@@ -1,0 +1,12 @@
+{% extends 'authapp/base.html' %}
+
+{% block loginForm %}
+    <form class="form-horizontal" action="{% url 'auth:profile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <input class="form-control" type="submit" value="Сохранить">
+    </form>
+    <a class="btn btn-link" href="{% url 'main' %}">На главную</a>
+    <a class="btn btn-link" href="{% url 'auth:logout' %}">Выйти из профиля</a>
+{% endblock %}

@@ -14,30 +14,22 @@
 
 <body>
     <div class="container">
-        <div class="starting-div-wrapper">
-            <div class="starting-div">
-                <div class="logo"><a href="#"><span>Intergalactic</span> <img src="{% static 'img/intergalactic2.png' %}" alt=""></a></div>
-                <div class="social-icons">
-                    <a href="#"> <i class="fab fa-vk"></i> </a>
-                    <a href="#"> <i class="fab fa-youtube"></i> </a>
-                    <a href="#"> <i class="fab fa-twitter"></i> </a>
-                    <a href="#"> <i class="fab fa-facebook-f"></i> </a>
-                </div>
-            </div>
-        </div>
-        <div class="nav-wrapper">
-            {% block main_menu %}
-                {% include 'mainapp/includes/inc_main_menu.html' %}
-            {% endblock %}
-        </div>
+
+        {% block starting_div %}
+            {% include 'mainapp/includes/inc_starting_div.html' %}
+        {% endblock %}
+
+        {% block main_menu %}
+            {% include 'mainapp/includes/inc_main_menu.html' %}
+        {% endblock %}
+
         {% block main_content %}
 
         {% endblock %}
-        <div class="footer-wrapper">
-            {% block footer %}
-                {% include 'mainapp/includes/inc_footer.html' %}
-            {% endblock %}
-        </div>
+
+        {% block footer %}
+            {% include 'mainapp/includes/inc_footer.html' %}
+        {% endblock %}
     </div>
 </body>
 
