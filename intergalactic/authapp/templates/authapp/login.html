@@ -1,0 +1,16 @@
+{% extends 'authapp/base.html' %}
+
+{% block loginForm %}
+    <form class="" action="{% url 'auth:login' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{% url 'auth:profile' %}">
+        {{ form.as_p }}
+        <br>
+        <input class="form-control" type="submit" value="вход">
+    </form>
+    <a class="btn btn-link" href="{% url 'auth:register' %}">Регистрация</a>
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+    {% endif %}
+
+{% endblock %}
