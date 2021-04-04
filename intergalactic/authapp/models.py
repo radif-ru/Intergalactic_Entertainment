@@ -3,11 +3,6 @@ from django.db import models
 
 
 class IntergalacticUser(AbstractUser):
-    id = models.AutoField(primary_key=True)
-    nikname = models.CharField(verbose_name='ник', max_length=32)
-    name = models.CharField(verbose_name='имя', max_length=32, blank=True)
-    surname = models.CharField(verbose_name='фамилия', max_length=32,
-                               blank=True)
     age = models.PositiveIntegerField(verbose_name='возраст', null=False,
                                       default=0)
     email = models.EmailField(verbose_name='электронный адрес', unique=True)
@@ -18,4 +13,4 @@ class IntergalacticUser(AbstractUser):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
-        ordering = ['-is_active', '-is_superuser', '-is_staff', 'name']
+        ordering = ['-is_active', '-is_superuser', '-is_staff', 'username']
