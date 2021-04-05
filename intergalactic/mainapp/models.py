@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from authapp.models import IntergalacticUser
 
@@ -32,3 +33,15 @@ class Publication(models.Model):
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'публикации'
+
+
+class Comments(models.Model):
+    publication = models.ForeignKey(Publication, verbose_name='публикация', on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    description = models.TextField(verbose_name='комментарий', blank=False)
+    created = models.DateTimeField(verbose_name='создан', auto_now_add=True)
+    updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
+
+    class Meta:
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'комментарии'
