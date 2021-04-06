@@ -1,78 +1,22 @@
 {% extends 'mainapp/base.html' %}
 
 {% load static %}
+{% load my_tags %}
 
 {% block main_content %}
-<div class="main-wrapper">
-    <div class="main-wrapper-center">
-        <p class="trending">Сейчас в тренде</p>
-        <div class="main-tiles">
-            <div class="main-tile-big"><img
-                    src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
-                    alt="">
-                <div class="main-tile-big-text"><a href="#" class="tile-category-link">Дизайн</a>
-                    <div class="main-tile-big-text-content">
-                        <h2>Lorem ipsum dolor sit amet, consectetur iddding.</h2>
-                        <div class="main-tile-big-text-info">
-                            <p>Максим</p>
-                            <h5>31 августа 2018</h5></div>
+        <div class="main-wrapper">
+            <div class="main-wrapper-center">
+                <div class="main-container">
+                    <div class="main-navigation">
+                        <ul>
+                            <li> <a href="#" class="active">Статьи</a> </li>
+                            <li><a href="#">Новости</a></li>
+                            <li><a href="#">Хабы</a></li>
+                            <li><a href="#">Авторы</a></li>
+                            <li><a href="#">Компании</a></li>
+                        </ul>
                     </div>
-                    <a href="#" class="tile-big-link"></a>
-                </div>
-            </div>
-            <div class="main-tile-small">
-                <div class="main-tile-small-wide"><img
-                        src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
-                        alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">Дизайн</a>
-                        <div class="main-tile-small-text-content">
-                            <h2>Lorem ipsum dolor sit amet, consectetur aisijcjijng.</h2>
-                            <div class="main-tile-small-text-info">
-                                <p>Максим</p>
-                                <h5>31 августа 2018</h5></div>
-                        </div>
-                        <a href="#" class="tile-big-link"></a>
-                    </div>
-                </div>
-                <div class="main-tile-small-narrow n1"><img
-                        src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
-                        alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">Дизайн</a>
-                        <div class="main-tile-small-text-content">
-                            <h2>Lorem ipsum dolor sit amet, consectetur aisijcjijng.</h2>
-                            <div class="main-tile-small-text-info">
-                                <p>Максим</p>
-                                <h5>31 августа 2018</h5></div>
-                        </div>
-                        <a href="#" class="tile-big-link"></a>
-                    </div>
-                </div>
-                <div class="main-tile-small-narrow n2"><img
-                        src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
-                        alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">Дизайн</a>
-                        <div class="main-tile-small-text-content">
-                            <h2>Lorem ipsum dolor sit amet, consectetur aisijcjijng.</h2>
-                            <div class="main-tile-small-text-info">
-                                <p>Максим</p>
-                                <h5>31 августа 2018</h5></div>
-                        </div>
-                        <a href="#" class="tile-big-link"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="main-container">
-            <div class="main-navigation">
-                <ul>
-                    <li><a href="#" class="active">Статьи</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Хабы</a></li>
-                    <li><a href="#">Авторы</a></li>
-                    <li><a href="#">Компании</a></li>
-                </ul>
-            </div>
-            <div class="fast-blocks-container">
+                    <div class="fast-blocks-container">
                 <p>Быстрые новости</p>
                 <div class="fast-blocks">
                     <div class="fast-block">
@@ -119,18 +63,22 @@
                     </div>
                 </div>
             </div>
-            <div class="main-last-blocks-container">
-                <p>Последние статьи</p>
-                    <div class="main-last-blocks">
-                        {% for publ in publication_list %}
-                            {% include 'mainapp/includes/inc_publications_in_list.html' %}
-                        {% endfor %}
-                   </div>
-                <div class="delimiter">
-                    <div class="del"></div>
-                    <a href="#">Больше</a></div>
-            </div>
-            <div class="popular-blocks-container">
+                    <div class="main-last-blocks-container">
+                        <div class="publication">
+                            <h5>{{ publication.user }}</h5>
+                            <h2>{{ publication.name }}</h2>
+                            <h6>{{ publication.category}}</h6>
+                            <img src="{{ publication.image|media_folder_publications }}" alt="">
+                            <p>{{ publication.text}}</p>
+                                    <h4>{{ publication.created}}</h4>
+                                    <h5>
+                                        <span class="likes">4</span>
+                                        <i class="fas fa-heart"></i>
+                                        <span class="comments">4 </span>
+                                        <i class="fas fa-comments"></i>
+                                    </h5>
+                        </div>
+                    <div class="popular-blocks-container">
                 <p>Популярные за неделю</p>
                 <div class="popular-blocks">
                     <div class="last-block pop1"><img src="{% static 'img/space-1280x720.jpg' %}" alt="">
@@ -210,6 +158,7 @@
         </div>
     </div>
 </div>
-
-
 {% endblock %}
+</body>
+
+</html>

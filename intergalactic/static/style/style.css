@@ -660,3 +660,14 @@ h4 {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+
+.publication img{
+  width: 820px;
+  padding-top: 20px;
+}
+.publication h2{
+  text-align: center;
+}
+.publication p{
+  text-transform: none !important;
+}
