@@ -45,3 +45,10 @@ class Comments(models.Model):
     class Meta:
         verbose_name = 'комментарий'
         verbose_name_plural = 'комментарии'
+
+ 
+class Likes(models.Model):
+    user_id = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE)
+    publication_id = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    status = models.BooleanField(default=0)
+
