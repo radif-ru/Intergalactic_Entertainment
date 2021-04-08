@@ -3,8 +3,10 @@ from mainapp.models import Publication, PublicationCategory
 
 
 def main(request):
-    publication_list =Publication.objects.order_by('-created')
+    categories = PublicationCategory.objects.filter(is_active=True)
+    publication_list =Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created')
     content = {
+        'categories': categories,
         'title': 'главная',
         'publication_list': publication_list,
     }
@@ -12,23 +14,29 @@ def main(request):
 
 
 def publication_page(request, pk):
+    categories = PublicationCategory.objects.filter(is_active=True)
     context = {
         'page_title': 'Publication',
+        'categories': categories,
         'publication': get_object_or_404(Publication, pk=pk)
     }
     return render(request, 'mainapp/publication.html', context)
 
 
 def category_page(request, pk):
-    links = PublicationCategory.objects.filter(is_active=True)
+    categories = PublicationCategory.objects.filter(is_active=True)
 
-    if pk:
-        category = get_object_or_404(PublicationCategory, pk=pk)
-        publications = Publication.objects.filter(category_id=pk, is_active=True,
-                                                  category__is_active=True).order_by('created')
-        title = category.name
+    if pk is not None:
+        if pk == 0:
+            title = 'Все потоки'
+            publications = Publication.objects.filter(is_active=True, category__is_active=True).order_by('created')
+        else:
+            category = get_object_or_404(PublicationCategory, pk=pk)
+            publications = Publication.objects.filter(category_id=pk, is_active=True,
+                                                      category__is_active=True).order_by('created')
+            title = category.name
         context = {
-            'links': links,
+            'categories': categories,
             'title': title,
             'publications': publications
         }

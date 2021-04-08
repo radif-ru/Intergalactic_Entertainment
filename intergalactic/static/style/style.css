@@ -176,6 +176,11 @@ h4 {
 .main-nav .nav-right .registration:hover {
   background-color: #4a85a0;
 }
+
+.nav-link-current {
+    color: #464646;
+}
+
 .main-wrapper {
   background-color: #dddddd;
 }

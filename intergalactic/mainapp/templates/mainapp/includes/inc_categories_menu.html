@@ -1,9 +1,0 @@
-<ul class="links-menu">
-    {% for link in links %}
-        <li>
-            <a href="{% url 'main:category' link.pk %}">
-                {{ link.name }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
