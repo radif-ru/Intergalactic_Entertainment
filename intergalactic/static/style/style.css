@@ -176,6 +176,11 @@ h4 {
 .main-nav .nav-right .registration:hover {
   background-color: #4a85a0;
 }
+
+.nav-link-current {
+    color: #464646;
+}
+
 .main-wrapper {
   background-color: #dddddd;
 }
@@ -659,4 +664,59 @@ h4 {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
+}
+
+.publication img{
+  width: 820px;
+  padding-top: 20px;
+}
+.publication h2{
+  text-align: center;
+}
+.publication p{
+  text-transform: none !important;
+}
+
+.btn {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border: 0;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    user-select: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    touch-action: manipulation;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    font-weight: 500;
+    font-family: "-apple-system",BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.btn:link {
+    text-decoration: none;
+}
+
+.btn_x-large {
+    padding: 0 13px;
+    height: 36px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.btn_outline_blue {
+    border: 1px solid #75aeca;
+    background-color: transparent;
+    color: #548eaa;
+}
+
+.post__habracut-btn {
+    margin-top: 5px;
+    margin-bottom: 15px;
 }

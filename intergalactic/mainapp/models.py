@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from authapp.models import IntergalacticUser
 
@@ -20,7 +21,7 @@ class Publication(models.Model):
     category = models.ForeignKey(PublicationCategory, on_delete=models.CASCADE, verbose_name='категория публикации')
     user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE, verbose_name='автор публикации')
     name = models.CharField('имя публикации', max_length=128)
-    image = models.ImageField(upload_to='products_images', blank=True)
+    image = models.ImageField(upload_to='publications_images', blank=True)
     short_desc = models.CharField('краткое описание публикации', max_length=64, blank=True)
     text = models.TextField('текст публикации', blank=True)
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
@@ -32,3 +33,22 @@ class Publication(models.Model):
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'публикации'
+
+
+class Comments(models.Model):
+    publication = models.ForeignKey(Publication, verbose_name='публикация', on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    description = models.TextField(verbose_name='комментарий', blank=False)
+    created = models.DateTimeField(verbose_name='создан', auto_now_add=True)
+    updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
+
+    class Meta:
+        verbose_name = 'комментарий'
+        verbose_name_plural = 'комментарии'
+
+ 
+class Likes(models.Model):
+    user_id = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE)
+    publication_id = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    status = models.BooleanField(default=0)
+
