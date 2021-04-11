@@ -20,6 +20,21 @@ class Command(BaseCommand):
     help = 'Fill DB new data'
 
     def handle(self, *args, **options):
+        if not IntergalacticUser.objects.filter(username='intergalactic').exists():
+            # создать суперюзера
+            IntergalacticUser.objects.create_superuser(username='intergalactic',
+                                                       email='admin@intergalactic.local',
+                                                       password='intergalactic',
+                                                       age='30')
+
+        if not IntergalacticUser.objects.filter(username='user').exists():
+            # создать обычный экземпляр моделей, без особенных свойств
+            # (обычного пользователя)
+            IntergalacticUser.objects.create(username='user',
+                                    email='user@gintergalactic.local',
+                                    password='user',
+                                    age='33')
+
         categories = load_from_json('mainapp_publicationcategory')
         PublicationCategory.objects.all().delete()
         [PublicationCategory.objects.create(
@@ -82,15 +97,3 @@ class Command(BaseCommand):
             new_likes = Likes(**{'id': like['pk']},
                               **like['fields'])
             new_likes.save()
-
-        if not IntergalacticUser.objects.filter(username='django').exists():
-            # создать обычный экземпляр моделей, без особенных свойств
-            # (обычного пользователя)
-            # ShopUser.objects.create(username='django',
-            #                         email='admin@geekshop.local',
-            #                         password='geekbrains')
-            # создать суперюзера
-            IntergalacticUser.objects.create_superuser(username='django',
-                                                       email='admin@geekshop.local',
-                                                       password='geekbrains',
-                                                       age='30')
