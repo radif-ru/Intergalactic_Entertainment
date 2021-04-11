@@ -20,20 +20,23 @@ class Command(BaseCommand):
     help = 'Fill DB new data'
 
     def handle(self, *args, **options):
-        if not IntergalacticUser.objects.filter(username='intergalactic').exists():
+        if not IntergalacticUser.objects.filter(
+                username='intergalactic').exists():
             # создать суперюзера
-            IntergalacticUser.objects.create_superuser(username='intergalactic',
-                                                       email='admin@intergalactic.local',
-                                                       password='intergalactic',
-                                                       age='30')
+            IntergalacticUser.objects.create_superuser(
+                username='intergalactic',
+                email='admin@intergalactic.local',
+                password='intergalactic',
+                age='30')
 
         if not IntergalacticUser.objects.filter(username='user').exists():
             # создать обычный экземпляр моделей, без особенных свойств
             # (обычного пользователя)
-            IntergalacticUser.objects.create(username='user',
-                                    email='user@gintergalactic.local',
-                                    password='user',
-                                    age='33')
+            IntergalacticUser.objects.create(
+                username='user',
+                email='user@gintergalactic.local',
+                password='user',
+                age='33')
 
         categories = load_from_json('mainapp_publicationcategory')
         PublicationCategory.objects.all().delete()
