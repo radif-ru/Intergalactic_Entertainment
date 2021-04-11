@@ -1,0 +1,1139 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2021-04-08T17:20:36.981Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "���������� 1 (����������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2021-04-08T17:20:51.339Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "���������� 2 (����������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2021-04-08T17:20:57.475Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "3",
+      "object_repr": "���������� 3 (�����������������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2021-04-08T17:21:05.476Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "4",
+      "object_repr": "���������� 4 (�����������������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2021-04-08T17:21:15.041Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "5",
+      "object_repr": "���������� 5 (������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2021-04-08T17:21:28.603Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "6",
+      "object_repr": "���������� 6 (������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2021-04-08T17:21:38.074Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "7",
+      "object_repr": "���������� 7 (����������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2021-04-08T17:21:53.762Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "8",
+      "object_repr": "���������� 8 (����������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2021-04-08T17:22:06.762Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "9",
+      "object_repr": "���������� 9 (���������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+      "action_time": "2021-04-08T17:22:14.818Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "10",
+      "object_repr": "���������� 10 (���������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+      "action_time": "2021-04-08T19:09:03.977Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "10",
+      "object_repr": "���������� 10 (���������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u043f\\u0443\\u0431\\u043b\\u0438\\u043a\\u0430\\u0446\\u0438\\u0438\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+      "action_time": "2021-04-09T14:37:56.907Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "11",
+      "object_repr": "���������� 11 (�������)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+      "action_time": "2021-04-09T14:38:36.524Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+      "action_time": "2021-04-09T15:27:23.633Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u043f\\u0443\\u0431\\u043b\\u0438\\u043a\\u0430\\u0446\\u0438\\u0438\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+      "action_time": "2021-04-09T15:46:55.893Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u043f\\u0443\\u0431\\u043b\\u0438\\u043a\\u0430\\u0446\\u0438\\u0438\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+      "action_time": "2021-04-09T15:49:51.732Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u043f\\u0443\\u0431\\u043b\\u0438\\u043a\\u0430\\u0446\\u0438\\u0438\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+      "action_time": "2021-04-09T15:51:01.254Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u043f\\u0443\\u0431\\u043b\\u0438\\u043a\\u0430\\u0446\\u0438\\u0438\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+      "action_time": "2021-04-09T16:52:21.521Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u043f\\u0443\\u0431\\u043b\\u0438\\u043a\\u0430\\u0446\\u0438\\u0438\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+      "action_time": "2021-04-09T16:54:32.210Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442 \\u043f\\u0443\\u0431\\u043b\\u0438\\u043a\\u0430\\u0446\\u0438\\u0438\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+      "action_time": "2021-04-10T20:18:07.617Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "12",
+      "object_repr": "���������� 12 (�������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+      "action_time": "2021-04-11T06:54:18.877Z",
+      "user": 2,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "���������� 1 (����������)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 1,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 4,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 4,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 4,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 4,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 5,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 5,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 5,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 5,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add ��������� ����������",
+      "content_type": 6,
+      "codename": "add_publicationcategory"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change ��������� ����������",
+      "content_type": 6,
+      "codename": "change_publicationcategory"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete ��������� ����������",
+      "content_type": 6,
+      "codename": "delete_publicationcategory"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view ��������� ����������",
+      "content_type": 6,
+      "codename": "view_publicationcategory"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add ����������",
+      "content_type": 7,
+      "codename": "add_publication"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change ����������",
+      "content_type": 7,
+      "codename": "change_publication"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete ����������",
+      "content_type": 7,
+      "codename": "delete_publication"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view ����������",
+      "content_type": 7,
+      "codename": "view_publication"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add likes",
+      "content_type": 8,
+      "codename": "add_likes"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change likes",
+      "content_type": 8,
+      "codename": "change_likes"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete likes",
+      "content_type": 8,
+      "codename": "delete_likes"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view likes",
+      "content_type": 8,
+      "codename": "view_likes"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add �����������",
+      "content_type": 9,
+      "codename": "add_comments"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change �����������",
+      "content_type": 9,
+      "codename": "change_comments"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete �����������",
+      "content_type": 9,
+      "codename": "delete_comments"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view �����������",
+      "content_type": 9,
+      "codename": "view_comments"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add ������������",
+      "content_type": 10,
+      "codename": "add_intergalacticuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change ������������",
+      "content_type": 10,
+      "codename": "change_intergalacticuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete ������������",
+      "content_type": 10,
+      "codename": "delete_intergalacticuser"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view ������������",
+      "content_type": 10,
+      "codename": "view_intergalacticuser"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+      "app_label": "admin",
+      "model": "logentry"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+      "app_label": "auth",
+      "model": "permission"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+      "app_label": "auth",
+      "model": "group"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+      "app_label": "contenttypes",
+      "model": "contenttype"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+      "app_label": "sessions",
+      "model": "session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+      "app_label": "mainapp",
+      "model": "publicationcategory"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+      "app_label": "mainapp",
+      "model": "publication"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+      "app_label": "mainapp",
+      "model": "likes"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+      "app_label": "mainapp",
+      "model": "comments"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+      "app_label": "authapp",
+      "model": "intergalacticuser"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "615ypp5zvra9wh84ngjl7nupwepz7ucm",
+    "fields": {
+      "session_data": ".eJxVjEEOwiAQRe_C2hBgEAaX7nsGMsAgVdMmpV0Z765NutDtf-_9l4i0rS1unZc4FnERWpx-t0T5wdMOyp2m2yzzPK3LmOSuyIN2OcyFn9fD_Tto1Nu3Ni4hes8WVQ0hW5erY7QWGIqpjlQ1mrXKAYMCQKQE2YP2kAIFezbi_QHLnDb9:1lU7hV:FIx_WPWAZBfcypa-IuEucCNpQOdg2PnJARevSsrxiKQ",
+      "expire_date": "2021-04-21T12:54:29.140Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "8v4kdllkw64jdgj1ekzl6cxk2yyce0zh",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlm24y8lPWew1rsbHECOFCcV4u4QKQW0b2beS2TY1pq3zkueSJyFEaffrQA-uO2A7tBus8S5rctU5K7Ig3Z5nYmfl8P9O6jQ67cGH4K2pIPyzIotjDoNyQeHiClQQjTFRcdAZNwIkVh7Z7QdUlJRRRDvD-L6N7Q:1lVJvE:2cG9NpNUy6hK-erUYpyVQuDV8sUO44zTtcDZIWirqs8",
+      "expire_date": "2021-04-24T20:09:36.999Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "a035ruhik7p70072a4nhnnd8ndm5z5hu",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlm24y8lPWew1rsbHECOFCcV4u4QKQW0b2beS2TY1pq3zkueSJyFEaffrQA-uO2A7tBus8S5rctU5K7Ig3Z5nYmfl8P9O6jQ67cGH4K2pIPyzIotjDoNyQeHiClQQjTFRcdAZNwIkVh7Z7QdUlJRRRDvD-L6N7Q:1lVYXw:4jUecM8VR7TV-0mNKdEQwRtymt-CeimL_1pUpoczPo0",
+      "expire_date": "2021-04-25T11:46:32.096Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "ejutev45z2tvyq9mhpt3opdm2w27503v",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlm24y8lPWew1rsbHECOFCcV4u4QKQW0b2beS2TY1pq3zkueSJyFEaffrQA-uO2A7tBus8S5rctU5K7Ig3Z5nYmfl8P9O6jQ67cGH4K2pIPyzIotjDoNyQeHiClQQjTFRcdAZNwIkVh7Z7QdUlJRRRDvD-L6N7Q:1lUZx4:L6hbWivy9b2Fn0Oit7OOuay9ekHy_3RyKJXrLN2iSNQ",
+      "expire_date": "2021-04-22T19:04:26.687Z"
+    }
+  },
+  {
+    "model": "mainapp.publicationcategory",
+    "pk": 1,
+    "fields": {
+      "name": "����������",
+      "desc": "",
+      "created": "2021-04-07T12:57:08.442Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publicationcategory",
+    "pk": 2,
+    "fields": {
+      "name": "�����������������",
+      "desc": "",
+      "created": "2021-04-07T12:57:22.633Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publicationcategory",
+    "pk": 3,
+    "fields": {
+      "name": "������",
+      "desc": "",
+      "created": "2021-04-07T12:57:29.643Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publicationcategory",
+    "pk": 4,
+    "fields": {
+      "name": "����������",
+      "desc": "",
+      "created": "2021-04-07T12:57:36.708Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publicationcategory",
+    "pk": 5,
+    "fields": {
+      "name": "���������",
+      "desc": "",
+      "created": "2021-04-07T12:57:46.701Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publicationcategory",
+    "pk": 6,
+    "fields": {
+      "name": "�������",
+      "desc": "",
+      "created": "2021-04-07T12:57:56.481Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "user": 1,
+      "name": "���������� 1",
+      "image": "",
+      "short_desc": "������� � ���������� 1",
+      "text": "������� ������� � ��������� � ���������� 1",
+      "created": "2021-04-07T12:58:19.582Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "user": 1,
+      "name": "���������� 2",
+      "image": "publications_images/6refmsobz4v_wj7mvw6temthoza_fivD8TW.jpeg",
+      "short_desc": "������� � ���������� 2",
+      "text": "������� ������� � ��������� � ���������� 2",
+      "created": "2021-04-07T12:58:32.950Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 3,
+    "fields": {
+      "category": 2,
+      "user": 1,
+      "name": "���������� 3",
+      "image": "publications_images/16bf79b16e121dfcc09f202785fd379c_SRvGjX4_XXqNnfF.jpg",
+      "short_desc": "������� � ���������� 3",
+      "text": "������� ������� � ��������� � ���������� 3",
+      "created": "2021-04-07T12:58:44.146Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 4,
+    "fields": {
+      "category": 2,
+      "user": 1,
+      "name": "���������� 4",
+      "image": "publications_images/123dfddaab121ea88ce8a6c126988b9b_KoTCdD4.jpeg",
+      "short_desc": "������� � ���������� 4",
+      "text": "������� ������� � ��������� � ���������� 4",
+      "created": "2021-04-07T12:59:20.230Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 5,
+    "fields": {
+      "category": 3,
+      "user": 1,
+      "name": "���������� 5",
+      "image": "publications_images/h8ddavlqrtl9n3uhdoyt_fvhg88_xtRaPNW.jpeg",
+      "short_desc": "������� � ���������� 5",
+      "text": "������� ������� � ��������� � ���������� 5",
+      "created": "2021-04-07T12:59:20.248Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 6,
+    "fields": {
+      "category": 3,
+      "user": 1,
+      "name": "���������� 6",
+      "image": "publications_images/6refmsobz4v_wj7mvw6temthoza_fivD8TW_3gP4Liw.jpeg",
+      "short_desc": "������� � ���������� 6",
+      "text": "������� ������� � ��������� � ���������� 6",
+      "created": "2021-04-07T12:59:20.267Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 7,
+    "fields": {
+      "category": 4,
+      "user": 1,
+      "name": "���������� 7",
+      "image": "publications_images/16bf79b16e121dfcc09f202785fd379c_SRvGjX4_XXqNnfF_1Tnz9d8.jpg",
+      "short_desc": "������� � ���������� 7",
+      "text": "������� ������� � ��������� � ���������� 7",
+      "created": "2021-04-07T12:59:20.286Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 8,
+    "fields": {
+      "category": 4,
+      "user": 1,
+      "name": "���������� 8",
+      "image": "publications_images/123dfddaab121ea88ce8a6c126988b9b_NTpc14V.jpeg",
+      "short_desc": "������� � ���������� 8",
+      "text": "������� ������� � ��������� � ���������� 8",
+      "created": "2021-04-07T12:59:20.304Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 9,
+    "fields": {
+      "category": 5,
+      "user": 1,
+      "name": "���������� 9",
+      "image": "publications_images/d1bxuuakuotytbbbpfcvrl0ecuo_jjKMLvo_C8lByOg.jpg",
+      "short_desc": "������� � ���������� 9",
+      "text": "������� ������� � ��������� � ���������� 9",
+      "created": "2021-04-07T12:59:20.321Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 10,
+    "fields": {
+      "category": 5,
+      "user": 1,
+      "name": "���������� 10",
+      "image": "publications_images/h8ddavlqrtl9n3uhdoyt_fvhg88_PO1KxNb.jpeg",
+      "short_desc": "������� � ���������� 10",
+      "text": "������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10������� ������� � ��������� � ���������� 10",
+      "created": "2021-04-07T12:59:22.101Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 11,
+    "fields": {
+      "category": 6,
+      "user": 1,
+      "name": "���������� 11",
+      "image": "publications_images/h8ddavlqrtl9n3uhdoyt_fvhg88_xtRaPNW_hcqsKE7.jpeg",
+      "short_desc": "������� ���������� ��� ���������� 11",
+      "text": "��������� ����� ��� ���������� 11",
+      "created": "2021-04-09T14:37:56.905Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.publication",
+    "pk": 12,
+    "fields": {
+      "category": 6,
+      "user": 1,
+      "name": "���������� 12",
+      "image": "",
+      "short_desc": "������� ���������� ��� ���������� 11",
+      "text": "����� ��� ���������-�����������, �� ��� ����� ����������� � ���������� ������� ��������� �� ������ ��������. � ���������, �������� �� ������ ���������� ��������. ����� ���������� �������� �� ������� �������� �������, ���� ������� ���� �������� �������������� ����������� ��������./n\r\n/n\r\n����� 1981 ���� ����� ����� ���������, ��� ������� ���� � ������� �������� � ������� ������������. ����� �� ����������� ��������� � ���� ����������������� �������� � ��������� ���� ���������.<br>\r\n\r\n��� � ���� ����������� �����. ������ ����� �������, ��� ��� ���������� �������� � ������������ ������. ����� ������� ��������� �� ��������� � ��������� ������������.<br>\r\n\r\n�� ����������� �� ������ � ����� �������������� ���������� � �����������. �.�. ���������, ��� ������� ���������� ������� ���� ��������, � ������������ � ���������.<br>\r\n\r\n�������� (17 ����� �����-��������� � ��������) ���� � ������ �������. �� �� �������� �� �������� � �� ������ �������� ���� � ������. � ��������� ������ ����� � �������������.<br>\r\n\r\n��������� �������� �� ����������� ����� �����������, �� ����� �������� ������ ����. ���� ������ �������� ���� ������. �������� ���� �� ��������������. � ���� ���� ����������� �������, �� ����� �� ������ � ��������.",
+      "created": "2021-04-09T14:38:36.523Z",
+      "is_active": true
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 1,
+    "fields": {
+      "publication": 8,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:40:59.822Z",
+      "updated": "2021-04-10T20:40:59.822Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 2,
+    "fields": {
+      "publication": 3,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.634Z",
+      "updated": "2021-04-10T20:41:44.634Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 3,
+    "fields": {
+      "publication": 1,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.652Z",
+      "updated": "2021-04-10T20:41:44.652Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 4,
+    "fields": {
+      "publication": 5,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.671Z",
+      "updated": "2021-04-10T20:41:44.671Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 5,
+    "fields": {
+      "publication": 2,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.688Z",
+      "updated": "2021-04-10T20:41:44.688Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 6,
+    "fields": {
+      "publication": 7,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:45.744Z",
+      "updated": "2021-04-10T20:41:45.744Z"
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 1,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 8,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 2,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 3,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 3,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 1,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 4,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 5,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 5,
+    "fields": {
+      "user_id": 2,
+      "publication_id": 3,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 6,
+    "fields": {
+      "user_id": 2,
+      "publication_id": 1,
+      "status": true
+    }
+  },
+  {
+    "model": "authapp.intergalacticuser",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$NU3ffda5my2S$DWZw3JcbRn5UJdArE6nHxMNOc6yt9id2CF8So6BOpxk=",
+      "last_login": "2021-04-07T12:54:29.126Z",
+      "is_superuser": false,
+      "username": "django",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-04-07T12:54:17.394Z",
+      "avatar": "",
+      "age": 0,
+      "email": "its@its.com",
+      "about": "",
+      "company": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "authapp.intergalacticuser",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$216000$c1OhsQSuZg0H$4omulO6B9fc3NGgGEI8C1TpSLEI3PlBmJXrjC4mlrew=",
+      "last_login": "2021-04-11T11:46:31.864Z",
+      "is_superuser": true,
+      "username": "user",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-04-08T17:19:24.979Z",
+      "avatar": "users_avatars/6refmsobz4v_wj7mvw6temthoza_fivD8TW_3gP4Liw.jpeg",
+      "age": 0,
+      "email": "qwe@qwe.ru",
+      "about": "",
+      "company": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

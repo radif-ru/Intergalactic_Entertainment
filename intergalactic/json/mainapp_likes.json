@@ -1,0 +1,56 @@
+[
+  {
+    "model": "mainapp.likes",
+    "pk": 1,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 8,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 2,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 3,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 3,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 1,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 4,
+    "fields": {
+      "user_id": 1,
+      "publication_id": 5,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 5,
+    "fields": {
+      "user_id": 2,
+      "publication_id": 3,
+      "status": true
+    }
+  },
+  {
+    "model": "mainapp.likes",
+    "pk": 6,
+    "fields": {
+      "user_id": 2,
+      "publication_id": 1,
+      "status": true
+    }
+  }
+]

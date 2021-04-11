@@ -1,0 +1,68 @@
+[
+  {
+    "model": "mainapp.comments",
+    "pk": 1,
+    "fields": {
+      "publication": 8,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:40:59.822Z",
+      "updated": "2021-04-10T20:40:59.822Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 2,
+    "fields": {
+      "publication": 3,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.634Z",
+      "updated": "2021-04-10T20:41:44.634Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 3,
+    "fields": {
+      "publication": 1,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.652Z",
+      "updated": "2021-04-10T20:41:44.652Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 4,
+    "fields": {
+      "publication": 5,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.671Z",
+      "updated": "2021-04-10T20:41:44.671Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 5,
+    "fields": {
+      "publication": 2,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:44.688Z",
+      "updated": "2021-04-10T20:41:44.688Z"
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 6,
+    "fields": {
+      "publication": 7,
+      "user": 1,
+      "description": "1213",
+      "created": "2021-04-10T20:41:45.744Z",
+      "updated": "2021-04-10T20:41:45.744Z"
+    }
+  }
+]
