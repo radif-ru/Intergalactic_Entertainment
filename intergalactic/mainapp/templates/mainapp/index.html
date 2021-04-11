@@ -1,6 +1,7 @@
 {% extends 'mainapp/base.html' %}
 
 {% load static %}
+{% load my_tags %}
 
 {% block main_content %}
 <div class="main-wrapper">
@@ -8,7 +9,7 @@
         <p class="trending">Сейчас в тренде</p>
         <div class="main-tiles">
             <div class="main-tile-big"><img
-                    src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
+                    src="{{ trendy_publication_list_of_dict.0.publication.image|media_folder_publications }}"
                     alt="">
                 <div class="main-tile-big-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
                     <div class="main-tile-big-text-content">
@@ -29,7 +30,7 @@
             </div>
             <div class="main-tile-small">
                 <div class="main-tile-small-wide"><img
-                        src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
+                        src="{{ trendy_publication_list_of_dict.1.publication.image|media_folder_publications }}"
                         alt="">
                     <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
@@ -49,7 +50,7 @@
                     </div>
                 </div>
                 <div class="main-tile-small-narrow n1"><img
-                        src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
+                        src="{{ trendy_publication_list_of_dict.2.publication.image|media_folder_publications }}"
                         alt="">
                     <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
@@ -69,7 +70,7 @@
                     </div>
                 </div>
                 <div class="main-tile-small-narrow n2"><img
-                        src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
+                        src="{{ trendy_publication_list_of_dict.3.publication.image|media_folder_publications }}"
                         alt="">
                     <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
@@ -100,7 +101,14 @@
                     <li><a href="#">Компании</a></li>
                 </ul>
             </div> -->
-            {% include 'mainapp/includes/inc_now_read_blocks.html' %}
+            <div class="fast-blocks-container">
+                <p>СЕЙЧАС ЧИТАЮТ</p>
+                <div class="fast-blocks">
+                    {% for publication_dict in now_read_publication_list_of_dict %}
+                        {% include 'mainapp/includes/inc_now_read_blocks.html' %}
+                    {% endfor %}
+                </div>
+            </div>
             <div class="main-last-blocks-container">
                 <p>Последние статьи</p>
                     <div class="main-last-blocks">

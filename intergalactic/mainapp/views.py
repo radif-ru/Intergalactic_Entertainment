@@ -13,6 +13,15 @@ def take_trendy_publication_id_list():
     return id_list
 
 
+def take_now_read_publication_id_list():
+    now_read_publication_id_counts = Comments.objects.values("publication").annotate(Count("id"))
+    now_read_publication_id_counts = sorted(now_read_publication_id_counts, key=lambda x: x['id__count'], reverse=True)
+    id_list = []
+    for vocabulary in now_read_publication_id_counts:
+        id_list.append(vocabulary["publication"])
+    return id_list
+
+
 def take_publications_list_of_dict(publications_list):
     publications_list_of_dict = []
     for publication in publications_list:
@@ -37,11 +46,22 @@ def main(request):
     ]
     trendy_publication_list_of_dict = take_publications_list_of_dict(trendy_publication_list)
 
+    now_read_id_list = take_now_read_publication_id_list()
+    now_read_publication_list = [
+        Publication.objects.get(id=now_read_id_list[0]),
+        Publication.objects.get(id=now_read_id_list[1]),
+        Publication.objects.get(id=now_read_id_list[2]),
+        Publication.objects.get(id=now_read_id_list[3]),
+        Publication.objects.get(id=now_read_id_list[4]),
+    ]
+    now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
+
     content = {
         'categories': categories,
         'title': 'главная',
         'publication_list_of_dict': publication_list_of_dict,
-        'trendy_publication_list_of_dict': trendy_publication_list_of_dict
+        'trendy_publication_list_of_dict': trendy_publication_list_of_dict,
+        'now_read_publication_list_of_dict': now_read_publication_list_of_dict
     }
     return render(request, 'mainapp/index.html', content)
 

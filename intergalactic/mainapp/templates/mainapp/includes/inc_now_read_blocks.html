@@ -1,48 +1,13 @@
-{% load static %}
-<div class="fast-blocks-container">
-    <p>СЕЙЧАС ЧИТАЮТ</p>
-    <div class="fast-blocks">
-        <div class="fast-block">
-            <a href="#"><img src="{% static 'img/983794168.jpg' %}" alt="" class="fast-block-img"></a>
-            <div class="fast-block-text"><a href="#" class="fast-header">Заголовок статьи</a>
-                <div class="fast-block-text-bottom"><a href="#" class="fast-name">от Ивана</a>
-                    <p class="fast-info">50 просмотров 3 комментария</p>
-                </div>
-            </div>
-        </div>
-        <div class="fast-block">
-            <a href="#"><img
-                    src="{% static 'img/https___cdn.cnn.com_cnnnext_dam_assets_191120053137-03-milky-way-images-australia.jpg' %}"
-                    alt="" class="fast-block-img"></a>
-            <div class="fast-block-text"><a href="#" class="fast-header">Заголовок статьи</a>
-                <div class="fast-block-text-bottom"><a href="#" class="fast-name">от Ивана</a>
-                    <p class="fast-info">50 просмотров 3 комментария</p>
-                </div>
-            </div>
-        </div>
-        <div class="fast-block">
-            <a href="#"><img src="{% static 'img/Photo.jpg' %}" alt="" class="fast-block-img"></a>
-            <div class="fast-block-text"><a href="#" class="fast-header">Заголовок статьи</a>
-                <div class="fast-block-text-bottom"><a href="#" class="fast-name">от Ивана</a>
-                    <p class="fast-info">50 просмотров 3 комментария</p>
-                </div>
-            </div>
-        </div>
-        <div class="fast-block">
-            <a href="#"><img src="{% static 'img/space-1280x720.jpg' %}" alt="" class="fast-block-img"></a>
-            <div class="fast-block-text"><a href="#" class="fast-header">Заголовок статьи</a>
-                <div class="fast-block-text-bottom"><a href="#" class="fast-name">от Ивана</a>
-                    <p class="fast-info">50 просмотров 3 комментария</p>
-                </div>
-            </div>
-        </div>
-        <div class="fast-block">
-            <a href="#"><img src="{% static 'img/983794168.jpg' %}" alt="" class="fast-block-img"></a>
-            <div class="fast-block-text"><a href="#" class="fast-header">Заголовок статьи</a>
-                <div class="fast-block-text-bottom"><a href="#" class="fast-name">от Ивана</a>
-                    <p class="fast-info">50 просмотров 3 комментария</p>
-                </div>
-            </div>
+{% load my_tags %}
+<div class="fast-block">
+    <a href="{% url 'main:publication_page' publication_dict.publication.pk  %}">
+        <img src="{{ publication_dict.publication.image|media_folder_publications }}" alt="" class="fast-block-img">
+    </a>
+    <div class="fast-block-text"><a href="{% url 'main:publication_page' publication_dict.publication.pk  %}" class="fast-header">{{publication_dict.publication.name}}</a>
+        <div class="fast-block-text-bottom">
+            <a class="fast-name">{{publication_dict.publication.user.username}}</a> <!-- Убран href-некуда ссылатся пока -->
+            <p class="fast-info">{{publication_dict.likes}} просмотров {{publication_dict.comments}} комментария</p>
         </div>
     </div>
 </div>
+
