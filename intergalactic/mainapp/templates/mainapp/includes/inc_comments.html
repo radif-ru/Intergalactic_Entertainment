@@ -1,0 +1,12 @@
+{% load my_tags %}
+
+{% for comment in comments %}
+    <hr>
+    <div class="comment-grid">
+        <img src="{{ comment.user.avatar|media_folder_users }}" alt="" class="user-avatar">
+        <p class="comment-username">{{ comment.user }}</p>
+        <p class="comment-text">{{ comment.description }}</p>
+    </div>
+    <p style="font-size: 10px; margin-left:15px; color:grey;">{{ comment.updated }}</p>
+    <br>
+{% endfor %}
