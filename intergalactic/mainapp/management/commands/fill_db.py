@@ -97,6 +97,10 @@ class Command(BaseCommand):
             # Заменяем имя юзера объектом
             like['fields']['user_id'] = _user
 
+            sender = like['fields']['sender_id']
+            _sender = IntergalacticUser.objects.get(id=sender)
+            like['fields']['sender_id'] = _sender
+
             new_likes = Likes(**{'id': like['pk']},
                               **like['fields'])
             new_likes.save()
