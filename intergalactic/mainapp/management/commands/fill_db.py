@@ -78,6 +78,10 @@ class Command(BaseCommand):
             # Заменяем имя юзера объектом
             comment['fields']['user'] = _user
 
+            sender = comment['fields']['receiver']
+            _sender = IntergalacticUser.objects.get(id=sender)
+            comment['fields']['receiver'] = _sender
+
             new_comments = Comments(**{'id': comment['pk']},
                                     **comment['fields'])
             new_comments.save()

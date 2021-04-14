@@ -8,3 +8,13 @@ function toggle_comments(el){
         form.removeClass('hide')
     }
 }
+
+function toggleNotifi(){
+    var box = $('#box')
+    if (box.css('opacity') == 1){
+    box.css({height: '0px',opacity:'0'})
+    }
+    else{
+    box.css({height: '510px',opacity:'1'})
+    }
+}

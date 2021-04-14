@@ -59,6 +59,9 @@ class Comments(models.Model):
     description = models.TextField(verbose_name='комментарий', blank=False)
     created = models.DateTimeField(verbose_name='создан', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
+    is_read = models.BooleanField(default=0)
+    receiver = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
+                               related_name='comments_sender', default=0)
 
     class Meta:
         verbose_name = 'комментарий'

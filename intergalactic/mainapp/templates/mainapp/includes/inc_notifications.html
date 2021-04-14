@@ -1,0 +1,37 @@
+{% load static %}
+
+{% load my_tags %}
+
+<div class="icon" onclick="toggleNotifi()">
+    <img src="{% static 'img/bell.png' %}" alt=""> <span class="notifications-count1">{{ notifications|length }}</span>
+</div>
+<div class="notifi-box" id="box">
+    <h2>Notifications <span class="notifications-count2">{{ notifications|length }}</span></h2>
+    {% for notification in notifications %}
+        <div class="notifi-item" name="{{ forloop.counter0 }}">
+            {% if notification.sender_id %}
+                <div class="notify-link-wrapper">
+                    <a href="#" class="notify-person-link"><img src="{{ notification.sender_id.avatar|media_folder_users }}" alt="img"></a>
+                    <a href="{% url 'main:publication_page' notification.publication_id.id %}" class="notify-link">
+                        <div class="text">
+                            <h4>{{ notification.sender_id }}</h4>
+                            <p>Лайкнул вашу запись {{notification.publication_id }}</p>
+                        </div>
+                    </a>
+                </div>
+                <i class="fas fa-trash-alt" data-id="{{ notification.id }}" name="like"></i>
+            {% else %}
+                <div class="notify-link-wrapper">
+                    <a href="#" class="notify-person-link"><img src="{{ notification.user.avatar|media_folder_users }}" alt="img"></a>
+                    <a href="{% url 'main:publication_page' notification.publication.id %}" class="notify-link">
+                        <div class="text">
+                            <h4>{{ notification.user }}</h4>
+                            <p>Прокомментировал вашу запись {{notification.publication}}</p>
+                        </div>
+                    </a>
+                </div>
+                <i class="fas fa-trash-alt" data-id="{{ notification.id }}" name="comment"></i>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

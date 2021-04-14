@@ -76,14 +76,14 @@
                             <h5 class="likes-comments">
                                 <span class="like-wrapper"><i class="like-button {% if publication|is_liked:user.id %} fas fa-heart {% else %} far fa-heart {% endif %}" style="font-size:30px; cursor:pointer;" data-publ="{{publication.id}}" data-user="{{publication.user.id}}"></i></span>
                                 <span class="likes" style="margin-right:15px; font-size:20px;">{{ publication.get_like_count }}</span>
-                                <span class="comments" onclick="toggle_comments(this)" style="cursor: pointer;"><i class="far fa-comment-alt" style="font-size:30px;"></i> <span class="comments" style="font-size:20px;">{{ publication.get_comment_count }}</span></span>
+                                <span class="comments" onclick="toggle_comments(this)" style="cursor: pointer;"><i class="far fa-comment-alt" style="font-size:30px;"></i> <span class="comments-count" style="font-size:20px;">{{ publication.get_comment_count }}</span></span>
                                 <div class="comments-wrapper">
                                     <div class="comments-div">
                                         {% include 'mainapp/includes/inc_comments.html' %}
                                     </div>
                                     <form action="{% url 'main:comment' %}" method="post" enctype="multipart/form-data" class="comment-form hide">
                                         {% csrf_token %}
-                                        <img src="{{ user.avatar|media_folder_users }}" alt="" class="user-avatar">
+                                        <img src="{{ user.avatar|media_folder_users }}" alt="" class="user-avatar-img">
                                         <input type="text" name="message" class="comment-input">
                                         <input type="hidden" name='publication_id' value='{{ publication.id }}'>
                                         <button type="submit" value="Submit" class="btn btn-primary"><i class="fas fa-paper-plane" style="font-size:20px;"></i></button>
