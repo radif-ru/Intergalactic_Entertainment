@@ -8,10 +8,14 @@ from django.db.models import Count
 from django.http import JsonResponse
 
 from authapp.models import IntergalacticUser
+from itertools import chain
 
 
 def get_notifications(user):
-    return Likes.objects.filter(user_id=user.id, is_read=False)
+    notifications = chain(
+        Likes.objects.filter(user_id=user.id, is_read=False), Comments.objects.filter(
+            receiver=user.id, is_read=False))
+    return list(notifications)
 
 
 def get_comments(pk):
@@ -74,7 +78,7 @@ def main(request):
     ]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
-    likes_list = get_notifications(request.user)
+    notifications = get_notifications(request.user)
 
     content = {
         'categories': categories,
@@ -82,7 +86,7 @@ def main(request):
         'publication_list_of_dict': publication_list_of_dict,
         'trendy_publication_list_of_dict': trendy_publication_list_of_dict,
         'now_read_publication_list_of_dict': now_read_publication_list_of_dict,
-        'likes': likes_list
+        'notifications': notifications,
     }
     return render(request, 'mainapp/index.html', content)
 
@@ -91,12 +95,16 @@ def publication_page(request, pk):
     categories = PublicationCategory.objects.filter(is_active=True)
     comments = get_comments(pk)
     likes = Likes.objects.all()
+    notifications = get_notifications(request.user)
+
     context = {
         'page_title': 'Publication',
         'categories': categories,
         'publication': get_object_or_404(Publication, pk=pk),
         'comments': comments,
-        'likes': likes
+        'likes': likes,
+        'notifications': notifications,
+
     }
     return render(request, 'mainapp/publication.html', context)
 
@@ -114,10 +122,15 @@ def category_page(request, pk):
             publications = Publication.objects.filter(category_id=pk, is_active=True,
                                                       category__is_active=True).order_by('created')
             title = category.name
+
+        notifications = get_notifications(request.user)
+
         context = {
             'categories': categories,
             'title': title,
-            'publications': publications
+            'publications': publications,
+            'notifications': notifications,
+
         }
         return render(request, 'mainapp/publication_category.html', context)
 
@@ -128,9 +141,11 @@ def comment(request):
         message = request.POST.get('message')
         if message != '':
             if request.user.is_authenticated:
-                sender = IntergalacticUser.objects.get(username=request.user)
+                user = IntergalacticUser.objects.get(username=request.user)
                 publication = Publication.objects.get(id=request.POST.get('publication_id'))
-                Comments.objects.create(publication=publication, user=sender, description=message)
+                receiver = publication.user
+                Comments.objects.create(publication=publication, user=user, description=message,
+                                        receiver=receiver)
                 comments = Comments.objects.filter(publication=publication)
                 data['form_is_valid'] = True
                 data['form_html'] = render_to_string('mainapp/includes/inc_comments.html',
@@ -170,9 +185,16 @@ def like(request, id, pk):
         return JsonResponse(data)
 
 
-def notification_read(request, pk):
-    like = Likes.objects.get(id=pk)
-    like.is_read = True
-    like.save()
+def notification_read(request, pk, name):
+    if name == 'like':
+        like = Likes.objects.get(id=pk)
+        like.is_read = True
+        like.save()
+    elif name == 'comment':
+        comment = Comments.objects.get(id=pk)
+        comment.is_read = True
+        comment.save()
 
-    return redirect('main:main')
+    notifications = get_notifications(request.user)
+
+    return JsonResponse({'length': len(notifications)})

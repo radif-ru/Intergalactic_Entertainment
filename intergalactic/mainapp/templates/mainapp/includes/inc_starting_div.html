@@ -1,9 +1,14 @@
 {% load static %}
 
+{% load my_tags %}
+
 <div class="starting-div-wrapper">
     <div class="starting-div">
         <div class="logo"><a href="{% url 'main:main' %}"><span>Intergalactic</span> <img src="{% static 'img/intergalactic2.png' %}" alt=""></a></div>
         <div class="social-icons">
+			<div class="notify-wrapper">
+				{% include 'mainapp/includes/inc_notifications.html' %}
+			</div>
             <a href="https://vk.com/"> <i class="fab fa-vk"></i> </a>
             <a href="https://www.youtube.com/"> <i class="fab fa-youtube"></i> </a>
             <a href="https://twitter.com/"> <i class="fab fa-twitter"></i> </a>

@@ -9,5 +9,5 @@ urlpatterns = [
     path('category/<int:pk>', mainapp.category_page, name='category'),
     path('comment/', mainapp.comment, name='comment'),
     path('like/<int:id>/<int:pk>', mainapp.like, name='like'),
-    path('notification_read/<int:pk>', mainapp.notification_read, name='notification_read'),
+    path('notification_read/<int:pk>/<name>', mainapp.notification_read, name='notification_read'),
 ]
