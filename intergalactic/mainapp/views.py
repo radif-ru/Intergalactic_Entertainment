@@ -1,7 +1,10 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ValidationError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse
+from django.views.generic import ListView
 
 from mainapp.models import Publication, PublicationCategory, Likes, Comments
 from django.db.models import Count
@@ -220,3 +223,18 @@ def notification_read(request, pk, name):
     notifications = get_notifications(request.user)
 
     return JsonResponse({'length': len(notifications)})
+
+
+class IndexView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    template_name = 'mainapp/personal_area.html'
+    model = Publication
+    context_object_name = 'publications_list'
+
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user.pk)
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse('main:main'))
