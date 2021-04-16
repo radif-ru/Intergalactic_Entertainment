@@ -18,8 +18,10 @@ class PublicationCategory(models.Model):
 
 
 class Publication(models.Model):
-    category = models.ForeignKey(PublicationCategory, on_delete=models.CASCADE, verbose_name='категория публикации')
-    user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE, verbose_name='автор публикации')
+    category = models.ForeignKey(PublicationCategory, on_delete=models.CASCADE,
+                                 verbose_name='категория публикации')
+    user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
+                             verbose_name='автор публикации')
     name = models.CharField('имя публикации', max_length=128)
     image = models.ImageField(upload_to='publications_images', blank=True)
     short_desc = models.CharField('краткое описание публикации', max_length=64, blank=True)
@@ -34,21 +36,42 @@ class Publication(models.Model):
         verbose_name = 'публикация'
         verbose_name_plural = 'публикации'
 
+    def get_like_count(self):
+        likes = len(Likes.objects.filter(publication_id=self.id, status=True))
+        return likes
+
+    def get_comment_count(self):
+        comments = len(Comments.objects.filter(publication=self.id))
+        return comments
+
+    def is_liked(self, user):
+        try:
+            Likes.objects.get(sender_id=user, publication_id=self.id, status=True)
+            return True
+        except:
+            return False
+
 
 class Comments(models.Model):
-    publication = models.ForeignKey(Publication, verbose_name='публикация', on_delete=models.CASCADE)
+    publication = models.ForeignKey(Publication, verbose_name='публикация',
+                                    on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     description = models.TextField(verbose_name='комментарий', blank=False)
     created = models.DateTimeField(verbose_name='создан', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
+    is_read = models.BooleanField(default=0)
+    receiver = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
+                               related_name='comments_sender', default=0)
 
     class Meta:
         verbose_name = 'комментарий'
         verbose_name_plural = 'комментарии'
 
- 
+
 class Likes(models.Model):
     user_id = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE)
+    sender_id = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
+                                  related_name='sender', default=0)
     publication_id = models.ForeignKey(Publication, on_delete=models.CASCADE)
-    status = models.BooleanField(default=0)
-
+    status = models.BooleanField(default=1)
+    is_read = models.BooleanField(default=0)

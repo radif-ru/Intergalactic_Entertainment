@@ -128,3 +128,6 @@ AUTH_USER_MODEL = 'authapp.IntergalacticUser'
 
 # Путь до аватарок в папке media
 USERS_AVATARS = 'users_avatars'
+
+# Путь до json файлов и дампов бд
+JSON_PATH = 'json'

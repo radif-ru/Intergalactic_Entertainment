@@ -1,16 +1,21 @@
 {% load my_tags %}
 <div class="last-block">
-    <img src="{{ publ.image|media_folder_publications }}" alt="">
+    <img src="{{ publ.publication.image|media_folder_publications }}" alt="">
     <div class="last-block-text">
-        <h2>{{ publ.name }}</h2>
-        <p>{{ publ.short_desc}}</p>
-        <h4>{{ publ.created}}</h4>
+        <p style="position: absolute; top: -30px; left: 10px;  border: 1px solid #fffbfb; padding: 5px";>
+            {{publ.publication.category.name}}
+        </p>
+        <h2>{{ publ.publication.name }}</h2>
+        <p>{{ publ.publication.short_desc}}</p>
+        <h4 style="margin-bottom: 30px;">{{ publ.publication.user.username}}</h4>
+        <h4>{{ publ.publication.created}}</h4>
         <h5>
-            <span class="likes">4</span>
+            <span class="likes">{{publ.likes}}</span>
             <i class="fas fa-heart"></i>
-            <span class="comments">4 </span>
+            <span class="comments">{{publ.comments}} </span>
             <i class="fas fa-comments"></i>
         </h5>
-        <a href="{% url 'main:publication_page' publ.pk  %}"></a>
+        <a style="background-color: black;  opacity: 0;" href="{% url 'main:publication_page' publ.publication.pk  %}"
+        onmouseover="this.style.opacity=0.4;" onmouseout="this.style.opacity=0;"></a>
     </div>
 </div>
