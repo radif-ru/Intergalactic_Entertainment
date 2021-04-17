@@ -27,6 +27,7 @@
                 <a href="{% url 'main:create_publication' %}" class="login">Создать статью</a>
                 <a href="{% url 'auth:logout' %}" class="login">Выйти</a>
                 <a href="{% url 'auth:profile' %}" class="registration">Личный кабинет</a>
+                <p>Привет, {{ request.user }}</p>
             {% else %}
                 <a href="{% url 'auth:login' %}" class="login">Войти</a>
                 <a href="{% url 'auth:register' %}" class="registration">Регистрация</a></div>

@@ -232,9 +232,9 @@ def create_publication(request):
     if request.method == 'POST':
         create_publication_form = CreatePublicationForm(request.POST, request.FILES)
         if create_publication_form.is_valid():
-            create_publication_form.save(commit=False)
-            create_publication_form.user = request.user
-            create_publication_form.save()
+            instance = create_publication_form.save(commit=False)
+            instance.user = request.user  # подстановка в форму создания статьи залогиневшегося пользователя
+            instance.save()
             return HttpResponseRedirect(reverse('main:main'))
     else:
         create_publication_form = CreatePublicationForm()
