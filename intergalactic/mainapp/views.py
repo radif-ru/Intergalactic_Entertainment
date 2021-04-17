@@ -10,6 +10,11 @@ from django.http import JsonResponse
 from authapp.models import IntergalacticUser
 from itertools import chain
 
+from django.views.generic import CreateView
+from mainapp.forms import CreatePublicationForm
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def get_notifications(user):
     notifications = chain(
@@ -220,3 +225,28 @@ def notification_read(request, pk, name):
     notifications = get_notifications(request.user)
 
     return JsonResponse({'length': len(notifications)})
+
+
+def create_publication(request):
+    print(f"пользователь: {request.user}")
+    if request.method == 'POST':
+        create_publication_form = CreatePublicationForm(request.POST, request.FILES)
+        if create_publication_form.is_valid():
+            create_publication_form.save(commit=False)
+            create_publication_form.user = request.user
+            create_publication_form.save()
+            return HttpResponseRedirect(reverse('main:main'))
+    else:
+        create_publication_form = CreatePublicationForm()
+
+    context = {
+        'page_title': 'пользователи/создание',
+        'create_publication_form': create_publication_form,
+    }
+
+    return render(request, 'mainapp/create_publication.html', context)
+
+"""class CreatePublication(CreateView):
+    form_class = CreatePublicationForm
+    template_name = 'mainapp/create_publication.html'
+    success_url = reverse_lazy('main:create_publication')"""

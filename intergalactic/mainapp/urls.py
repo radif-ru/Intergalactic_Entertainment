@@ -10,4 +10,6 @@ urlpatterns = [
     path('comment/', mainapp.comment, name='comment'),
     path('like/<int:id>/<int:pk>', mainapp.like, name='like'),
     path('notification_read/<int:pk>/<name>', mainapp.notification_read, name='notification_read'),
+    # path('create_publication/', mainapp.CreatePublication.as_view(), name='create_publication'),
+    path('create_publication/', mainapp.create_publication, name='create_publication'),
 ]
