@@ -2,12 +2,12 @@
 <div class="last-block">
     <img src="{{ publ.publication.image|media_folder_publications }}" alt="">
     <div class="last-block-text">
-        <p style="position: absolute; top: -30px; left: 10px;  border: 1px solid #fffbfb; padding: 5px";>
+        <p>
             {{publ.publication.category.name}}
         </p>
         <h2>{{ publ.publication.name }}</h2>
         <p>{{ publ.publication.short_desc}}</p>
-        <h4 style="margin-bottom: 30px;">{{ publ.publication.user.username}}</h4>
+        <h4>{{ publ.publication.user.username}}</h4>
         <h4>{{ publ.publication.created}}</h4>
         <h5>
             <span class="likes">{{publ.likes}}</span>
@@ -15,7 +15,6 @@
             <span class="comments">{{publ.comments}} </span>
             <i class="fas fa-comments"></i>
         </h5>
-        <a style="background-color: black;  opacity: 0;" href="{% url 'main:publication_page' publ.publication.pk  %}"
-        onmouseover="this.style.opacity=0.4;" onmouseout="this.style.opacity=0;"></a>
+        <a href="{% url 'main:publication_page' publ.publication.pk  %}"></a>
     </div>
 </div>
