@@ -245,8 +245,3 @@ def create_publication(request):
     }
 
     return render(request, 'mainapp/create_publication.html', context)
-
-"""class CreatePublication(CreateView):
-    form_class = CreatePublicationForm
-    template_name = 'mainapp/create_publication.html'
-    success_url = reverse_lazy('main:create_publication')"""
