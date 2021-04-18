@@ -20,14 +20,13 @@ class PublicationCategory(models.Model):
 
 class Publication(models.Model):
     category = models.ForeignKey(PublicationCategory, on_delete=models.CASCADE,
-                                 verbose_name='категория публикации')
+                                 verbose_name='категория')
     user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
-                             verbose_name='автор публикации')
-    name = models.CharField('имя публикации', max_length=128)
-    image = models.ImageField(upload_to='publications_images', blank=True)
-    short_desc = models.CharField('краткое описание публикации', max_length=64, blank=True)
-    # text = models.TextField('текст публикации', blank=True)
-    text = RichTextUploadingField(blank=True, default='')
+                             verbose_name='автор')
+    name = models.CharField('заголовок', max_length=128)
+    image = models.ImageField(upload_to='publications_images', blank=True, verbose_name='главное изображение')
+    short_desc = models.CharField('краткое описание', max_length=64, blank=True)
+    text = RichTextUploadingField(blank=True, default='', verbose_name='контент')
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
     is_active = models.BooleanField(db_index=True, default=True)
 

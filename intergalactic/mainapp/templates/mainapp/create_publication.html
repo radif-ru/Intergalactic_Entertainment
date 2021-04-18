@@ -4,49 +4,18 @@
 {% load my_tags %}
 
 {% block main_content %}
-        <div class="main-wrapper">
-            <div class="main-wrapper-center">
-                <div class="main-container">
-                   <!-- <div class="main-navigation">
-                         <ul>
-                            <li> <a href="#" class="active">Статьи</a> </li>
-                            <li><a href="#">Новости</a></li>
-                            <li><a href="#">Хабы</a></li>
-                            <li><a href="#">Авторы</a></li>
-                            <li><a href="#">Компании</a></li>
-                        </ul>
-                    </div> -->
-                    <div class="fast-blocks-container">
-                        <p>СЕЙЧАС ЧИТАЮТ</p>
-                        <div class="fast-blocks">
-                            {% for publication_dict in now_read_publication_list_of_dict %}
-                                {% include 'mainapp/includes/inc_now_read_blocks.html' %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div class="main-last-blocks-container">
-                        <div class="new-publication">
-                            <h1>Создание статьи</h1>
-                            <div class="new_category_form">
-                                <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    {{ create_publication_form.as_p }}
-                                    <input class="form-control" type="submit" value="сохранить">
-                                </form>
-                            </div>
-
-                        </div>
-                    <!-- {% include 'mainapp/includes/inc_popular_blocks.html' %} -->
-                <!-- <div class="delimiter">
-                    <div class="del"></div>
-                    <a href="#">Больше</a></div> -->
-            </div>
-        </div>
-        <div class="main-news">
-            <p></p>
+    <div class="main-wrapper">
+    <div class="new-publication">
+        <h1>Создание публикации</h1>
+        <div class="new_category_form">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ create_publication_form.as_p }}
+                <input type="submit" class="create" value="Создать">
+            </form>
         </div>
     </div>
-</div>
+    </div>
 {% endblock %}
 </body>
 

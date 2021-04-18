@@ -154,17 +154,20 @@ h4 {
   align-items: center;
 }
 .main-nav .nav-right .login,
-.main-nav .nav-right .registration {
+.main-nav .nav-right .registration,
+.create{
   padding: 5px 10px;
   border-radius: 3px;
   margin-left: 15px;
 }
-.main-nav .nav-right .login {
+.main-nav .nav-right .login,
+.create{
   margin-left: 10px;
   color: #6c6c6c;
   border: 1px solid grey;
 }
-.main-nav .nav-right .login:hover {
+.main-nav .nav-right .login:hover,
+.create:hover{
   color: #67a5bc;
   border-color: #67a5bc;
 }
@@ -665,6 +668,8 @@ h4 {
   font-size: 17px;
   text-transform: uppercase;
 }
+
+/*Стиль публикации*/
 .publication img {
   width: 820px;
   padding-top: 20px;
@@ -675,6 +680,36 @@ h4 {
 .publication p {
   text-transform: none !important;
 }
+
+/*Стиль страницы создания публикации*/
+.new-publication{
+  padding: 50px;
+  display: inline;
+  width: 820px;
+  text-align: center;
+}
+.new-publication h1{
+  padding-bottom: 20px;
+}
+.new-publication p{
+  padding: 10px;
+}
+
+.create{
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+#id_name{
+  width: 200px;
+  height: 30px;
+}
+
+#id_short_desc{
+  width: 300px;
+  height: 30px;
+}
+
 .btn {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
