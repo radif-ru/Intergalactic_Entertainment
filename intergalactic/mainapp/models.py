@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from authapp.models import IntergalacticUser
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class PublicationCategory(models.Model):
@@ -25,7 +26,8 @@ class Publication(models.Model):
     name = models.CharField('имя публикации', max_length=128)
     image = models.ImageField(upload_to='publications_images', blank=True)
     short_desc = models.CharField('краткое описание публикации', max_length=64, blank=True)
-    text = models.TextField('текст публикации', blank=True)
+    # text = models.TextField('текст публикации', blank=True)
+    text = RichTextUploadingField(blank=True, default='')
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
     is_active = models.BooleanField(db_index=True, default=True)
 
