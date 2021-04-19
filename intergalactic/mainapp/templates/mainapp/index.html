@@ -11,7 +11,7 @@
             <div class="main-tile-big"><img
                     src="{{ trendy_publication_list_of_dict.0.publication.image|media_folder_publications }}"
                     alt="">
-                <div class="main-tile-big-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
+                <div class="main-tile-big-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.0.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
                     <div class="main-tile-big-text-content">
                         <h2>{{trendy_publication_list_of_dict.0.publication.name}}</h2>
                         <div class="main-tile-big-text-info">
@@ -32,7 +32,7 @@
                 <div class="main-tile-small-wide"><img
                         src="{{ trendy_publication_list_of_dict.1.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.1.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.1.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
@@ -52,7 +52,7 @@
                 <div class="main-tile-small-narrow n1"><img
                         src="{{ trendy_publication_list_of_dict.2.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.2.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.2.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
@@ -72,7 +72,7 @@
                 <div class="main-tile-small-narrow n2"><img
                         src="{{ trendy_publication_list_of_dict.3.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.3.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.3.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
