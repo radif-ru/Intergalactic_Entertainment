@@ -669,6 +669,7 @@ h4 {
   text-transform: uppercase;
 }
 
+
 /*Стиль публикации*/
 .publication img {
   width: 820px;
@@ -680,6 +681,7 @@ h4 {
 .publication p {
   text-transform: none !important;
 }
+
 
 /*Стиль страницы создания публикации*/
 .new-publication{
@@ -745,6 +747,7 @@ h4 {
   background-color: transparent;
   color: #548eaa;
 }
+
 .post__habracut-btn {
   margin-top: 5px;
   margin-bottom: 10px;
