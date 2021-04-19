@@ -32,7 +32,7 @@
                                 {{ publication.category}}
                             <a></a></h6>
                             <img src="{{ publication.image|media_folder_publications }}" alt="">
-                            <p>{{ publication.text}}</p>
+                            <p>{{ publication.text|safe}}</p>
                                     <h4>{{ publication.created}}</h4>
                             <h5 class="likes-comments">
                                 <span class="like-wrapper"><i class="like-button {% if publication|is_liked:user.id %} fas fa-heart {% else %} far fa-heart {% endif %}" style="font-size:30px; cursor:pointer;" data-publ="{{publication.id}}" data-user="{{publication.user.id}}"></i></span>
