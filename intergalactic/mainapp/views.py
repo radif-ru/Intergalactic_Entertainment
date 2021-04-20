@@ -254,7 +254,7 @@ class IndexView(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return self.model.objects.filter(user=self.request.user.pk)
 
     def test_func(self):
-        return self.request.user.is_staff
+        return self.request.user.is_active
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse('main:main'))
