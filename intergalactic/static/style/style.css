@@ -506,7 +506,7 @@ h4 {
   font-size: 1.25em;
   backface-visibility: hidden;
 }
-.main-container .last-block .last-block-text:hover :not(h5) {
+.main-container .last-block .last-block-text:hover:not(h5) {
   color: black !important;
   opacity: 1;
 }
@@ -912,6 +912,72 @@ h4 {
 #id_short_desc {
   width: 300px;
   height: 30px;
+}
+.category-block {
+  display: flex;
+}
+.category-block .category-block-img {
+  flex: 0 0 33.3%;
+}
+.category-block .category-block-img img {
+  height: 220px;
+  width: 250px;
+}
+.category-block .category-block-content {
+  flex: 0 0 67%;
+}
+.category-block .category-block-content > p {
+  margin-bottom: 0.5rem;
+}
+.category-block .category-block-content h4 {
+  margin-left: -20%;
+  margin-top: 1rem;
+  background-color: #dddddd;
+  padding: 1rem 1.5rem 1rem;
+  font-size: 24px;
+}
+.category-block .category-block-content h4 a {
+  color: #111111;
+}
+.category-block .category-block-content .category-block-content-info {
+  display: flex;
+  align-items: center;
+}
+.category-block .category-block-content .category-block-content-info span:first-child a {
+  color: #ffffff !important;
+  padding: 0.5em 0.8rem;
+  border-radius: 3px;
+  background-color: #FF6347 !important;
+}
+.category-block .category-block-content .category-block-content-info > span {
+  font-size: 11px;
+  display: inline-block;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  color: #111111;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 0.5rem;
+}
+.category-block .category-block-content .category-block-content-info > span:not(:first-child):after {
+  content: "/";
+  padding-left: 1rem;
+}
+.category-block .category-block-content .category-block-content-info .category-content-link {
+  font-size: 11px;
+  display: inline-block;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  color: #111111;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 0.5rem;
+}
+.category-block .category-block-content .category-block-content-info .category-content-link a {
+  color: black;
+}
+.category-block:not(:first-child) {
+  margin-top: 30px;
 }
 * {
   -webkit-box-sizing: content-box;
