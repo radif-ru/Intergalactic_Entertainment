@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ValidationError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -8,13 +8,11 @@ from django.views.generic import ListView
 
 from mainapp.models import Publication, PublicationCategory, Likes, Comments
 from django.db.models import Count
-from django.http import JsonResponse
 
 from authapp.models import IntergalacticUser
 from itertools import chain
 
 from mainapp.forms import CreatePublicationForm
-from django.http import HttpResponseRedirect
 
 
 def get_notifications(user):
