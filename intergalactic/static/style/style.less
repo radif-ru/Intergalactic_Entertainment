@@ -157,6 +157,7 @@ h4 {
 .main-nav {
     display: flex;
     justify-content: space-between;
+    z-index: 99;
     ul {
         display: flex;
         list-style-type: none;
@@ -243,7 +244,7 @@ h4 {
                 outline: 1px solid white;
                 display: inline-block;
                 color: white;
-                z-index: 10000000;
+                z-index: 5;
                 transition: 0.2s;
             }
             a.tile-category-link:hover {
@@ -320,7 +321,7 @@ h4 {
                     border: 1px solid white;
                     display: inline-block;
                     color: white;
-                    z-index: 10000000;
+                    z-index: 5;
                     transition: 0.2s;
                     margin-left: 20px;
                 }
@@ -383,7 +384,7 @@ h4 {
                     border: 1px solid white;
                     display: inline-block;
                     color: white;
-                    z-index: 10000000;
+                    z-index: 5;
                     transition: 0.2s;
                     margin-left: 20px;
                 }
@@ -1069,6 +1070,51 @@ h4 {
 .category-block:not(:first-child) {
     margin-top: 30px;
 }
+
+// Стили Олега
+.create {
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-left: 10px;
+    color: #6c6c6c;
+    border: 1px solid grey;
+}
+
+.create:hover{
+    color: #67a5bc;
+    border-color: #67a5bc;
+}
+
+/*Стиль страницы создания публикации*/
+.new-publication{
+  padding: 50px;
+  display: inline;
+  width: 820px;
+  text-align: center;
+}
+.new-publication h1{
+  padding-bottom: 20px;
+}
+.new-publication p{
+  padding: 10px;
+}
+
+.create{
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+#id_name{
+  width: 200px;
+  height: 30px;
+}
+
+#id_short_desc{
+  width: 300px;
+  height: 30px;
+}
+
+// Стили Олега
 
 * {
     -webkit-box-sizing: content-box;
