@@ -13,6 +13,9 @@ from django.http import JsonResponse
 from authapp.models import IntergalacticUser
 from itertools import chain
 
+from mainapp.forms import CreatePublicationForm
+from django.http import HttpResponseRedirect
+
 
 def get_notifications(user):
     notifications = chain(
@@ -223,6 +226,25 @@ def notification_read(request, pk, name):
     notifications = get_notifications(request.user)
 
     return JsonResponse({'length': len(notifications)})
+
+
+def create_publication(request):
+    if request.method == 'POST':
+        create_publication_form = CreatePublicationForm(request.POST, request.FILES)
+        if create_publication_form.is_valid():
+            instance = create_publication_form.save(commit=False)
+            instance.user = request.user  # подстановка в форму создания статьи залогиневшегося пользователя
+            instance.save()
+            return HttpResponseRedirect(reverse('main:main'))
+    else:
+        create_publication_form = CreatePublicationForm()
+
+    context = {
+        'page_title': 'пользователи/создание',
+        'create_publication_form': create_publication_form,
+    }
+
+    return render(request, 'mainapp/create_publication.html', context)
 
 
 class IndexView(LoginRequiredMixin, UserPassesTestMixin, ListView):
