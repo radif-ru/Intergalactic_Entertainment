@@ -1,0 +1,65 @@
+{% extends 'mainapp/base.html' %}
+
+{% load static %}
+{% load my_tags %}
+
+{% block main_content %}
+
+    <div class="wrapper" id="page-title">
+        <div class="container">
+
+            <div class="pt-2 pb-3 mb-0 small lh-sm border-bottom w-100">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <strong class="text-gray-dark">Личный кабинет пользователя {{ request.user|title }}</strong>
+                    <a class="mt-2 btn btn-outline-secondary"
+                       href="{% url 'auth:profile' %}">
+                        Редактировать профиль
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Мои статьи</h6>
+        {% if publications_list %}
+            <table id="datatable" class="table dt-responsive nowrap table-vertical"
+                   width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Img</th>
+                    <th>Название</th>
+                    <th>Краткое описание</th>
+                    <th>Понравилось</th>
+                    <th>Комментарии</th>
+                    <th>Дата публикации</th>
+                    <th>Статус</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for publication in publications_list %}
+                    <tr>
+                        <td>{{ publication.id }}</td>
+                        <td><img alt="not" src="/media/{{ publication.image }}" height="50px"></td>
+                        <td>{{ publication.name }}</td>
+                        <td>{{ publication.short_desc }}</td>
+                        <td>{{ publication.get_like_count }}</td>
+                        <td>{{ publication.get_comment_count }}</td>
+                        <td>{{ publication.created }}</td>
+                        <td>{{ publication.get_is_active }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="lead">Пока ничего не опубликовано</p>
+        {% endif %}
+
+        <a class="btn btn-outline-secondary" href="{% url 'main:create_publication' %}">Создать</a>
+    </div>
+
+{% endblock %}

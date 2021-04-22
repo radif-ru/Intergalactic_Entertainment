@@ -11,4 +11,5 @@ urlpatterns = [
     path('like/<int:id>/<int:pk>', mainapp.like, name='like'),
     path('notification_read/<int:pk>/<name>', mainapp.notification_read, name='notification_read'),
     path('create_publication/', mainapp.create_publication, name='create_publication'),
+    path('personality/', mainapp.IndexView.as_view(extra_context={'title': 'Личный кабинет'}), name='personality'),
 ]
