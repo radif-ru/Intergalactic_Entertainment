@@ -59,6 +59,12 @@ class Publication(models.Model):
             self.text = self.text[:350] + '...'
         return self.text
 
+    def get_is_active(self):
+        if self.is_active:
+            return "Активна"
+        else:
+            return "Не активна"
+
 
 class Comments(models.Model):
     publication = models.ForeignKey(Publication, verbose_name='публикация',
