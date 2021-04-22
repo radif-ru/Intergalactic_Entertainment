@@ -4,6 +4,13 @@
 {% load my_tags %}
 
 {% block main_content %}
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.css' %}">
+    {% endblock %}
+
+    {% block js %}
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+    {% endblock %}
 
     <div class="wrapper" id="page-title">
         <div class="container">
