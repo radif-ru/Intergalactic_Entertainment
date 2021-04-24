@@ -1,14 +1,18 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ValidationError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse
+from django.views.generic import ListView
 
 from mainapp.models import Publication, PublicationCategory, Likes, Comments
 from django.db.models import Count
-from django.http import JsonResponse
 
 from authapp.models import IntergalacticUser
 from itertools import chain
+
+from mainapp.forms import CreatePublicationForm
 
 
 def get_notifications(user):
@@ -220,3 +224,37 @@ def notification_read(request, pk, name):
     notifications = get_notifications(request.user)
 
     return JsonResponse({'length': len(notifications)})
+
+
+def create_publication(request):
+    if request.method == 'POST':
+        create_publication_form = CreatePublicationForm(request.POST, request.FILES)
+        if create_publication_form.is_valid():
+            instance = create_publication_form.save(commit=False)
+            instance.user = request.user  # подстановка в форму создания статьи залогиневшегося пользователя
+            instance.save()
+            return HttpResponseRedirect(reverse('main:main'))
+    else:
+        create_publication_form = CreatePublicationForm()
+
+    context = {
+        'page_title': 'пользователи/создание',
+        'create_publication_form': create_publication_form,
+    }
+
+    return render(request, 'mainapp/create_publication.html', context)
+
+
+class IndexView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    template_name = 'mainapp/personal_area.html'
+    model = Publication
+    context_object_name = 'publications_list'
+
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user.pk)
+
+    def test_func(self):
+        return self.request.user.is_active
+
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse('main:main'))

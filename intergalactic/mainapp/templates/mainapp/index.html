@@ -11,11 +11,10 @@
             <div class="main-tile-big"><img
                     src="{{ trendy_publication_list_of_dict.0.publication.image|media_folder_publications }}"
                     alt="">
-                <div class="main-tile-big-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
+                <div class="main-tile-big-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.0.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
                     <div class="main-tile-big-text-content">
                         <h2>{{trendy_publication_list_of_dict.0.publication.name}}</h2>
                         <div class="main-tile-big-text-info">
-                            <p>{{trendy_publication_list_of_dict.0.publication.user.username}}</p>
                             <h5>
                                 {{trendy_publication_list_of_dict.0.publication.created}} &#8195
                                 <span class="likes">{{trendy_publication_list_of_dict.0.likes}}</span>
@@ -32,11 +31,10 @@
                 <div class="main-tile-small-wide"><img
                         src="{{ trendy_publication_list_of_dict.1.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.1.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.1.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
-                                <p>{{trendy_publication_list_of_dict.1.publication.user.username}}</p>
                                 <h5>
                                     {{trendy_publication_list_of_dict.1.publication.created}} &#8195
                                     <span class="likes">{{trendy_publication_list_of_dict.1.likes}}</span>
@@ -52,11 +50,10 @@
                 <div class="main-tile-small-narrow n1"><img
                         src="{{ trendy_publication_list_of_dict.2.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.2.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.2.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
-                                <p>{{trendy_publication_list_of_dict.2.publication.user.username}}</p>
                                 <h5>
                                     {{trendy_publication_list_of_dict.2.publication.created}} &#8195
                                     <span class="likes">{{trendy_publication_list_of_dict.2.likes}}</span>
@@ -72,11 +69,10 @@
                 <div class="main-tile-small-narrow n2"><img
                         src="{{ trendy_publication_list_of_dict.3.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.3.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.3.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
-                                <p>{{trendy_publication_list_of_dict.3.publication.user.username}}</p>
                                 <h5>
                                     {{trendy_publication_list_of_dict.3.publication.created}} &#8195
                                     <span class="likes">{{trendy_publication_list_of_dict.3.likes}}</span>

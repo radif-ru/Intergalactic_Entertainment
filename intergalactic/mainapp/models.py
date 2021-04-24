@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from authapp.models import IntergalacticUser
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class PublicationCategory(models.Model):
@@ -19,13 +20,14 @@ class PublicationCategory(models.Model):
 
 class Publication(models.Model):
     category = models.ForeignKey(PublicationCategory, on_delete=models.CASCADE,
-                                 verbose_name='категория публикации')
+                                 verbose_name='категория')
     user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
-                             verbose_name='автор публикации')
-    name = models.CharField('имя публикации', max_length=128)
-    image = models.ImageField(upload_to='publications_images', blank=True)
-    short_desc = models.CharField('краткое описание публикации', max_length=64, blank=True)
-    text = models.TextField('текст публикации', blank=True)
+                             verbose_name='автор')
+    name = models.CharField('заголовок', max_length=128)
+    image = models.ImageField(upload_to='publications_images', blank=True,
+                              verbose_name='главное изображение')
+    short_desc = models.CharField('краткое описание', max_length=64, blank=True)
+    text = RichTextUploadingField(blank=True, default='', verbose_name='контент')
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
     is_active = models.BooleanField(db_index=True, default=True)
 
@@ -51,6 +53,18 @@ class Publication(models.Model):
         except:
             return False
 
+    def get_short_text(self):
+
+        if len(self.text) > 1000:
+            self.text = self.text[:350] + '...'
+        return self.text
+
+    def get_is_active(self):
+        if self.is_active:
+            return "Активна"
+        else:
+            return "Не активна"
+
 
 class Comments(models.Model):
     publication = models.ForeignKey(Publication, verbose_name='публикация',
@@ -61,7 +75,7 @@ class Comments(models.Model):
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
     is_read = models.BooleanField(default=0)
     receiver = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
-                               related_name='comments_sender', default=0)
+                                 related_name='comments_sender', default=0)
 
     class Meta:
         verbose_name = 'комментарий'

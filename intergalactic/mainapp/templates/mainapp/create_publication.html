@@ -1,0 +1,22 @@
+{% extends 'mainapp/base.html' %}
+
+{% load static %}
+{% load my_tags %}
+
+{% block main_content %}
+    <div class="main-wrapper">
+        <div class="new-publication">
+            <h1>Создание публикации</h1>
+            <div class="new_category_form">
+                <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ create_publication_form.as_p }}
+                    <input type="submit" class="create" value="Создать">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+
+</html>
