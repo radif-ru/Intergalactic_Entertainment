@@ -64,22 +64,11 @@ def main(request):
     publication_list_of_dict = take_publications_list_of_dict(publication_list)
 
     trendy_id_list = take_trendy_publication_id_list()
-    trendy_publication_list = [
-        Publication.objects.get(id=trendy_id_list[0]),
-        Publication.objects.get(id=trendy_id_list[1]),
-        Publication.objects.get(id=trendy_id_list[2]),
-        Publication.objects.get(id=trendy_id_list[3])
-    ]
+    trendy_publication_list = [Publication.objects.get(id=trendy_id_list[i]) for i in range(4)]
     trendy_publication_list_of_dict = take_publications_list_of_dict(trendy_publication_list)
 
     now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [
-        Publication.objects.get(id=now_read_id_list[0]),
-        Publication.objects.get(id=now_read_id_list[1]),
-        Publication.objects.get(id=now_read_id_list[2]),
-        Publication.objects.get(id=now_read_id_list[3]),
-        Publication.objects.get(id=now_read_id_list[4]),
-    ]
+    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
     notifications = get_notifications(request.user)
@@ -102,13 +91,7 @@ def publication_page(request, pk):
     notifications = get_notifications(request.user)
 
     now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [
-        Publication.objects.get(id=now_read_id_list[0]),
-        Publication.objects.get(id=now_read_id_list[1]),
-        Publication.objects.get(id=now_read_id_list[2]),
-        Publication.objects.get(id=now_read_id_list[3]),
-        Publication.objects.get(id=now_read_id_list[4]),
-    ]
+    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
     context = {
@@ -128,13 +111,7 @@ def category_page(request, pk):
     categories = PublicationCategory.objects.filter(is_active=True)
 
     now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [
-        Publication.objects.get(id=now_read_id_list[0]),
-        Publication.objects.get(id=now_read_id_list[1]),
-        Publication.objects.get(id=now_read_id_list[2]),
-        Publication.objects.get(id=now_read_id_list[3]),
-        Publication.objects.get(id=now_read_id_list[4]),
-    ]
+    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
     if pk is not None:
