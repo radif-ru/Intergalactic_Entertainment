@@ -16,6 +16,28 @@
                             <li><a href="#">Компании</a></li>
                         </ul>
                     </div> -->
+                    <div class="info-publication-block">
+                        <h3>Информация</h3>
+                        <hr>
+                        <table>
+                            <tr>
+                                <th>Рубрика:</th>
+                                <td><a href="{% url 'main:category'  publication.category.pk %}">
+                                {{ publication.category}}
+                            </a></td></tr>
+                            {% if publication.user.company %}
+                            <tr><th>Компания:</th>
+                                <td>publication.user.company</td></tr> {% endif %}
+                            <tr>
+                                <th>Автор:</th>
+                                <td>{{publication.user}}</td></tr>
+                            <tr>
+                                <th>Дата создания:</th>
+                                <td>{{publication.created}}</td></tr>
+
+                        </table>
+
+                    </div>
                     <div class="fast-blocks-container">
                         <p>СЕЙЧАС ЧИТАЮТ</p>
                         <div class="fast-blocks">
@@ -26,11 +48,7 @@
                     </div>
                     <div class="main-last-blocks-container">
                         <div class="publication">
-                            <h5>{{ publication.user }}</h5>
                             <h2>{{ publication.name }}</h2>
-                            <h6><a href="{% url 'main:category'  publication.category.pk %}">
-                                {{ publication.category}}
-                            <a></a></h6>
                             <img src="{{ publication.image|media_folder_publications }}" alt="">
                             <p>{{ publication.text|safe}}</p>
                                     <h4>{{ publication.created}}</h4>

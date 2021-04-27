@@ -1027,3 +1027,9 @@ h4 {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+.info-publication-block {
+    display: inline-block;
+}
+.info-publication-block th {
+    text-align: left;
+}
