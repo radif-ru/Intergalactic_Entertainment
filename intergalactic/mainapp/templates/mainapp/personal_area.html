@@ -44,6 +44,8 @@
                     <th>Комментарии</th>
                     <th>Дата публикации</th>
                     <th>Статус</th>
+                    <th>Просмотр</th>
+                    <th>Редактировать</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,6 +59,10 @@
                         <td>{{ publication.get_comment_count }}</td>
                         <td>{{ publication.created }}</td>
                         <td>{{ publication.get_is_active }}</td>
+                        <td><a href="{% url 'main:publication_page' pk=publication.id  %}">Посмотреть</a></td>
+                        {% if not publication.is_active %}
+                        <td><a href="{% url 'main:edit_publication' pk=publication.id  %}">Редактировать</a></td>
+                        {% endif %}
 
                     </tr>
                 {% endfor %}

@@ -12,4 +12,6 @@ urlpatterns = [
     path('notification_read/<int:pk>/<name>', mainapp.notification_read, name='notification_read'),
     path('create_publication/', mainapp.create_publication, name='create_publication'),
     path('personality/', mainapp.IndexView.as_view(extra_context={'title': 'Личный кабинет'}), name='personality'),
+    path('edit_publication/<int:pk>', mainapp.edit_publication, name='edit_publication'),
+    path('to_publish/<int:pk>', mainapp.to_publish, name='to_publish'),
 ]

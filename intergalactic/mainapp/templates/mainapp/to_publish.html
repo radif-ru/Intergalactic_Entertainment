@@ -6,17 +6,17 @@
 {% block main_content %}
     <div class="main-wrapper">
         <div class="new-publication">
-            <h1>Создание публикации</h1>
+            <h1>Точно публикуем?</h1>
             <div class="new_category_form">
                 <form class="form-horizontal" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ create_publication_form.as_p }}
-                    <input type="submit" class="create" value="Предварительный просмотр">
+                    {{ to_publish_form.as_p }}
+                    <input class="form-control" type="submit" value="Да">
                 </form>
+                <a href="{% url 'main:main' %}" class="btn btn-primary form-control last">
+            На Главную
+        </a>
             </div>
         </div>
     </div>
 {% endblock %}
-</body>
-
-</html>

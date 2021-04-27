@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -12,7 +14,7 @@ from django.db.models import Count
 from authapp.models import IntergalacticUser
 from itertools import chain
 
-from mainapp.forms import CreatePublicationForm
+from mainapp.forms import CreatePublicationForm, ToPublishForm
 
 
 def get_notifications(user):
@@ -209,8 +211,10 @@ def create_publication(request):
         if create_publication_form.is_valid():
             instance = create_publication_form.save(commit=False)
             instance.user = request.user  # подстановка в форму создания статьи залогиневшегося пользователя
+            instance.is_active = 0
             instance.save()
-            return HttpResponseRedirect(reverse('main:main'))
+            # return HttpResponseRedirect(reverse('main:publication_page'))
+            return publication_page(request, pk=instance.id)
     else:
         create_publication_form = CreatePublicationForm()
 
@@ -235,3 +239,42 @@ class IndexView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def handle_no_permission(self):
         return HttpResponseRedirect(reverse('main:main'))
+
+
+def edit_publication(request, pk):
+    publ = get_object_or_404(Publication, pk=pk)
+    if request.method == 'POST':
+        update_publication_form = CreatePublicationForm(request.POST, request.FILES, instance=publ)
+        if update_publication_form.is_valid():
+            instance = update_publication_form.save(commit=False)
+            instance.is_active = 0
+            instance.save()
+            return publication_page(request, pk=instance.id)
+    else:
+        update_publication_form = CreatePublicationForm(instance=publ)
+
+    context = {
+        'page_title': 'пользователи/создание',
+        'update_publication_form': update_publication_form,
+    }
+
+    return render(request, 'mainapp/edit_publication.html', context)
+
+
+def to_publish(request, pk):
+    publ = get_object_or_404(Publication, pk=pk)
+    if request.method == 'POST':
+        to_publish_form = ToPublishForm(request.POST, request.FILES, instance=publ)
+        if to_publish_form.is_valid():
+            instance = to_publish_form.save(commit=False)
+            instance.is_active = 1
+            instance.save()
+            return HttpResponseRedirect(reverse('main:main'))
+    else:
+        to_publish_form = ToPublishForm(instance=publ)
+
+    context = {
+        'to_publish_form': to_publish_form,
+    }
+
+    return render(request, 'mainapp/to_publish.html', context)
