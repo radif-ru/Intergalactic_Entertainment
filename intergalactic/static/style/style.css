@@ -1033,3 +1033,29 @@ h4 {
 .info-publication-block th {
     text-align: left;
 }
+
+.to_publish_form input{
+  margin: 20px;
+  font-size: 25px;
+}
+.to_publish_form a, .preliminarily a {
+  margin: 10px;
+  font-size: 25px;
+  color: #6c6c6c;
+  border: 1px solid grey;
+  border-radius: 3px;
+  font-family: sans-serif;
+  padding: 5px;
+}
+.to_publish_form a:hover, .preliminarily a:hover{
+  color: #637e9c;
+  border-color: #637e9c;
+}
+.preliminarily{
+  text-align: center;
+}
+.preliminarily h1{
+  margin-bottom: 20px;
+}
+
+

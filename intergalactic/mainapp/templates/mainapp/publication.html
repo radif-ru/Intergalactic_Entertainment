@@ -7,7 +7,7 @@
         <div class="main-wrapper">
             <div class="main-wrapper-center">
                     {% if not publication.is_active %}
-                        <div id="preliminarily">
+                        <div class="preliminarily">
                             <h1>Страница предварительного просмотра публикации</h1>
                             <a href="{% url 'main:edit_publication' pk=publication.id %}" class="login">Редактировать</a>
                             <a href="{% url 'main:to_publish' pk=publication.id %}" class="login">Опубликовать</a>
