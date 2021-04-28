@@ -82,21 +82,21 @@
                                 </h5>
                             </div>
                         </div>
-                        <a href="{% url 'main:publication_page' trendy_publication_list_of_dict.3.publication.pk  %}" class="tile-big-link"></a>
+                        <a  href="{% url 'main:publication_page' trendy_publication_list_of_dict.3.publication.pk  %}" class="tile-big-link"></a>
+                        <div id="sort-space"></div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="main-container">
-            <!-- <div class="main-navigation">
+            <div  class="main-navigation">
                 <ul>
-                    <li><a href="#" class="active">Статьи</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Хабы</a></li>
-                    <li><a href="#">Авторы</a></li>
-                    <li><a href="#">Компании</a></li>
+                    <li><a >Сортировать по:</a></li>
+                    <li><a href="{% url 'main:main' %}?sort=date#sort-space" class="{% if request.GET.sort == 'date' %} active {% endif %}">Дате</a></li>
+                    <li><a href="{% url 'main:main' %}?sort=like#sort-space" class="{% if request.GET.sort == 'like' %} active {% endif %}">Лайкам</a></li>
+                    <li><a href="{% url 'main:main' %}?sort=comment#sort-space" class="{% if request.GET.sort == 'comment' %} active {% endif %}">Комментариям</a></li>
                 </ul>
-            </div> -->
+            </div>
             <div class="fast-blocks-container">
                 <p>СЕЙЧАС ЧИТАЮТ</p>
                 <div class="fast-blocks">
