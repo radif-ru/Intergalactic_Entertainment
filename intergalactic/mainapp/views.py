@@ -58,16 +58,24 @@ def take_publications_list_of_dict(publications_list):
 
 def main(request):
     categories = PublicationCategory.objects.filter(is_active=True)
+    print(request)
+    trendy_id_list = take_trendy_publication_id_list()
+    now_read_id_list = take_now_read_publication_id_list()
+    get_request_sort = {
+        'date': Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created'),
+        'like': [Publication.objects.get(id=i) for i in trendy_id_list],
+        'comment': [Publication.objects.get(id=i) for i in now_read_id_list]
+    }
+    try:
+        publication_list = get_request_sort[request.GET['sort']]
+    except:
+        publication_list = Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created')
 
-    publication_list = Publication.objects.filter(is_active=True,
-                                                  category__is_active=True).order_by('-created')
     publication_list_of_dict = take_publications_list_of_dict(publication_list)
 
-    trendy_id_list = take_trendy_publication_id_list()
     trendy_publication_list = [Publication.objects.get(id=trendy_id_list[i]) for i in range(4)]
     trendy_publication_list_of_dict = take_publications_list_of_dict(trendy_publication_list)
 
-    now_read_id_list = take_now_read_publication_id_list()
     now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
@@ -81,6 +89,7 @@ def main(request):
         'now_read_publication_list_of_dict': now_read_publication_list_of_dict,
         'notifications': notifications,
     }
+
     return render(request, 'mainapp/index.html', content)
 
 
