@@ -12,3 +12,15 @@ class CreatePublicationForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = "form-control"
             field.help_text = ''
+
+
+class ToPublishForm(forms.ModelForm):
+    class Meta:
+        model = Publication
+        fields = ()
+
+    def __init__(self, *args, **kwargs):
+        super(ToPublishForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = "form-control"
+            field.help_text = ''
