@@ -6,6 +6,13 @@
 {% block main_content %}
         <div class="main-wrapper">
             <div class="main-wrapper-center">
+                    {% if not publication.is_active %}
+                        <div class="preliminarily">
+                            <h1>Страница предварительного просмотра публикации</h1>
+                            <a href="{% url 'main:edit_publication' pk=publication.id %}" class="login">Редактировать</a>
+                            <a href="{% url 'main:to_publish' pk=publication.id %}" class="login">Опубликовать</a>
+                        </div>
+                    {% endif %}
                 <div class="main-container">
                    <!-- <div class="main-navigation">
                          <ul>
@@ -16,6 +23,28 @@
                             <li><a href="#">Компании</a></li>
                         </ul>
                     </div> -->
+                    <div class="info-publication-block">
+                        <h3>Информация</h3>
+                        <hr>
+                        <table>
+                            <tr>
+                                <th>Рубрика:</th>
+                                <td><a href="{% url 'main:category'  publication.category.pk %}">
+                                {{ publication.category}}
+                            </a></td></tr>
+                            {% if publication.user.company %}
+                            <tr><th>Компания:</th>
+                                <td>publication.user.company</td></tr> {% endif %}
+                            <tr>
+                                <th>Автор:</th>
+                                <td>{{publication.user}}</td></tr>
+                            <tr>
+                                <th>Дата создания:</th>
+                                <td>{{publication.created}}</td></tr>
+
+                        </table>
+
+                    </div>
                     <div class="fast-blocks-container">
                         <p>СЕЙЧАС ЧИТАЮТ</p>
                         <div class="fast-blocks">
@@ -26,17 +55,18 @@
                     </div>
                     <div class="main-last-blocks-container">
                         <div class="publication">
-                            <h5>{{ publication.user }}</h5>
                             <h2>{{ publication.name }}</h2>
-                            <h6><a href="{% url 'main:category'  publication.category.pk %}">
-                                {{ publication.category}}
-                            <a></a></h6>
                             <img src="{{ publication.image|media_folder_publications }}" alt="">
                             <p>{{ publication.text|safe}}</p>
-                                    <h4>{{ publication.created}}</h4>
+                            <h4>{{ publication.created}}</h4>
                             <h5 class="likes-comments">
+
                                 <span class="like-wrapper"><i class="like-button {% if publication|is_liked:user.id %} fas fa-heart {% else %} far fa-heart {% endif %}" style="font-size:30px; cursor:pointer;" data-publ="{{publication.id}}" data-user="{{publication.user.id}}"></i></span>
                                 <span class="likes" style="margin-right:15px; font-size:20px;">{{ publication.get_like_count }}</span>
+
+                                <span class="dislike-wrapper"><i class="dislike-button {% if publication|is_liked:user.id %} fas fa-thumbs-down {% else %} far fa-thumbs-down {% endif %}" style="font-size:30px; cursor:pointer;" data-publ="{{publication.id}}" data-user="{{publication.user.id}}"></i></span>
+                                <span class="dislikes" style="margin-right:15px; font-size:20px;">{{ publication.get_dislike_count }}</span>
+
                                 <span class="comments" onclick="toggle_comments(this)" style="cursor: pointer;"><i class="far fa-comment-alt" style="font-size:30px;"></i> <span class="comments-count" style="font-size:20px;">{{ publication.get_comment_count }}</span></span>
                                 <div class="comments-wrapper">
                                     <div class="comments-div">
@@ -64,6 +94,3 @@
     </div>
 </div>
 {% endblock %}
-</body>
-
-</html>

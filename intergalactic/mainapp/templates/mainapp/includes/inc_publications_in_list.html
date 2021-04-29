@@ -2,9 +2,7 @@
 <div class="last-block">
     <img src="{{ publ.publication.image|media_folder_publications }}" alt="">
     <div class="last-block-text">
-        <p>
-            {{publ.publication.category.name}}
-        </p>
+        <a href="{% url 'main:category' publ.publication.category.pk %}">{{publ.publication.category.name}}</a>
         <h2>{{ publ.publication.name }}</h2>
         <p>{{ publ.publication.short_desc}}</p>
         <h4>{{ publ.publication.user.username}}</h4>

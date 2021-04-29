@@ -4,71 +4,69 @@
 {% load my_tags %}
 
 {% block title %}
-    <title>title</title>
+<title>title</title>
 {% endblock %}
 
 {% block main_content %}
 <div class="main-wrapper">
     <div class="main-wrapper-center">
         <div class="main-container">
-             <div class="main-navigation">
-                 <!-- <ul>
-                    <li> <a href="#" class="active">Статьи</a> </li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Хабы</a></li>
-                    <li><a href="#">Авторы</a></li>
-                    <li><a href="#">Компании</a></li>
-                </ul> -->
+            <div class="main-navigation">
+                <!-- <ul>
+                   <li> <a href="#" class="active">Статьи</a> </li>
+                   <li><a href="#">Новости</a></li>
+                   <li><a href="#">Хабы</a></li>
+                   <li><a href="#">Авторы</a></li>
+                   <li><a href="#">Компании</a></li>
+               </ul> -->
             </div>
 
             <div class="fast-blocks-container">
                 <p>СЕЙЧАС ЧИТАЮТ</p>
                 <div class="fast-blocks">
                     {% for publication_dict in now_read_publication_list_of_dict %}
-                        {% include 'mainapp/includes/inc_now_read_blocks.html' %}
+                    {% include 'mainapp/includes/inc_now_read_blocks.html' %}
                     {% endfor %}
                 </div>
             </div>
 
-    <div class="main-last-blocks-container">
-        {% for publication in publications %}
-            <div class="main-last-blocks-container">
-                <div class="publication">
-                <h5>{{ publication.user }}</h5>
-                <h2>{{ publication.name }}</h2>
-                <h6><a href={% url 'main:category'  publication.category.pk %}>
-                    {{ publication.category}}
-                <a></a></h6>
-                <img src="{{ publication.image|media_folder_publications }}" alt="">
-                <p>{{ publication.short_desc}}</p>
-                <h4>{{ publication.created}}</h4>
-                <h5>
-                    <span class="likes">4</span>
-                    <i class="fas fa-heart"></i>
-                    <span class="comments">4 </span>
-                    <i class="fas fa-comments"></i>
-                </h5>
-                <a href={% url 'main:publication_page' publication.pk %}
-                    class="btn btn_x-large btn_outline_blue post__habracut-btn">Читатать далее
-                </a>
+            <div class="category-blocks-container">
+                {% for publication in publications %}
+                <div class="category-block">
+                    <div class="category-block-img">
+                        <a href="{% url 'main:publication_page' publication.pk %}"> <img
+                                src="{{ publication.image|media_folder_publications }}" alt="">
+                        </a>
+                    </div>
+                    <div class="category-block-content">
+                        <h4><a href="{% url 'main:publication_page' publication.pk %}">{{ publication.name }}</a></h4>
+                        <p>{{ publication.get_short_text|safe }}</p>
+                        <div class="category-block-content-info">
+                            <span><a
+                                    href="{% url 'main:category' publication.category.pk %}">{{ publication.category }}</a></span>
+                            <span>{{ publication.created}}</span>
+                            <span class="category-content-link"><a href="#">{{ publication.user }}</a></span>
+                            <p><span class="likes">{{ publication.get_like_count }}</span>
+                                <i class="fas fa-heart"></i>
+                                <span class="comments">{{ publication.get_comment_count }}</span>
+                                <i class="fas fa-comments"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!-- {% include 'mainapp/includes/inc_popular_blocks.html' %} -->
+
+                <!-- <div class="delimiter">
+                    <div class="del">
+                        <a href="#">Больше</a>
+                    </div> -->
             </div>
-        {% endfor %}
-
-        <!-- {% include 'mainapp/includes/inc_popular_blocks.html' %} -->
-
-        <!-- <div class="delimiter">
-            <div class="del">
-                <a href="#">Больше</a>
-            </div> -->
+            <div class="main-news">
+                <p></p>
+            </div>
         </div>
     </div>
-    <div class="main-news">
-        <p></p>
-    </div>
-</div>
-</div>
 </div>
 {% endblock %}
-</body>
-
-</html>

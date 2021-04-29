@@ -1,18 +1,20 @@
+import datetime
+
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ValidationError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse
+from django.views.generic import ListView
 
-from mainapp.models import Publication, PublicationCategory, Likes, Comments
+from mainapp.models import Publication, PublicationCategory, Likes, Dislikes, Comments
 from django.db.models import Count
-from django.http import JsonResponse
 
 from authapp.models import IntergalacticUser
 from itertools import chain
 
-from mainapp.forms import CreatePublicationForm
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from mainapp.forms import CreatePublicationForm, ToPublishForm
 
 
 def get_notifications(user):
@@ -58,28 +60,25 @@ def take_publications_list_of_dict(publications_list):
 
 def main(request):
     categories = PublicationCategory.objects.filter(is_active=True)
+    print(request)
+    trendy_id_list = take_trendy_publication_id_list()
+    now_read_id_list = take_now_read_publication_id_list()
+    get_request_sort = {
+        'date': Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created'),
+        'like': [Publication.objects.get(id=i) for i in trendy_id_list],
+        'comment': [Publication.objects.get(id=i) for i in now_read_id_list]
+    }
+    try:
+        publication_list = get_request_sort[request.GET['sort']]
+    except:
+        publication_list = Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created')
 
-    publication_list = Publication.objects.filter(is_active=True,
-                                                  category__is_active=True).order_by('-created')
     publication_list_of_dict = take_publications_list_of_dict(publication_list)
 
-    trendy_id_list = take_trendy_publication_id_list()
-    trendy_publication_list = [
-        Publication.objects.get(id=trendy_id_list[0]),
-        Publication.objects.get(id=trendy_id_list[1]),
-        Publication.objects.get(id=trendy_id_list[2]),
-        Publication.objects.get(id=trendy_id_list[3])
-    ]
+    trendy_publication_list = [Publication.objects.get(id=trendy_id_list[i]) for i in range(4)]
     trendy_publication_list_of_dict = take_publications_list_of_dict(trendy_publication_list)
 
-    now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [
-        Publication.objects.get(id=now_read_id_list[0]),
-        Publication.objects.get(id=now_read_id_list[1]),
-        Publication.objects.get(id=now_read_id_list[2]),
-        Publication.objects.get(id=now_read_id_list[3]),
-        Publication.objects.get(id=now_read_id_list[4]),
-    ]
+    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
     notifications = get_notifications(request.user)
@@ -92,6 +91,7 @@ def main(request):
         'now_read_publication_list_of_dict': now_read_publication_list_of_dict,
         'notifications': notifications,
     }
+
     return render(request, 'mainapp/index.html', content)
 
 
@@ -102,13 +102,7 @@ def publication_page(request, pk):
     notifications = get_notifications(request.user)
 
     now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [
-        Publication.objects.get(id=now_read_id_list[0]),
-        Publication.objects.get(id=now_read_id_list[1]),
-        Publication.objects.get(id=now_read_id_list[2]),
-        Publication.objects.get(id=now_read_id_list[3]),
-        Publication.objects.get(id=now_read_id_list[4]),
-    ]
+    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
     context = {
@@ -128,13 +122,7 @@ def category_page(request, pk):
     categories = PublicationCategory.objects.filter(is_active=True)
 
     now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [
-        Publication.objects.get(id=now_read_id_list[0]),
-        Publication.objects.get(id=now_read_id_list[1]),
-        Publication.objects.get(id=now_read_id_list[2]),
-        Publication.objects.get(id=now_read_id_list[3]),
-        Publication.objects.get(id=now_read_id_list[4]),
-    ]
+    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
     now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
 
     if pk is not None:
@@ -185,29 +173,25 @@ def comment(request):
         return HttpResponse("Invalid request")
 
 
-def like(request, id, pk):
+def like(request, id, pk, model_type):
     data = dict()
+    model = Likes if model_type == 'like' else Dislikes
     if request.is_ajax():
         if request.user.is_authenticated:
             publication = Publication.objects.get(id=id)
             sender = IntergalacticUser.objects.get(username=request.user)
             receiver = IntergalacticUser.objects.get(id=pk)
             try:
-                liked = Likes.objects.get(sender_id=sender, publication_id=publication)
-                if liked.status:
-                    liked.status = False
-                    data['plus'] = False
-                else:
-                    liked.status = True
-                    data['plus'] = True
-                liked.save()
+                model = model.objects.get(sender_id=sender, publication_id=publication)
+                data['plus'] = False if model.status else True
+                changed = model.change_status()
             except:
-                Likes.objects.create(user_id=receiver, sender_id=sender, publication_id=publication)
+                changed = model.create(user=receiver, sender=sender, publication=publication)
                 data['plus'] = True
+            data['minus'] = True if changed else False
             data['form_is_valid'] = True
         else:
             data['form_is_valid'] = False
-
         return JsonResponse(data)
 
 
@@ -232,8 +216,10 @@ def create_publication(request):
         if create_publication_form.is_valid():
             instance = create_publication_form.save(commit=False)
             instance.user = request.user  # подстановка в форму создания статьи залогиневшегося пользователя
+            instance.is_active = 0
             instance.save()
-            return HttpResponseRedirect(reverse('main:main'))
+            # return HttpResponseRedirect(reverse('main:publication_page'))
+            return publication_page(request, pk=instance.id)
     else:
         create_publication_form = CreatePublicationForm()
 
@@ -243,3 +229,57 @@ def create_publication(request):
     }
 
     return render(request, 'mainapp/create_publication.html', context)
+
+
+class IndexView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    template_name = 'mainapp/personal_area.html'
+    model = Publication
+    context_object_name = 'publications_list'
+
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user.pk)
+
+    def test_func(self):
+        return self.request.user.is_active
+
+    def handle_no_permission(self):
+        return HttpResponseRedirect(reverse('main:main'))
+
+
+def edit_publication(request, pk):
+    publ = get_object_or_404(Publication, pk=pk)
+    if request.method == 'POST':
+        update_publication_form = CreatePublicationForm(request.POST, request.FILES, instance=publ)
+        if update_publication_form.is_valid():
+            instance = update_publication_form.save(commit=False)
+            instance.is_active = 0
+            instance.save()
+            return publication_page(request, pk=instance.id)
+    else:
+        update_publication_form = CreatePublicationForm(instance=publ)
+
+    context = {
+        'page_title': 'пользователи/создание',
+        'update_publication_form': update_publication_form,
+    }
+
+    return render(request, 'mainapp/edit_publication.html', context)
+
+
+def to_publish(request, pk):
+    publ = get_object_or_404(Publication, pk=pk)
+    if request.method == 'POST':
+        to_publish_form = ToPublishForm(request.POST, request.FILES, instance=publ)
+        if to_publish_form.is_valid():
+            instance = to_publish_form.save(commit=False)
+            instance.is_active = 1
+            instance.save()
+            return HttpResponseRedirect(reverse('main:main'))
+    else:
+        to_publish_form = ToPublishForm(instance=publ)
+
+    context = {
+        'to_publish_form': to_publish_form,
+    }
+
+    return render(request, 'mainapp/to_publish.html', context)

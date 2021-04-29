@@ -24,7 +24,8 @@ class Publication(models.Model):
     user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
                              verbose_name='автор')
     name = models.CharField('заголовок', max_length=128)
-    image = models.ImageField(upload_to='publications_images', blank=True, verbose_name='главное изображение')
+    image = models.ImageField(upload_to='publications_images', blank=True,
+                              verbose_name='главное изображение')
     short_desc = models.CharField('краткое описание', max_length=64, blank=True)
     text = RichTextUploadingField(blank=True, default='', verbose_name='контент')
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
@@ -41,6 +42,10 @@ class Publication(models.Model):
         likes = len(Likes.objects.filter(publication_id=self.id, status=True))
         return likes
 
+    def get_dislike_count(self):
+        dislikes = len(Dislikes.objects.filter(publication_id=self.id, status=True))
+        return dislikes
+
     def get_comment_count(self):
         comments = len(Comments.objects.filter(publication=self.id))
         return comments
@@ -52,6 +57,24 @@ class Publication(models.Model):
         except:
             return False
 
+    def is_disliked(self, user):
+        try:
+            Dislikes.objects.get(sender_id=user, publication_id=self.id, status=True)
+            return True
+        except:
+            return False
+    def get_short_text(self):
+
+        if len(self.text) > 1000:
+            self.text = self.text[:350] + '...'
+        return self.text
+
+    def get_is_active(self):
+        if self.is_active:
+            return "Активна"
+        else:
+            return "Не активна"
+
 
 class Comments(models.Model):
     publication = models.ForeignKey(Publication, verbose_name='публикация',
@@ -62,7 +85,7 @@ class Comments(models.Model):
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
     is_read = models.BooleanField(default=0)
     receiver = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
-                               related_name='comments_sender', default=0)
+                                 related_name='comments_sender', default=0)
 
     class Meta:
         verbose_name = 'комментарий'
@@ -76,3 +99,58 @@ class Likes(models.Model):
     publication_id = models.ForeignKey(Publication, on_delete=models.CASCADE)
     status = models.BooleanField(default=1)
     is_read = models.BooleanField(default=0)
+
+    def change_status(self):
+        changed = False
+        if self.status:
+            self.status = False
+        else:
+            try:
+                dislike = Dislikes.objects.get(sender_id=self.sender_id, publication_id=self.publication_id)
+                if dislike.status:
+                    dislike.status = False
+                    dislike.save()
+                    changed = True
+            except:
+                pass
+            self.status = True
+        self.save()
+        return changed
+
+    @staticmethod
+    def create(user, sender, publication):
+        Likes.objects.create(user_id=user, sender_id=sender, publication_id=publication, status=0)
+        like = Likes.objects.get(sender_id=sender, publication_id=publication)
+        return like.change_status()
+
+
+class Dislikes(models.Model):
+    user_id = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE)
+    sender_id = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
+                                  related_name='dislike_sender', default=0)
+    publication_id = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    status = models.BooleanField(default=1)
+    is_read = models.BooleanField(default=0)
+
+    def change_status(self):
+        changed = False
+        if self.status:
+            self.status = False
+        else:
+            try:
+                like = Likes.objects.get(sender_id=self.sender_id, publication_id=self.publication_id)
+                if like.status:
+                    like.status = False
+                    like.save()
+                    changed = True
+            except:
+                pass
+            self.status = True
+        self.save()
+        return changed
+
+    @staticmethod
+    def create(user, sender, publication):
+        Dislikes.objects.create(user_id=user, sender_id=sender, publication_id=publication, status=0)
+        dislike = Dislikes.objects.get(sender_id=sender, publication_id=publication)
+        return dislike.change_status()

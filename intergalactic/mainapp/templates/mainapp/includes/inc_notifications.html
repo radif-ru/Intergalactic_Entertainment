@@ -5,7 +5,7 @@
 <div class="icon" onclick="toggleNotifi()">
     <img src="{% static 'img/bell.png' %}" alt=""> <span class="notifications-count1">{{ notifications|length }}</span>
 </div>
-<div class="notifi-box" id="box">
+<div class="notifi-box" id="box" style="display:none;">
     <h2>Notifications <span class="notifications-count2">{{ notifications|length }}</span></h2>
     {% for notification in notifications %}
         <div class="notifi-item" name="{{ forloop.counter0 }}">
