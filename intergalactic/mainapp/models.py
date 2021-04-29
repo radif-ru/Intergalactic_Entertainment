@@ -24,7 +24,8 @@ class Publication(models.Model):
     user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
                              verbose_name='автор')
     name = models.CharField('заголовок', max_length=128)
-    image = models.ImageField(upload_to='publications_images', blank=True, verbose_name='главное изображение')
+    image = models.ImageField(upload_to='publications_images', blank=True,
+                              verbose_name='главное изображение')
     short_desc = models.CharField('краткое описание', max_length=64, blank=True)
     text = RichTextUploadingField(blank=True, default='', verbose_name='контент')
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
@@ -62,6 +63,17 @@ class Publication(models.Model):
             return True
         except:
             return False
+    def get_short_text(self):
+
+        if len(self.text) > 1000:
+            self.text = self.text[:350] + '...'
+        return self.text
+
+    def get_is_active(self):
+        if self.is_active:
+            return "Активна"
+        else:
+            return "Не активна"
 
 
 class Comments(models.Model):
@@ -73,7 +85,7 @@ class Comments(models.Model):
     updated = models.DateTimeField(verbose_name='обновлен', auto_now=True)
     is_read = models.BooleanField(default=0)
     receiver = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
-                               related_name='comments_sender', default=0)
+                                 related_name='comments_sender', default=0)
 
     class Meta:
         verbose_name = 'комментарий'

@@ -1,0 +1,22 @@
+{% extends 'mainapp/base.html' %}
+
+{% load static %}
+{% load my_tags %}
+
+{% block main_content %}
+    <div class="main-wrapper">
+        <div class="new-publication">
+            <h1>Точно публикуем?</h1>
+            <div class="to_publish_form">
+                <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ to_publish_form.as_p }}
+                    <input class="form-control" type="submit" value="Да, публикуем">
+                </form>
+                <a href="{% url 'main:edit_publication' pk=to_publish_form.instance.id %}" class="login">
+                    Нет, я хочу продолжить редактирование
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

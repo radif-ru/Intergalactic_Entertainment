@@ -11,11 +11,10 @@
             <div class="main-tile-big"><img
                     src="{{ trendy_publication_list_of_dict.0.publication.image|media_folder_publications }}"
                     alt="">
-                <div class="main-tile-big-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
+                <div class="main-tile-big-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.0.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
                     <div class="main-tile-big-text-content">
                         <h2>{{trendy_publication_list_of_dict.0.publication.name}}</h2>
                         <div class="main-tile-big-text-info">
-                            <p>{{trendy_publication_list_of_dict.0.publication.user.username}}</p>
                             <h5>
                                 {{trendy_publication_list_of_dict.0.publication.created}} &#8195
                                 <span class="likes">{{trendy_publication_list_of_dict.0.likes}}</span>
@@ -32,11 +31,10 @@
                 <div class="main-tile-small-wide"><img
                         src="{{ trendy_publication_list_of_dict.1.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.1.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.1.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
-                                <p>{{trendy_publication_list_of_dict.1.publication.user.username}}</p>
                                 <h5>
                                     {{trendy_publication_list_of_dict.1.publication.created}} &#8195
                                     <span class="likes">{{trendy_publication_list_of_dict.1.likes}}</span>
@@ -52,11 +50,10 @@
                 <div class="main-tile-small-narrow n1"><img
                         src="{{ trendy_publication_list_of_dict.2.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.2.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.2.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
-                                <p>{{trendy_publication_list_of_dict.2.publication.user.username}}</p>
                                 <h5>
                                     {{trendy_publication_list_of_dict.2.publication.created}} &#8195
                                     <span class="likes">{{trendy_publication_list_of_dict.2.likes}}</span>
@@ -72,11 +69,10 @@
                 <div class="main-tile-small-narrow n2"><img
                         src="{{ trendy_publication_list_of_dict.3.publication.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="#" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.3.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
                         <div class="main-tile-small-text-content">
                             <h2>{{trendy_publication_list_of_dict.3.publication.name}}</h2>
                             <div class="main-tile-small-text-info">
-                                <p>{{trendy_publication_list_of_dict.3.publication.user.username}}</p>
                                 <h5>
                                     {{trendy_publication_list_of_dict.3.publication.created}} &#8195
                                     <span class="likes">{{trendy_publication_list_of_dict.3.likes}}</span>
@@ -86,21 +82,21 @@
                                 </h5>
                             </div>
                         </div>
-                        <a href="{% url 'main:publication_page' trendy_publication_list_of_dict.3.publication.pk  %}" class="tile-big-link"></a>
+                        <a  href="{% url 'main:publication_page' trendy_publication_list_of_dict.3.publication.pk  %}" class="tile-big-link"></a>
+                        <div id="sort-space"></div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="main-container">
-            <!-- <div class="main-navigation">
+            <div  class="main-navigation">
                 <ul>
-                    <li><a href="#" class="active">Статьи</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Хабы</a></li>
-                    <li><a href="#">Авторы</a></li>
-                    <li><a href="#">Компании</a></li>
+                    <li><a >Сортировать по:</a></li>
+                    <li><a href="{% url 'main:main' %}?sort=date#sort-space" class="{% if request.GET.sort == 'date' %} active {% endif %}">Дате</a></li>
+                    <li><a href="{% url 'main:main' %}?sort=like#sort-space" class="{% if request.GET.sort == 'like' %} active {% endif %}">Лайкам</a></li>
+                    <li><a href="{% url 'main:main' %}?sort=comment#sort-space" class="{% if request.GET.sort == 'comment' %} active {% endif %}">Комментариям</a></li>
                 </ul>
-            </div> -->
+            </div>
             <div class="fast-blocks-container">
                 <p>СЕЙЧАС ЧИТАЮТ</p>
                 <div class="fast-blocks">
