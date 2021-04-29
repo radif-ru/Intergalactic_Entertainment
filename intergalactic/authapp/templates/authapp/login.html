@@ -3,7 +3,7 @@
 {% block loginForm %}
     <form class="" action="{% url 'auth:login' %}" method="post">
         {% csrf_token %}
-        <input name="next" type="hidden" value="{% url 'auth:profile' %}">
+        <input name="next" type="hidden" value="{% url 'main:main' %}">
         {{ form.as_p }}
         <br>
         <input class="form-control" type="submit" value="вход">
