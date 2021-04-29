@@ -25,11 +25,13 @@ window.onload = ()=> {
     });
     $('i.like-button').on('click', ()=>{
         var target = $('i.like-button')
+        var dislikeCount = document.querySelector('.dislikes')
+        var dislike = $('i.dislike-button')
         var wrapper = $('.like-wrapper')
         var likeCount = document.querySelector('.likes')
 
         $.ajax({
-            url:'/like/' + target.data('publ') + '/' + target.data('user'),
+            url:'/like/' + target.data('publ') + '/' + target.data('user') + '/like',
             success: (data) => {
                 if (data.form_is_valid){
                     if (data.plus){
@@ -41,6 +43,48 @@ window.onload = ()=> {
                         target.addClass('far')
                         target.removeClass('fas')
                         likeCount.innerText = Number(likeCount.innerText) - 1 
+                    }
+
+                    if (data.minus){
+                        dislike.addClass('far')
+                        dislike.removeClass('fas')
+                        dislikeCount.innerText = Number(dislikeCount.innerText) - 1
+                    }
+
+                }
+                else{
+                    wrapper.append('<p style="margin-top:10px;">Вы должны войти в аккаунт</p>')
+                }
+            },
+        });
+        event.preventDefault();
+    });
+    $('i.dislike-button').on('click', ()=>{
+        var like = $('i.like-button')
+        var dislikeCount = document.querySelector('.dislikes')
+        var dislike = $('i.dislike-button')
+        var wrapper = $('.like-wrapper')
+        var likeCount = document.querySelector('.likes')
+
+        $.ajax({
+            url:'/like/' + dislike.data('publ') + '/' + dislike.data('user') + '/dislike',
+            success: (data) => {
+                if (data.form_is_valid){
+                    if (data.plus){
+                        dislike.addClass('fas')
+                        dislike.removeClass('far')
+                        dislikeCount.innerText = Number(dislikeCount.innerText) + 1
+                    }
+                    else{
+                        dislike.addClass('far')
+                        dislike.removeClass('fas')
+                        dislikeCount.innerText = Number(dislikeCount.innerText) - 1
+                    }
+
+                    if (data.minus){
+                        like.addClass('far')
+                        like.removeClass('fas')
+                        likeCount.innerText = Number(likeCount.innerText) - 1
                     }
 
                 }

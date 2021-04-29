@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 
-from mainapp.models import Publication, PublicationCategory, Likes, Comments
+from mainapp.models import Publication, PublicationCategory, Likes, Dislikes, Comments
 from django.db.models import Count
 from django.http import JsonResponse
 
@@ -185,29 +185,25 @@ def comment(request):
         return HttpResponse("Invalid request")
 
 
-def like(request, id, pk):
+def like(request, id, pk, model_type):
     data = dict()
+    model = Likes if model_type == 'like' else Dislikes
     if request.is_ajax():
         if request.user.is_authenticated:
             publication = Publication.objects.get(id=id)
             sender = IntergalacticUser.objects.get(username=request.user)
             receiver = IntergalacticUser.objects.get(id=pk)
             try:
-                liked = Likes.objects.get(sender_id=sender, publication_id=publication)
-                if liked.status:
-                    liked.status = False
-                    data['plus'] = False
-                else:
-                    liked.status = True
-                    data['plus'] = True
-                liked.save()
+                model = model.objects.get(sender_id=sender, publication_id=publication)
+                data['plus'] = False if model.status else True
+                changed = model.change_status()
             except:
-                Likes.objects.create(user_id=receiver, sender_id=sender, publication_id=publication)
+                changed = model.create(user=receiver, sender=sender, publication=publication)
                 data['plus'] = True
+            data['minus'] = True if changed else False
             data['form_is_valid'] = True
         else:
             data['form_is_valid'] = False
-
         return JsonResponse(data)
 
 
