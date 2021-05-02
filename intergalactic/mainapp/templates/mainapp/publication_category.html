@@ -21,16 +21,36 @@
                </ul> -->
             </div>
 
+            <div  class="main-navigation">
+                <ul>
+                    <li><a >Сортировать по:</a></li>
+                    <li><a href="{% url 'main:category' pk %}?sort=date#sort-space" class="{% if request.GET.sort == 'date' %} active {% endif %}">Дате</a></li>
+                    <li><a href="{% url 'main:category' pk  %}?sort=like#sort-space" class="{% if request.GET.sort == 'like' %} active {% endif %}">Лайкам</a></li>
+                    <li><a href="{% url 'main:category' pk  %}?sort=comment#sort-space" class="{% if request.GET.sort == 'comment' %} active {% endif %}">Комментариям</a></li>
+                </ul>
+            </div>
+
             <div class="fast-blocks-container">
                 <p>СЕЙЧАС ЧИТАЮТ</p>
                 <div class="fast-blocks">
-                    {% for publication_dict in now_read_publication_list_of_dict %}
+                    {% for publication in now_read_publications %}
                     {% include 'mainapp/includes/inc_now_read_blocks.html' %}
                     {% endfor %}
                 </div>
             </div>
 
-            <div class="category-blocks-container">
+            <div class="main-last-blocks-container">
+                <p>Последние статьи</p>
+                    <div class="main-last-blocks">
+                        {% for publ in publications %}
+                            {% include 'mainapp/includes/inc_publications_in_list.html' %}
+                        {% endfor %}
+                   </div>
+                <!-- <div class="delimiter">
+                    <div class="del"></div>
+                    <a href="#">Больше</a></div> -->
+            </div>
+             <!-- <div class="category-blocks-container">
                 {% for publication in publications %}
                 <div class="category-block">
                     <div class="category-block-img">
@@ -62,7 +82,7 @@
                     <div class="del">
                         <a href="#">Больше</a>
                     </div> -->
-            </div>
+            </div> -->
             <div class="main-news">
                 <p></p>
             </div>

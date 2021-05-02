@@ -48,7 +48,7 @@
                     <div class="fast-blocks-container">
                         <p>СЕЙЧАС ЧИТАЮТ</p>
                         <div class="fast-blocks">
-                            {% for publication_dict in now_read_publication_list_of_dict %}
+                            {% for publication in now_read_publications %}
                                 {% include 'mainapp/includes/inc_now_read_blocks.html' %}
                             {% endfor %}
                         </div>

@@ -28,8 +28,12 @@ def get_comments(pk):
     return Comments.objects.filter(publication=pk)
 
 
-def take_trendy_publication_id_list():
-    trendy_publication_id_counts = Likes.objects.values("publication_id").annotate(Count("id"))
+def take_trendy_publication_id_list(category_pk):
+    if category_pk == 0:
+        trendy_publication_id_counts = Likes.objects.filter(status=1).values("publication_id").annotate(Count("id"))
+    else:
+        trendy_publication_id_counts = Likes.objects.filter(publication_id__category_id=category_pk, status=1).values("publication_id").annotate(Count("id"))
+
     trendy_publication_id_counts = sorted(trendy_publication_id_counts,
                                           key=lambda x: x['id__count'], reverse=True)
     id_list = []
@@ -38,8 +42,12 @@ def take_trendy_publication_id_list():
     return id_list
 
 
-def take_now_read_publication_id_list():
-    now_read_publication_id_counts = Comments.objects.values("publication").annotate(Count("id"))
+def take_now_read_publication_id_list(category_pk):
+    if category_pk == 0:
+        now_read_publication_id_counts = Comments.objects.values("publication").annotate(Count("id"))
+    else:
+        now_read_publication_id_counts = Comments.objects.filter(publication__category_id=category_pk).values("publication").annotate(Count("id"))
+
     now_read_publication_id_counts = sorted(now_read_publication_id_counts,
                                             key=lambda x: x['id__count'], reverse=True)
     id_list = []
@@ -48,47 +56,33 @@ def take_now_read_publication_id_list():
     return id_list
 
 
-def take_publications_list_of_dict(publications_list):
-    publications_list_of_dict = []
-    for publication in publications_list:
-        likes = Likes.objects.filter(publication_id=publication).count()
-        comments = Comments.objects.filter(publication=publication).count()
-        publications_list_of_dict.append(
-            {"publication": publication, "likes": likes, "comments": comments})
-    return publications_list_of_dict
-
-
 def main(request):
     categories = PublicationCategory.objects.filter(is_active=True)
     print(request)
-    trendy_id_list = take_trendy_publication_id_list()
-    now_read_id_list = take_now_read_publication_id_list()
+    trendy_id_list = take_trendy_publication_id_list(0)
+    now_read_id_list = take_now_read_publication_id_list(0)
     get_request_sort = {
         'date': Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created'),
         'like': [Publication.objects.get(id=i) for i in trendy_id_list],
         'comment': [Publication.objects.get(id=i) for i in now_read_id_list]
     }
     try:
-        publication_list = get_request_sort[request.GET['sort']]
+        publications = get_request_sort[request.GET['sort']]
     except:
-        publication_list = Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created')
+        publications = Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created')
 
-    publication_list_of_dict = take_publications_list_of_dict(publication_list)
+    trendy_publications = [Publication.objects.get(id=trendy_id_list[i]) for i in range(4)]
 
-    trendy_publication_list = [Publication.objects.get(id=trendy_id_list[i]) for i in range(4)]
-    trendy_publication_list_of_dict = take_publications_list_of_dict(trendy_publication_list)
-
-    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
-    now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
+    now_read_publications = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
 
     notifications = get_notifications(request.user)
 
     content = {
         'categories': categories,
         'title': 'главная',
-        'publication_list_of_dict': publication_list_of_dict,
-        'trendy_publication_list_of_dict': trendy_publication_list_of_dict,
-        'now_read_publication_list_of_dict': now_read_publication_list_of_dict,
+        'publications': publications,
+        'trendy_publications': trendy_publications,
+        'now_read_publications': now_read_publications,
         'notifications': notifications,
     }
 
@@ -101,9 +95,8 @@ def publication_page(request, pk):
     likes = Likes.objects.all()
     notifications = get_notifications(request.user)
 
-    now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
-    now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
+    now_read_id_list = take_now_read_publication_id_list(0)
+    now_read_publications = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
 
     context = {
         'page_title': 'Publication',
@@ -111,7 +104,7 @@ def publication_page(request, pk):
         'publication': get_object_or_404(Publication, pk=pk),
         'comments': comments,
         'likes': likes,
-        'now_read_publication_list_of_dict': now_read_publication_list_of_dict,
+        'now_read_publications': now_read_publications,
         'notifications': notifications,
 
     }
@@ -121,28 +114,50 @@ def publication_page(request, pk):
 def category_page(request, pk):
     categories = PublicationCategory.objects.filter(is_active=True)
 
-    now_read_id_list = take_now_read_publication_id_list()
-    now_read_publication_list = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
-    now_read_publication_list_of_dict = take_publications_list_of_dict(now_read_publication_list)
+    now_read_id_list = take_now_read_publication_id_list(0)
+    now_read_publications = [Publication.objects.get(id=now_read_id_list[i]) for i in range(5)]
 
     if pk is not None:
         if pk == 0:
             title = 'Все потоки'
-            publications = Publication.objects.filter(is_active=True,
-                                                      category__is_active=True).order_by('created')
+            trendy_id_list = take_trendy_publication_id_list(0)
+            now_read_id_list = take_now_read_publication_id_list(0)
+
+            get_request_sort = {
+                'date': Publication.objects.filter(is_active=True, category__is_active=True).order_by('-created'),
+                'like': [Publication.objects.get(id=i) for i in trendy_id_list],
+                'comment': [Publication.objects.get(id=i) for i in now_read_id_list]
+            }
+            try:
+                publications = get_request_sort[request.GET['sort']]
+            except:
+                publications = Publication.objects.filter(is_active=True, category__is_active=True).order_by('created')
+
         else:
             category = get_object_or_404(PublicationCategory, pk=pk)
-            publications = Publication.objects.filter(category_id=pk, is_active=True,
-                                                      category__is_active=True).order_by('created')
+            trendy_id_list = take_trendy_publication_id_list(pk)
+            now_read_id_list = take_now_read_publication_id_list(pk)
+
+            get_request_sort = {
+                'date': Publication.objects.filter(category_id=pk, is_active=True, category__is_active=True).order_by('created'),
+                'like': [Publication.objects.get(id=i) for i in trendy_id_list],
+                'comment': [Publication.objects.get(id=i) for i in now_read_id_list]
+            }
+            try:
+                publications = get_request_sort[request.GET['sort']]
+            except:
+                publications = Publication.objects.filter(category_id=pk, is_active=True, category__is_active=True).order_by('created')
+
             title = category.name
 
         notifications = get_notifications(request.user)
 
         context = {
+            'pk': pk,
             'categories': categories,
             'title': title,
             'publications': publications,
-            'now_read_publication_list_of_dict': now_read_publication_list_of_dict,
+            'now_read_publications': now_read_publications,
             'notifications': notifications,
 
         }
