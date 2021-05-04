@@ -14,4 +14,6 @@ urlpatterns = [
     path('personality/', mainapp.IndexView.as_view(extra_context={'title': 'Личный кабинет'}), name='personality'),
     path('edit_publication/<int:pk>', mainapp.edit_publication, name='edit_publication'),
     path('to_publish/<int:pk>', mainapp.to_publish, name='to_publish'),
+    path('admin_room/', mainapp.admin_room, name='admin_room'),
+    path('moderator_room/', mainapp.moderator_room, name='moderator_room'),
 ]

@@ -30,6 +30,8 @@ class Publication(models.Model):
     text = RichTextUploadingField(blank=True, default='', verbose_name='контент')
     created = models.DateTimeField(verbose_name='создана', auto_now_add=True)
     is_active = models.BooleanField(db_index=True, default=True)
+    on_moderator_check = models.BooleanField(db_index=True, default=False)
+    moderator_refuse = RichTextUploadingField(blank=True, default='', verbose_name='комментарий')
 
     def __str__(self):
         return f'{self.name} ({self.category.name})'
@@ -63,6 +65,7 @@ class Publication(models.Model):
             return True
         except:
             return False
+
     def get_short_text(self):
 
         if len(self.text) > 1000:
@@ -70,6 +73,8 @@ class Publication(models.Model):
         return self.text
 
     def get_is_active(self):
+        if self.on_moderator_check == True:
+            return "На модерации"
         if self.is_active:
             return "Активна"
         else:

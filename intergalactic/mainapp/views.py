@@ -287,7 +287,11 @@ def to_publish(request, pk):
         to_publish_form = ToPublishForm(request.POST, request.FILES, instance=publ)
         if to_publish_form.is_valid():
             instance = to_publish_form.save(commit=False)
-            instance.is_active = 1
+            if request.user.is_staff:
+                instance.is_active = True
+                instance.on_moderator_check = False
+            else:
+                instance.on_moderator_check = True
             instance.save()
             return HttpResponseRedirect(reverse('main:main'))
     else:
@@ -298,3 +302,53 @@ def to_publish(request, pk):
     }
 
     return render(request, 'mainapp/to_publish.html', context)
+
+
+def admin_room(request):
+    users_list = IntergalacticUser.objects.order_by("id")
+    if request.method == 'POST':
+        user = get_object_or_404(IntergalacticUser, pk=request.POST['pk'])
+        to_publish_form = ToPublishForm(request.POST, request.FILES, instance=user)
+        if to_publish_form.is_valid():
+            instance = to_publish_form.save(commit=False)
+            if 'is_staff' in request.POST.keys():
+                print(request.POST)
+                instance.is_staff = request.POST['is_staff']
+            if 'is_active' in request.POST.keys():
+                print(request.POST)
+                instance.is_active = request.POST['is_active']
+            instance.save()
+            return HttpResponseRedirect(reverse('main:admin_room'))
+    context = {
+        'users_list': users_list
+    }
+    return render(request, 'mainapp/admin_room.html', context)
+
+
+def moderator_room(request):
+    publications_list = Publication.objects.filter(is_active=False, on_moderator_check=True).order_by('-created')
+    if request.method == 'POST':
+        print(request.POST)
+        publ = get_object_or_404(Publication, pk=request.POST['pk'])
+        if request.method == 'POST':
+            to_publish_form = ToPublishForm(request.POST, request.FILES, instance=publ)
+            if to_publish_form.is_valid():
+                instance = to_publish_form.save(commit=False)
+                instance.is_active = False
+                instance.on_moderator_check = False
+                instance.moderator_refuse = '<p>Отказ в публикации.</p> ' \
+                                            '<p>Нарушены правила №: '
+
+                for i in range(5):
+                    rule = f'rule{i+1}'
+                    if rule in request.POST.keys():
+                        if request.POST[rule] == 'selected':
+                            instance.moderator_refuse = instance.moderator_refuse + f'{i+1}; '
+                instance.moderator_refuse = instance.moderator_refuse + f'</p> <p>Дополнительный комментарий: {request.POST["reason"]}</p>'
+                instance.save()
+                return HttpResponseRedirect(reverse('main:moderator_room'))
+
+    context = {
+        "publications_list": publications_list
+    }
+    return render(request, 'mainapp/moderator_room.html', context)

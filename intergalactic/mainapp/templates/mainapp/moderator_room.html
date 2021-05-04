@@ -30,7 +30,9 @@
                     <th>Дата публикации</th>
                     <th>Статус</th>
                     <th>Просмотр</th>
-                    <th>Редактировать</th>
+                    <th>
+                        Действие
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,21 +47,18 @@
                         <td>{{ publication.created }}</td>
                         <td>{{ publication.get_is_active }}</td>
                         <td><a href="{% url 'main:publication_page' pk=publication.id  %}">Посмотреть</a></td>
-                        {% if not publication.is_active and not publication.on_moderator_check %}
-                        <td><a href="{% url 'main:edit_publication' pk=publication.id  %}">Редактировать</a>
-                            <dialog class="moderatorComment{{publication.id}}" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
-                                <h2>Коментарий Модератора</h2>
-                                <p>
-                                    {% if publication.moderator_refuse %}
-                                        {{publication.moderator_refuse|safe}}
-                                    {% else %}
-                                        Комментариев пока нет
-                                    {% endif %}
-                                </p>
-                                <button id="close{{publication.id}}">Закрыть</button>
-                            </dialog>
-                            <button style="border: none; background-color: white; color: green;" id="show{{publication.id}}">&#128386;</button>
-                        </td>
+                        {% if not publication.is_active %}
+                            {% if publication.user.id == request.user.id %}
+                                <td><a href="{% url 'main:edit_publication' pk=publication.id  %}">Редактировать</a></td>
+                            {% endif %}
+                            {% if publication.user.id != request.user.id %}
+                                <td>
+                                    {% include 'mainapp/includes/inc_refusal_to_publish.html' %}
+                                    <button style="border: none; background-color: white;" id="show{{publication.id}}">
+                                        Отказать
+                                    </button>
+                                </td>
+                            {% endif %}
                         {% endif %}
 
                     </tr>
@@ -70,21 +69,21 @@
             <p class="lead">Пока ничего не опубликовано</p>
         {% endif %}
 
-        <a class="btn btn-outline-secondary" href="{% url 'main:create_publication' %}">Создать</a>
+
     </div>
 
 <script type = text/javascript>
 {% for publication in publications_list %}
-    {% if not publication.is_active and not publication.on_moderator_check %}
-        var dialog{{publication.id}} = document.querySelector('.moderatorComment{{publication.id}}');
-        document.querySelector('#show{{publication.id}}').onclick = function() {
-          dialog{{publication.id}}.show();
-        };
-        document.querySelector('#close{{publication.id}}').onclick = function() {
-          dialog{{publication.id}}.close();
-        };
-    {% endif %}
+    var dialog{{publication.id}} = document.querySelector('.refusal{{publication.id}}');
+    document.querySelector('#show{{publication.id}}').onclick = function() {
+      dialog{{publication.id}}.show();
+    };
+    document.querySelector('#close1{{publication.id}}').onclick = function() {
+      dialog{{publication.id}}.close();
+    };
+    document.querySelector('#close{{publication.id}}').onclick = function() {
+      dialog{{publication.id}}.close();
+    };
 {% endfor %}
 </script>
-
 {% endblock %}
