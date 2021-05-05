@@ -31,6 +31,7 @@
                     <th>Статус</th>
                     <th>Просмотр</th>
                     <th>Редактировать</th>
+                    <th>Уведомления!</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,7 +48,10 @@
                         <td><a href="{% url 'main:publication_page' pk=publication.id  %}">Посмотреть</a></td>
                         {% if not publication.is_active and not publication.on_moderator_check %}
                         <td><a href="{% url 'main:edit_publication' pk=publication.id  %}">Редактировать</a>
-                            <dialog class="moderatorComment{{publication.id}}" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
+
+                        </td>
+                        <td>
+                        <dialog class="moderatorComment{{publication.id}}" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
                                 <h2>Коментарий Модератора</h2>
                                 <p>
                                     {% if publication.moderator_refuse %}
