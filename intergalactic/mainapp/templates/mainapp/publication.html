@@ -9,8 +9,16 @@
                     {% if not publication.is_active %}
                         <div class="preliminarily">
                             <h1>Страница предварительного просмотра публикации</h1>
-                            <a href="{% url 'main:edit_publication' pk=publication.id %}" class="login">Редактировать</a>
-                            <a href="{% url 'main:to_publish' pk=publication.id %}" class="login">Опубликовать</a>
+                            {% if publication.user == request.user %}
+                                <a href="{% url 'main:edit_publication' pk=publication.id %}" class="login">Редактировать</a>
+                            {% elif request.user.is_staff %}
+                                <a href="{% url 'main:moderator_room' %}" class="login">Вернутся</a>
+                            {% endif %}
+                            {% if request.user.is_staff %}
+                                <a href="{% url 'main:to_publish' pk=publication.id %}" class="login">Опубликовать</a>
+                            {% else %}
+                                <a href="{% url 'main:to_publish' pk=publication.id %}" class="login">Оправить на модерацию</a>
+                            {% endif %}
                         </div>
                     {% endif %}
                 <div class="main-container">

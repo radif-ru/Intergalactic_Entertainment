@@ -1,0 +1,37 @@
+{% load static %}
+{% load my_tags %}
+<dialog class="refusal{{publication.id}}" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Укажите присчину отказа</h2>
+        <ol style="text-align:left;">
+            <li>
+                Запрещена нецензурная и оскорбительная лексика
+                <input type="checkbox" name="rule1" value="selected">
+            </li>
+            <li>
+                Запрещено нарушение законодательства РФ
+                <input type="checkbox" name="rule2" value="selected">
+            </li>
+            <li>
+                Соблюдение правил грамматики и делового стиля приветствуется
+                <input type="checkbox" name="rule3" value="selected">
+            </li>
+            <li>
+                Если ваша статья по своей теме соответствует одному из других разделов портала, разместите ее там
+                <input type="checkbox" name="rule4" value="selected">
+            </li>
+            <li>
+                Дублирующиеся посты размещать запрещено
+                <input type="checkbox" name="rule5" value="selected">
+            </li>
+        </ol>
+        <input type="hidden" name="pk" value="{{publication.id}}">
+        <input type="text" placeholder="Добавить комментарий" name="reason">
+        <button id="close1{{publication.id}}" >Отказать</button>
+    </form>
+    <button id="close{{publication.id}}">Закрыть</button>
+
+</dialog>
+
+
