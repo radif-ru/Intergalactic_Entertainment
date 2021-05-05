@@ -1,18 +1,49 @@
 {% load my_tags %}
 
 {% for comment in comments %}
-    <hr>
-    <div class="comment-grid">
-        <div class="user-avatar">
-            <a href="#" >
-                <img src="{{ comment.user.avatar|media_folder_users }}" alt="" class="user-avatar-img">
-            </a>
+    {% if not comment|tag_to_user:to_comments %}
+        <hr>
+        <div>
+            <div class="comment-grid">
+                <div class="user-avatar">
+                    <a href="#">
+                        <img src="{{ comment.user.avatar|media_folder_users }}"
+                             alt=""
+                             class="user-avatar-img">
+                    </a>
+                </div>
+                <div class="comment-username">
+                    <a href="#" style="color: #1d5e8c;"><p
+                            style="display: inline;">{{ comment.user }}</p></a>
+                </div>
+                <p class="comment-text">{{ comment.description }}</p>
+            </div>
+            <p style="font-size: 10px; margin-left:15px; color:grey;">{{ comment.updated }}</p>
+            <br>
         </div>
-        <div class="comment-username">
-            <a href="#" style="color: #1d5e8c;"><p style="display: inline;">{{ comment.user }}</p></a>
+
+    {% else %}
+
+        <div style="margin-left: 5%">
+            <div class="comment-grid">
+                <div class="user-avatar">
+                    <a href="#">
+                        <img src="{{ comment.user.avatar|media_folder_users }}"
+                             alt=""
+                             class="user-avatar-img">
+                    </a>
+                </div>
+                <div class="comment-username">
+                    <a href="#" style="color: #1d5e8c;"><p
+                            style="display: inline;">{{ comment.user }}</p></a>
+                </div>
+                <p class="comment-text"><a
+                        href="#">{{ comment|tag_to_user:to_comments }}</a>, {{ comment.description }}
+                </p>
+            </div>
+            <p style="font-size: 10px; margin-left:15px; color:grey;">{{ comment.updated }}</p>
+            <br>
         </div>
-        <p class="comment-text">{{ comment.description }}</p>
-    </div>
-    <p style="font-size: 10px; margin-left:15px; color:grey;">{{ comment.updated }}</p>
-    <br>
+
+    {% endif %}
 {% endfor %}
