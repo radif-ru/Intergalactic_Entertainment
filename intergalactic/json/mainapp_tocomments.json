@@ -1,0 +1,38 @@
+[
+  {
+    "model": "mainapp.tocomments",
+    "pk": 1,
+    "fields": {
+      "comment": 7,
+      "to_user": 1,
+      "for_comment": 3
+    }
+  },
+  {
+    "model": "mainapp.tocomments",
+    "pk": 2,
+    "fields": {
+      "comment": 8,
+      "to_user": 3,
+      "for_comment": 3
+    }
+  },
+  {
+    "model": "mainapp.tocomments",
+    "pk": 4,
+    "fields": {
+      "comment": 10,
+      "to_user": 2,
+      "for_comment": 9
+    }
+  },
+  {
+    "model": "mainapp.tocomments",
+    "pk": 5,
+    "fields": {
+      "comment": 11,
+      "to_user": 3,
+      "for_comment": 9
+    }
+  }
+]

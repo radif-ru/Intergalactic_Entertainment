@@ -1,6 +1,6 @@
 function toggle_comments(el){
     $this = $(el);
-    var form = $this.parent().find('form');
+    var form = $this.parent().find('form').filter( ':first' );
     if (form.is(':visible')){
         form.addClass('hide');
     }

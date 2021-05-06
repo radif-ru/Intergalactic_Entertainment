@@ -1,6 +1,7 @@
 import re
 from django import template
 from django.conf import settings
+
 register = template.Library()
 
 
@@ -32,3 +33,11 @@ def media_folder_users(string):
         return f'{string}'
 
     return f'{settings.MEDIA_URL}{string}'
+
+
+@register.filter(name='tag_to_user')
+def tag_to_user(comment, to_comments):
+    for to_comment in to_comments:
+        if comment.pk == to_comment.comment.id:
+            return to_comment.to_user
+    return False
