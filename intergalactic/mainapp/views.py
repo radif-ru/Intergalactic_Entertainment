@@ -213,10 +213,15 @@ def comment(request):
                                         description=message,
                                         receiver=receiver)
                 comments = Comments.objects.filter(publication=publication)
+
+                to_comments = ToComments.objects.all()
+
                 data['form_is_valid'] = True
                 data['form_html'] = render_to_string(
                     'mainapp/includes/inc_comments.html',
-                    {'comments': comments}, request=request)
+                    {'comments': comments, 'to_comments': to_comments},
+                    request=request)
+
             else:
                 data['form_is_valid'] = 'AnonymousUser'
         else:
