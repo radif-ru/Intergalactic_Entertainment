@@ -17,14 +17,6 @@
   },
   {
     "model": "mainapp.tocomments",
-    "pk": 3,
-    "fields": {
-      "comment": 9,
-      "to_user": 2
-    }
-  },
-  {
-    "model": "mainapp.tocomments",
     "pk": 4,
     "fields": {
       "comment": 10,
