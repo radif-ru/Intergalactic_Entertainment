@@ -119,6 +119,10 @@ class Command(BaseCommand):
             # Заменяем пользователя объектом
             to_comment['fields']['to_user'] = _to_user
 
+            for_comment = to_comment['fields']['for_comment']
+            _for_comment = Comments.objects.get(id=for_comment)
+            to_comment['fields']['for_comment'] = _for_comment
+
             new_to_comments = ToComments(**{'id': to_comment['pk']},
                                          **to_comment['fields'])
             new_to_comments.save()

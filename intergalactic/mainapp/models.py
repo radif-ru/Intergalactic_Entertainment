@@ -106,10 +106,13 @@ class Comments(models.Model):
 
 
 class ToComments(models.Model):
-    comment = models.ForeignKey(Comments, verbose_name='комментарий',
+    comment = models.ForeignKey(Comments, verbose_name='коммент',
                                 on_delete=models.CASCADE)
     to_user = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
-                                verbose_name='кому комментарий', default=0)
+                                verbose_name='кого комментируем', default=0)
+    for_comment = models.ForeignKey(Comments, on_delete=models.CASCADE,
+                                    verbose_name='что комментируем', default=0,
+                                    related_name='for_comment')
 
     class Meta:
         verbose_name = 'кому комментарий'

@@ -217,18 +217,17 @@ def comment(request):
                     receiver=receiver)
                 comments = Comments.objects.filter(publication=publication)
 
-                print(new_comments_obj.id)
-
                 comment_id = request.POST.get('comment_id')
                 comment_user_id = request.POST.get('comment_user_id')
 
                 if comment_id and comment_user_id:
-                    # comment_id_obj = Comments.objects.get(id=comment_id)
+                    comment_id_obj = Comments.objects.get(id=comment_id)
                     comment_user_id_obj = IntergalacticUser.objects.get(
                         id=comment_user_id)
 
                     ToComments.objects.create(comment=new_comments_obj,
-                                              to_user=comment_user_id_obj)
+                                              to_user=comment_user_id_obj,
+                                              for_comment=comment_id_obj)
 
                 to_comments = ToComments.objects.all()
 

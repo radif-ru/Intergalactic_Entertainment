@@ -4,7 +4,8 @@
     "pk": 1,
     "fields": {
       "comment": 7,
-      "to_user": 1
+      "to_user": 1,
+      "for_comment": 3
     }
   },
   {
@@ -12,7 +13,8 @@
     "pk": 2,
     "fields": {
       "comment": 8,
-      "to_user": 3
+      "to_user": 3,
+      "for_comment": 3
     }
   },
   {
@@ -20,7 +22,8 @@
     "pk": 4,
     "fields": {
       "comment": 10,
-      "to_user": 2
+      "to_user": 2,
+      "for_comment": 9
     }
   },
   {
@@ -28,7 +31,8 @@
     "pk": 5,
     "fields": {
       "comment": 11,
-      "to_user": 3
+      "to_user": 3,
+      "for_comment": 9
     }
   }
 ]
