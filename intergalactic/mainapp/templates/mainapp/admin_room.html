@@ -1,0 +1,129 @@
+{% extends 'mainapp/base.html' %}
+
+{% load static %}
+{% load my_tags %}
+
+{% block main_content %}
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.css' %}">
+    {% endblock %}
+
+    {% block js %}
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+    {% endblock %}
+
+{% include 'mainapp/includes/inc_personal_area_menu.html' %}
+
+    <div class="my-3 p-3 bg-body rounded shadow-sm">
+        <h6 class="border-bottom pb-2 mb-0">Список пользователей</h6>
+        {% if users_list %}
+            <table id="datatable" class="table dt-responsive nowrap table-vertical"
+                   width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>avatar</th>
+                    <th>username</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>age</th>
+                    <th>email</th>
+                    <th>company</th>
+                    <th>is_active</th>
+                    <th>is_staff</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users_list %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td><img alt="not" src="/media/{{ user.avatar }}" height="50px"></td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.age }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.company }}</td>
+                        <td>
+                            {{ user.is_active }}
+                            <dialog class="is_active{{user.id}}" style="position: absolute; left: 50%; top: 50%;
+                            transform: translate(-50%,-50%); padding: 20px;">
+                                {% if user.is_active %}
+                                    <h2>Хотите заблокировать пользователя: {{user.username}}</h2>
+                                {% else %}
+                                    <h2>Хотите разблокировать пользователя: {{user.username}}</h2>
+                                {% endif %}
+                                <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="pk" value="{{user.id}}">
+                                    {% if user.is_active %}
+                                        <input type="hidden" name="is_active" value="False">
+                                    {% else %}
+                                        <input type="hidden" name="is_active" value="True">
+                                    {% endif %}
+                                    <button id="is_active_close1{{user.id}}" >Применить</button>
+                                </form>
+                                <button id="is_active_close{{user.id}}">Закрыть</button>
+                            </dialog>
+                            <button id="is_active_show{{user.id}}">&#9998;</button>
+                        </td>
+                        <td>
+                            {{ user.is_staff }}
+                            <dialog class="is_staff{{user.id}}" style="position: absolute; left: 50%; top: 50%;
+                            transform: translate(-50%,-50%); padding: 20px;">
+                                {% if user.is_staff %}
+                                    <h2>Хотите забрать права модератора: {{user.username}}</h2>
+                                {% else %}
+                                    <h2>Хотите выдать права модератора: {{user.username}}</h2>
+                                {% endif %}
+                                <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="pk" value="{{user.id}}">
+                                    {% if user.is_staff%}
+                                        <input type="hidden" name="is_staff" value="False">
+                                    {% else %}
+                                        <input type="hidden" name="is_staff" value="True">
+                                    {% endif %}
+                                    <button id="is_staff_close1{{user.id}}" >Применить</button>
+                                </form>
+                                <button id="is_staff_close{{user.id}}">Закрыть</button>
+                            </dialog>
+                            <button id="is_staff_show{{user.id}}">&#9998;</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="lead">Пока нет пользователей</p>
+        {% endif %}
+    </div>
+
+<script type = text/javascript>
+{% for user in users_list %}
+    var dialog_is_active{{user.id}} = document.querySelector('.is_active{{user.id}}');
+    document.querySelector('#is_active_show{{user.id}}').onclick = function() {
+      dialog_is_active{{user.id}}.show();
+    };
+    document.querySelector('#is_active_close1{{user.id}}').onclick = function() {
+      dialog_is_active{{user.id}}.close();
+    };
+    document.querySelector('#is_active_close{{user.id}}').onclick = function() {
+      dialog_is_active{{user.id}}.close();
+    };
+
+    var dialog_is_staff{{user.id}} = document.querySelector('.is_staff{{user.id}}');
+    document.querySelector('#is_staff_show{{user.id}}').onclick = function() {
+      dialog_is_staff{{user.id}}.show();
+    };
+    document.querySelector('#is_staff_close1{{user.id}}').onclick = function() {
+      dialog_is_staff{{user.id}}.close();
+    };
+    document.querySelector('#is_staff_close{{user.id}}').onclick = function() {
+      dialog_is_staff{{user.id}}.close();
+    };
+{% endfor %}
+</script>
+
+{% endblock %}
+

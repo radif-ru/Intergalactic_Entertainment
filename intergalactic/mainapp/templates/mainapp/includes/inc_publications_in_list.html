@@ -1,18 +1,18 @@
 {% load my_tags %}
 <div class="last-block">
-    <img src="{{ publ.publication.image|media_folder_publications }}" alt="">
+    <img src="{{ publ.image|media_folder_publications }}" alt="">
     <div class="last-block-text">
-        <a href="{% url 'main:category' publ.publication.category.pk %}">{{publ.publication.category.name}}</a>
-        <h2>{{ publ.publication.name }}</h2>
-        <p>{{ publ.publication.short_desc}}</p>
-        <h4>{{ publ.publication.user.username}}</h4>
-        <h4>{{ publ.publication.created}}</h4>
+        <a href="{% url 'main:category' publ.category.pk %}">{{publ.category.name}}</a>
+        <h2>{{ publ.name }}</h2>
+        <p>{{ publ.short_desc}}</p>
+        <h4>{{ publ.user.username}}</h4>
+        <h4>{{ publ.created}}</h4>
         <h5>
-            <span class="likes">{{publ.likes}}</span>
+            <span class="likes">{{publ.get_like_count}}</span>
             <i class="fas fa-heart"></i>
-            <span class="comments">{{publ.comments}} </span>
+            <span class="comments">{{publ.get_comment_count}} </span>
             <i class="fas fa-comments"></i>
         </h5>
-        <a href="{% url 'main:publication_page' publ.publication.pk  %}"></a>
+        <a href="{% url 'main:publication_page' publ.pk  %}"></a>
     </div>
 </div>

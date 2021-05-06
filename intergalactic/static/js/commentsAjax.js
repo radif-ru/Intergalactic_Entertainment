@@ -1,8 +1,12 @@
 window.onload = ()=> {
-    $('form.comment-form').on('click', 'button[type="submit"]', ()=>{
-        var form = $('form.comment-form')
-        var input = $('input.comment-input')
-        var commentsWrapper = $('.comments-wrapper')
+    $('form.comment-form').on('click', 'button[type="submit"]', (ev)=>{
+        // var form = $('form.comment-form')
+        // var input = $('input.comment-input')
+        // var commentsWrapper = $('.comments-wrapper')
+        // var commentCount = document.querySelector('.comments-count')
+        var form = $(ev.target.parentNode.parentNode)
+        var input = $(form).find('input.comment-input')
+        var commentsWrapper = $(form).find('.comments-wrapper')
         var commentCount = document.querySelector('.comments-count')
         $.post(form.attr('action'), form.serialize(), data => {
             switch (data.form_is_valid){

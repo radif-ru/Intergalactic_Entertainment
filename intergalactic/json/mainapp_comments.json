@@ -70,5 +70,65 @@
       "updated": "2021-04-10T20:41:45.744Z",
       "receiver": 2
     }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 7,
+    "fields": {
+      "publication": 1,
+      "user": 3,
+      "description": "ещё комментарий",
+      "created": "2021-04-10T20:41:44.652Z",
+      "updated": "2021-04-10T20:41:44.652Z",
+      "receiver": 2
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 8,
+    "fields": {
+      "publication": 1,
+      "user": 2,
+      "description": "больше комментариев!",
+      "created": "2021-04-10T20:41:44.652Z",
+      "updated": "2021-04-10T20:41:44.652Z",
+      "receiver": 2
+    }
+  },
+  {
+    "model": "mainapp.comments",
+    "pk": 9,
+    "fields": {
+      "publication": 1,
+      "user": 2,
+      "description": "ясно всё с вами",
+      "created": "2021-04-10T20:41:44.652Z",
+      "updated": "2021-04-10T20:41:44.652Z",
+      "receiver": 2
+    }
+  },
+   {
+    "model": "mainapp.comments",
+    "pk": 10,
+    "fields": {
+      "publication": 1,
+      "user": 3,
+      "description": "как так?",
+      "created": "2021-04-10T20:41:44.652Z",
+      "updated": "2021-04-10T20:41:44.652Z",
+      "receiver": 2
+    }
+  },
+   {
+    "model": "mainapp.comments",
+    "pk": 11,
+    "fields": {
+      "publication": 1,
+      "user": 2,
+      "description": "так как!",
+      "created": "2021-04-10T20:41:44.652Z",
+      "updated": "2021-04-10T20:41:44.652Z",
+      "receiver": 2
+    }
   }
 ]
