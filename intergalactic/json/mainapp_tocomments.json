@@ -25,7 +25,7 @@
   },
   {
     "model": "mainapp.tocomments",
-    "pk": 3,
+    "pk": 4,
     "fields": {
       "comment": 10,
       "to_user": 2
@@ -33,7 +33,7 @@
   },
   {
     "model": "mainapp.tocomments",
-    "pk": 3,
+    "pk": 5,
     "fields": {
       "comment": 11,
       "to_user": 3
