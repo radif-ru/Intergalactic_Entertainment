@@ -1,0 +1,66 @@
+{% load static %}
+{% load my_tags %}
+<div class="wrapper" id="page-title">
+        <div class="container">
+
+            <div class="pt-2 pb-3 mb-0 small lh-sm border-bottom w-100">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <strong class="text-gray-dark">Личный кабинет пользователя {{ request.user|title }}</strong>
+                    {% if request.user.is_superuser %}
+                        <a class="mt-2 btn btn-outline-secondary"
+                           href="{% url 'main:admin_room' %}">
+                            Кабинет Администратора
+                        </a>
+                    {% endif %}
+                    {% if request.user.is_staff %}
+
+                        <a class="mt-2 btn btn-outline-secondary"
+                           href="{% url 'main:moderator_room' %}">
+                            Кабинет Модератора
+                        </a>
+
+                        <a class="mt-2 btn btn-outline-secondary"
+                           href="{% url 'main:personality' %}">
+                            Мои Статьи
+                        </a>
+
+                    {% endif %}
+
+                    <a class="mt-2 btn btn-outline-secondary">
+                        <dialog style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
+                            <h2>Правила размещения статей</h2>
+                            <ol style="text-align:left;">
+                                <li>Запрещена нецензурная и оскорбительная лексика</li>
+                                <li>Запрещено нарушение законодательства РФ</li>
+                                <li>Соблюдение правил грамматики и делового стиля приветствуется</li>
+                                <li>Если ваша статья по своей теме соответствует одному из других разделов портала, разместите ее там</li>
+                                <li>Дублирующиеся посты размещать запрещено</li>
+                            </ol>
+                            <button id="close">Закрыть</button>
+                        </dialog>
+                        <button style="border: none; background-color: white; color: #6c757d"
+                                onmouseover="this.style.backgroundColor='#6c757d'; this.style.color='white';"
+                                onmouseout="this.style.backgroundColor='white'; this.style.color='#6c757d';"
+                                id="show">Правила</button>
+                    </a>
+
+                    <a class="mt-2 btn btn-outline-secondary"
+                       href="{% url 'auth:profile' %}">
+                        Редактировать профиль
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type = text/javascript>
+var dialog = document.querySelector('dialog');
+document.querySelector('#show').onclick = function() {
+  dialog.show();
+};
+document.querySelector('#close').onclick = function() {
+  dialog.close();
+};
+</script>

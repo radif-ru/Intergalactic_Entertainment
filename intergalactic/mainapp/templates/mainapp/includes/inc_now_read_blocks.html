@@ -1,12 +1,12 @@
 {% load my_tags %}
 <div class="fast-block">
-    <a href="{% url 'main:publication_page' publication_dict.publication.pk  %}">
-        <img src="{{ publication_dict.publication.image|media_folder_publications }}" alt="" class="fast-block-img">
+    <a href="{% url 'main:publication_page' publication.pk  %}">
+        <img src="{{ publication.image|media_folder_publications }}" alt="" class="fast-block-img">
     </a>
-    <div class="fast-block-text"><a href="{% url 'main:publication_page' publication_dict.publication.pk  %}" class="fast-header">{{publication_dict.publication.name}}</a>
+    <div class="fast-block-text"><a href="{% url 'main:publication_page' publication.pk  %}" class="fast-header">{{publication.name}}</a>
         <div class="fast-block-text-bottom">
-            <a class="fast-name">{{publication_dict.publication.user.username}}</a> <!-- Убран href-некуда ссылатся пока -->
-            <p class="fast-info">{{publication_dict.likes}} просмотров {{publication_dict.comments}} комментария</p>
+            <a class="fast-name">{{publication.user.username}}</a> <!-- Убран href-некуда ссылатся пока -->
+            <p class="fast-info">{{publication.get_like_count}} просмотров {{publication.get_comment_count}} комментария</p>
         </div>
     </div>
 </div>

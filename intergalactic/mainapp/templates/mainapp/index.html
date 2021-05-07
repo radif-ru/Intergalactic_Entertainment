@@ -9,80 +9,80 @@
         <p class="trending">Сейчас в тренде</p>
         <div class="main-tiles">
             <div class="main-tile-big"><img
-                    src="{{ trendy_publication_list_of_dict.0.publication.image|media_folder_publications }}"
+                    src="{{ trendy_publications.0.image|media_folder_publications }}"
                     alt="">
-                <div class="main-tile-big-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.0.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.0.publication.category.name}}</a>
+                <div class="main-tile-big-text"><a href="{% url 'main:category' trendy_publications.0.category.pk %}" class="tile-category-link">{{trendy_publications.0.category.name}}</a>
                     <div class="main-tile-big-text-content">
-                        <h2>{{trendy_publication_list_of_dict.0.publication.name}}</h2>
+                        <h2>{{trendy_publications.0.name}}</h2>
                         <div class="main-tile-big-text-info">
                             <h5>
-                                {{trendy_publication_list_of_dict.0.publication.created}} &#8195
-                                <span class="likes">{{trendy_publication_list_of_dict.0.likes}}</span>
+                                {{trendy_publications.0.created}} &#8195
+                                <span class="likes">{{trendy_publications.0.get_like_count}}</span>
                                 <i class="fas fa-heart"></i>
-                                <span class="comments">{{trendy_publication_list_of_dict.0.comments}} </span>
+                                <span class="comments">{{trendy_publications.0.get_comment_count}} </span>
                                 <i class="fas fa-comments"></i>
                             </h5>
                         </div>
                     </div>
-                    <a href="{% url 'main:publication_page' trendy_publication_list_of_dict.0.publication.pk  %}" class="tile-big-link"></a>
+                    <a href="{% url 'main:publication_page' trendy_publications.0.pk  %}" class="tile-big-link"></a>
                 </div>
             </div>
             <div class="main-tile-small">
                 <div class="main-tile-small-wide"><img
-                        src="{{ trendy_publication_list_of_dict.1.publication.image|media_folder_publications }}"
+                        src="{{ trendy_publications.1.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.1.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.1.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publications.1.category.pk %}" class="tile-category-link">{{trendy_publications.1.category.name}}</a>
                         <div class="main-tile-small-text-content">
-                            <h2>{{trendy_publication_list_of_dict.1.publication.name}}</h2>
+                            <h2>{{trendy_publications.1.name}}</h2>
                             <div class="main-tile-small-text-info">
                                 <h5>
-                                    {{trendy_publication_list_of_dict.1.publication.created}} &#8195
-                                    <span class="likes">{{trendy_publication_list_of_dict.1.likes}}</span>
+                                    {{trendy_publications.1.created}} &#8195
+                                    <span class="likes">{{trendy_publications.1.get_like_count}}</span>
                                     <i class="fas fa-heart"></i>
-                                    <span class="comments">{{trendy_publication_list_of_dict.1.comments}} </span>
+                                    <span class="comments">{{trendy_publications.1.get_comment_count}} </span>
                                     <i class="fas fa-comments"></i>
                                 </h5>
                             </div>
                         </div>
-                        <a href="{% url 'main:publication_page' trendy_publication_list_of_dict.1.publication.pk  %}" class="tile-big-link"></a>
+                        <a href="{% url 'main:publication_page' trendy_publications.1.pk  %}" class="tile-big-link"></a>
                     </div>
                 </div>
                 <div class="main-tile-small-narrow n1"><img
-                        src="{{ trendy_publication_list_of_dict.2.publication.image|media_folder_publications }}"
+                        src="{{ trendy_publications.2.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.2.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.2.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publications.2.category.pk %}" class="tile-category-link">{{trendy_publications.2.category.name}}</a>
                         <div class="main-tile-small-text-content">
-                            <h2>{{trendy_publication_list_of_dict.2.publication.name}}</h2>
+                            <h2>{{trendy_publications.2.name}}</h2>
                             <div class="main-tile-small-text-info">
                                 <h5>
-                                    {{trendy_publication_list_of_dict.2.publication.created}} &#8195
-                                    <span class="likes">{{trendy_publication_list_of_dict.2.likes}}</span>
+                                    {{trendy_publications.2.created}} &#8195
+                                    <span class="likes">{{trendy_publications.2.get_like_count}}</span>
                                     <i class="fas fa-heart"></i>
-                                    <span class="comments">{{trendy_publication_list_of_dict.2.comments}} </span>
+                                    <span class="comments">{{trendy_publications.2.get_comment_count}} </span>
                                     <i class="fas fa-comments"></i>
                                 </h5>
                             </div>
                         </div>
-                        <a href="{% url 'main:publication_page' trendy_publication_list_of_dict.2.publication.pk  %}" class="tile-big-link"></a>
+                        <a href="{% url 'main:publication_page' trendy_publications.2.pk  %}" class="tile-big-link"></a>
                     </div>
                 </div>
                 <div class="main-tile-small-narrow n2"><img
-                        src="{{ trendy_publication_list_of_dict.3.publication.image|media_folder_publications }}"
+                        src="{{ trendy_publications.3.image|media_folder_publications }}"
                         alt="">
-                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publication_list_of_dict.3.publication.category.pk %}" class="tile-category-link">{{trendy_publication_list_of_dict.3.publication.category.name}}</a>
+                    <div class="main-tile-small-text"><a href="{% url 'main:category' trendy_publications.3.category.pk %}" class="tile-category-link">{{trendy_publications.3.category.name}}</a>
                         <div class="main-tile-small-text-content">
-                            <h2>{{trendy_publication_list_of_dict.3.publication.name}}</h2>
+                            <h2>{{trendy_publications.3.name}}</h2>
                             <div class="main-tile-small-text-info">
                                 <h5>
-                                    {{trendy_publication_list_of_dict.3.publication.created}} &#8195
-                                    <span class="likes">{{trendy_publication_list_of_dict.3.likes}}</span>
+                                    {{trendy_publications.3.created}} &#8195
+                                    <span class="likes">{{trendy_publications.3.get_like_count}}</span>
                                     <i class="fas fa-heart"></i>
-                                    <span class="comments">{{trendy_publication_list_of_dict.3.comments}} </span>
+                                    <span class="comments">{{trendy_publications.3.get_comment_count}} </span>
                                     <i class="fas fa-comments"></i>
                                 </h5>
                             </div>
                         </div>
-                        <a  href="{% url 'main:publication_page' trendy_publication_list_of_dict.3.publication.pk  %}" class="tile-big-link"></a>
+                        <a  href="{% url 'main:publication_page' trendy_publications.3.pk  %}" class="tile-big-link"></a>
                         <div id="sort-space"></div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
             <div class="fast-blocks-container">
                 <p>СЕЙЧАС ЧИТАЮТ</p>
                 <div class="fast-blocks">
-                    {% for publication_dict in now_read_publication_list_of_dict %}
+                    {% for publication in now_read_publications %}
                         {% include 'mainapp/includes/inc_now_read_blocks.html' %}
                     {% endfor %}
                 </div>
@@ -108,7 +108,7 @@
             <div class="main-last-blocks-container">
                 <p>Последние статьи</p>
                     <div class="main-last-blocks">
-                        {% for publ in publication_list_of_dict %}
+                        {% for publ in publications %}
                             {% include 'mainapp/includes/inc_publications_in_list.html' %}
                         {% endfor %}
                    </div>
