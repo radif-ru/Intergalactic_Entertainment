@@ -205,6 +205,7 @@ def comment(request):
         message = request.POST.get('message')
         if message != '':
             if request.user.is_authenticated:
+                print('POST_DATA', request.POST, request.POST.get('publication_id'))
                 user = IntergalacticUser.objects.get(username=request.user)
                 publication = Publication.objects.get(
                     id=request.POST.get('publication_id'))
@@ -225,7 +226,7 @@ def comment(request):
                     comment_user_id_obj = IntergalacticUser.objects.get(
                         id=comment_user_id)
 
-                    ToComments.objects.create(comment=new_comments_obj,
+                    new_to_comments_obj = ToComments.objects.create(comment=new_comments_obj,
                                               to_user=comment_user_id_obj,
                                               for_comment=comment_id_obj)
 

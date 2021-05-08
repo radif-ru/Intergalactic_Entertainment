@@ -37,7 +37,9 @@ def media_folder_users(string):
 
 @register.filter(name='tag_to_user')
 def tag_to_user(comment, to_comments):
+    # print(comment.pk)
     for to_comment in to_comments:
-        if comment.pk == to_comment.comment.id:
+        # print(comment.pk, to_comment.for_comment.pk, to_comment.to_user)
+        if comment.pk == to_comment.comment.pk:
             return to_comment.to_user
     return False
