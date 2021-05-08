@@ -58,7 +58,9 @@ window.onload = () => {
                     }
 
                 } else {
-                    wrapper.append('<p style="margin-top:10px;">Вы должны войти в аккаунт</p>')
+                    if (!wrapper.parent().children('.AnonymousUserLike').length) {
+                        wrapper.parent().append('<p class="AnonymousUserLike" style="margin-top:10px; color: red">Чтобы лайкать, Вы должны войти в аккаунт</p>')
+                    }
                 }
             },
         });
@@ -92,7 +94,9 @@ window.onload = () => {
                     }
 
                 } else {
-                    wrapper.append('<p style="margin-top:10px;">Вы должны войти в аккаунт</p>')
+                    if (!wrapper.parent().children('.AnonymousUserDis').length) {
+                        wrapper.parent().append('<p class="AnonymousUserDis" style="margin-top:10px; color: red">Чтобы дизлайкать, Вы должны войти в аккаунт</p>')
+                    }
                 }
             },
         });
