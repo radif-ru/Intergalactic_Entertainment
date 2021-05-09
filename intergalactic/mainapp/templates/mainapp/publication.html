@@ -14,14 +14,14 @@
                            class="login">Редактировать</a>
                     {% elif request.user.is_staff %}
                         <a href="{% url 'main:moderator_room' %}"
-                           class="login">Вернутся</a>
+                           class="login">Вернуться</a>
                     {% endif %}
                     {% if request.user.is_staff %}
                         <a href="{% url 'main:to_publish' pk=publication.id %}"
                            class="login">Опубликовать</a>
                     {% else %}
                         <a href="{% url 'main:to_publish' pk=publication.id %}"
-                           class="login">Оправить на модерацию</a>
+                           class="login">Отправить на модерацию</a>
                     {% endif %}
                 </div>
             {% endif %}

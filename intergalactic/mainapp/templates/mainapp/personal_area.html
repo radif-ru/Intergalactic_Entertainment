@@ -38,7 +38,7 @@
                 {% for publication in publications_list %}
                     <tr>
                         <td>{{ publication.id }}</td>
-                        <td><img alt="not" src="/media/{{ publication.image }}" height="50px"></td>
+                        <td><img alt="not" src="{{ publication.image|media_folder_publications }}" height="50px"></td>
                         <td>{{ publication.name }}</td>
                         <td>{{ publication.short_desc }}</td>
                         <td>{{ publication.get_like_count }}</td>
