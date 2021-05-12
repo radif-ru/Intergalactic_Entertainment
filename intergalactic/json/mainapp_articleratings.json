@@ -1,0 +1,38 @@
+[
+  {
+    "model": "mainapp.articleratings",
+    "pk": 1,
+    "fields": {
+      "publication": 1,
+      "user": 1,
+      "rating": 4
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 2,
+    "fields": {
+      "publication": 1,
+      "user": 2,
+      "rating": 2
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 3,
+    "fields": {
+      "publication": 1,
+      "user": 3,
+      "rating": 6
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 4,
+    "fields": {
+      "publication": 2,
+      "user": 1,
+      "rating": 4
+    }
+  }
+]

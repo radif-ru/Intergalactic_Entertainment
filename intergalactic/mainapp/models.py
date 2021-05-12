@@ -186,3 +186,15 @@ class Dislikes(models.Model):
         dislike = Dislikes.objects.get(sender_id=sender,
                                        publication_id=publication)
         return dislike.change_status()
+
+
+class ArticleRatings(models.Model):
+    publication = models.ForeignKey(Publication, verbose_name='публикация',
+                                    on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,
+                             verbose_name='автор рейтинга')
+    rating = models.IntegerField(default=0, blank=True, verbose_name='рейтинг')
+
+    class Meta:
+        verbose_name = 'рейтинг статьи'
+        verbose_name_plural = 'рейтинги статей'

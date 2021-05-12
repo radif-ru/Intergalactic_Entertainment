@@ -6,10 +6,11 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 
 from mainapp.models import Publication, PublicationCategory, Likes, Dislikes, \
-    Comments, ToComments
+    Comments, ToComments, ArticleRatings
 from django.db.models import Count
 
 from authapp.models import IntergalacticUser
@@ -117,6 +118,17 @@ def publication_page(request, pk):
 
     to_comments = ToComments.objects.all()
 
+    user_pub_rating = 0
+    average_pub_rating = 0
+    article_ratings = ArticleRatings.objects.filter(publication_id=pk)
+    for article_rating in article_ratings:
+        average_pub_rating += article_rating.rating
+    average_pub_rating = int(average_pub_rating / len(article_ratings))
+
+    if request.user.is_authenticated:
+        user_article_rating = article_ratings.get(user=request.user)
+        user_pub_rating = user_article_rating.rating
+
     context = {
         'page_title': 'Publication',
         'categories': categories,
@@ -125,7 +137,9 @@ def publication_page(request, pk):
         'likes': likes,
         'now_read_publications': now_read_publications,
         'notifications': notifications,
-        'to_comments': to_comments
+        'to_comments': to_comments,
+        'user_pub_rating': user_pub_rating,
+        'average_pub_rating': average_pub_rating
 
     }
     return render(request, 'mainapp/publication.html', context)
@@ -205,7 +219,8 @@ def comment(request):
         message = request.POST.get('message')
         if message != '':
             if request.user.is_authenticated:
-                print('POST_DATA', request.POST, request.POST.get('publication_id'))
+                print('POST_DATA', request.POST,
+                      request.POST.get('publication_id'))
                 user = IntergalacticUser.objects.get(username=request.user)
                 publication = Publication.objects.get(
                     id=request.POST.get('publication_id'))
@@ -226,9 +241,10 @@ def comment(request):
                     comment_user_id_obj = IntergalacticUser.objects.get(
                         id=comment_user_id)
 
-                    new_to_comments_obj = ToComments.objects.create(comment=new_comments_obj,
-                                              to_user=comment_user_id_obj,
-                                              for_comment=comment_id_obj)
+                    new_to_comments_obj = ToComments.objects.create(
+                        comment=new_comments_obj,
+                        to_user=comment_user_id_obj,
+                        for_comment=comment_id_obj)
 
                 to_comments = ToComments.objects.all()
 
@@ -421,3 +437,35 @@ def moderator_room(request):
         "publications_list": publications_list
     }
     return render(request, 'mainapp/moderator_room.html', context)
+
+
+@csrf_exempt
+def user_pub_rating(request):
+    data = dict()
+    if request.method == 'POST':
+        user_pub_rat = request.POST.get('user_pub_rating')
+        pub_id = request.POST.get('pub_id')
+        if user_pub_rat != '' and pub_id != 0:
+            if request.user.is_authenticated:
+                average_pub_rating = 0
+                article_ratings = ArticleRatings.objects.filter(
+                    publication_id=pub_id)
+
+                article_ratings.filter(user=request.user).update(
+                    rating=user_pub_rat)
+
+                for article_rating in article_ratings:
+                    average_pub_rating += article_rating.rating
+                average_pub_rating = int(
+                    average_pub_rating / len(article_ratings))
+
+                data['form_is_valid'] = True
+                data['user_pub_rating'] = user_pub_rat
+                data['average_pub_rating'] = average_pub_rating
+            else:
+                data['form_is_valid'] = 'AnonymousUser'
+        else:
+            data['form_is_valid'] = False
+        return JsonResponse(data)
+    else:
+        return HttpResponse("Invalid request")

@@ -16,4 +16,5 @@ urlpatterns = [
     path('to_publish/<int:pk>', mainapp.to_publish, name='to_publish'),
     path('admin_room/', mainapp.admin_room, name='admin_room'),
     path('moderator_room/', mainapp.moderator_room, name='moderator_room'),
+    path('user_pub_rating/', mainapp.user_pub_rating, name='user_pub_rating')
 ]
