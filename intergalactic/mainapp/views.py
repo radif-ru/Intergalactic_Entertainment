@@ -9,13 +9,14 @@ from django.urls import reverse
 from django.views.generic import ListView
 
 from mainapp.models import Publication, PublicationCategory, Likes, Dislikes, \
-    Comments, ToComments
+    Comments, ToComments, ViewCounter
 from django.db.models import Count
 
 from authapp.models import IntergalacticUser
 from itertools import chain
 
 from mainapp.forms import CreatePublicationForm, ToPublishForm
+from .decorators import counted
 
 
 def get_notifications(user):
@@ -105,6 +106,7 @@ def main(request):
     return render(request, 'mainapp/index.html', content)
 
 
+@counted
 def publication_page(request, pk):
     categories = PublicationCategory.objects.filter(is_active=True)
     comments = get_comments(pk)
@@ -117,6 +119,9 @@ def publication_page(request, pk):
 
     to_comments = ToComments.objects.all()
 
+    # Получение количества просмотров для конкретной публикации из таблицы
+    count = ViewCounter.objects.get(publication_id=pk)
+
     context = {
         'page_title': 'Publication',
         'categories': categories,
@@ -125,8 +130,8 @@ def publication_page(request, pk):
         'likes': likes,
         'now_read_publications': now_read_publications,
         'notifications': notifications,
-        'to_comments': to_comments
-
+        'to_comments': to_comments,
+        'count': count.count,
     }
     return render(request, 'mainapp/publication.html', context)
 
@@ -346,6 +351,7 @@ def edit_publication(request, pk):
 
 def to_publish(request, pk):
     publ = get_object_or_404(Publication, pk=pk)
+    views = get_object_or_404(ViewCounter, publication_id=pk)
     if request.method == 'POST':
         to_publish_form = ToPublishForm(request.POST, request.FILES,
                                         instance=publ)
@@ -354,9 +360,14 @@ def to_publish(request, pk):
             if request.user.is_staff:
                 instance.is_active = True
                 instance.on_moderator_check = False
+
             else:
                 instance.on_moderator_check = True
+
             instance.save()
+            # Обнуление количества просмотров статьи в момент опубликования
+            views.count = 0
+            views.save()
             return HttpResponseRedirect(reverse('main:main'))
     else:
         to_publish_form = ToPublishForm(instance=publ)

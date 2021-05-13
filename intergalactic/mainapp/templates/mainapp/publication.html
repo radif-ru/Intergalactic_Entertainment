@@ -59,7 +59,12 @@
                             <th>Дата создания:</th>
                             <td>{{ publication.created }}</td>
                         </tr>
-
+                    {% if publication.is_active %}
+                        <tr>
+                            <th>Просмотров:</th>
+                            <td>{{ count }}</td>
+                        </tr>
+                    {% endif %}
                     </table>
 
                 </div>
