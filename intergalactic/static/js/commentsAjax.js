@@ -4,10 +4,10 @@ window.onload = () => {
     // var input = $('input.comment-input')
     // var commentsWrapper = $('.comments-wrapper')
     // var commentCount = document.querySelector('.comments-count')
-    var form = $(ev.target.parentNode.parentNode)
-    var input = $(form).find('input.comment-input')
+    const form = $(ev.target.parentNode.parentNode)
+    const input = $(form).find('input.comment-input')
     // var commentsWrapper = $('.comments-wrapper')
-    var commentCount = document.querySelector('.comments-count')
+    const commentCount = document.querySelector('.comments-count')
     $.post(form.attr('action'), form.serialize(), data => {
       switch (data.form_is_valid) {
         case 'AnonymousUser':
@@ -34,7 +34,7 @@ window.onload = () => {
     var target = $('i.like-button')
     var dislikeCount = document.querySelector('.dislikes')
     var dislike = $('i.dislike-button')
-    var wrapper = $('.like-wrapper')
+    const wrapper = $('.like-wrapper')
     var likeCount = document.querySelector('.likes')
 
     $.ajax({
@@ -70,7 +70,7 @@ window.onload = () => {
     var like = $('i.like-button')
     var dislikeCount = document.querySelector('.dislikes')
     var dislike = $('i.dislike-button')
-    var wrapper = $('.like-wrapper')
+    const wrapper = $('.like-wrapper')
     var likeCount = document.querySelector('.likes')
 
     $.ajax({
