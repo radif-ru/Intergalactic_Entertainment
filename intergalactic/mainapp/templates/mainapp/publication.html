@@ -14,7 +14,7 @@
                class="login">Редактировать</a>
           {% elif request.user.is_staff %}
             <a href="{% url 'main:moderator_room' %}"
-               class="login">Вернутся</a>
+               class="login">Вернуться</a>
           {% endif %}
           {% if request.user.is_staff %}
             <a href="{% url 'main:to_publish' pk=publication.id %}"
@@ -58,10 +58,10 @@
                   ==> Средний рейтинг:
                   <span style="color: salmon; filter: saturate(300%);"
                         id="average_author_rating">{{ average_author_rating }}</span>.
-                  Мой рейтинг:
+                  Мой рейтинг автору:
                   <span style="color: salmon; filter: saturate(300%);"
                         id="user_author_rating">{{ user_author_rating }}</span>
-                  <a style="right: -200px; bottom: 0;"
+                  <a style="right: -150px; bottom: 0;"
                       id="author_rating" class="stars" href="javascript://"
                      data-authorid="{{ publication.user.pk }}">
                     <i data-rating="2" class="icon-star"></i>
