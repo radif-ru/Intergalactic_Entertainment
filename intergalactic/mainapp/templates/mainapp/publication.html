@@ -58,7 +58,7 @@
                   ==> Средний рейтинг:
                   <span class="rating"
                         id="average_author_rating">{{ average_author_rating }}</span>.
-                  {% if not publication.user == request.user %}
+                  {#% if not publication.user == request.user %#}
                       Мой рейтинг автору:
                       <span class="rating"
                             id="user_author_rating">{{ user_author_rating }}</span>
@@ -71,7 +71,7 @@
                         <i data-rating="8" class="icon-star"></i>
                         <i data-rating="10" class="icon-star"></i>
                       </a>
-                  {% endif %}
+                  {#% endif %#}
                 </span>
               </td>
             </tr>
@@ -101,7 +101,7 @@
               Средний рейтинг статьи:
               <span class="rating"
                     id="average_pub_rating">{{ average_pub_rating }}</span>.
-              {% if not publication.user == request.user %}
+              {#% if not publication.user == request.user %#}
                   Мой рейтинг статьи:
                   <span class="rating"
                         id="user_pub_rating">{{ user_pub_rating }}</span>
@@ -113,7 +113,7 @@
                     <i data-rating="8" class="icon-star"></i>
                     <i data-rating="10" class="icon-star"></i>
                   </a>
-              {% endif %}
+              {#% endif %#}
             </p>
             <h4>{{ publication.created }}</h4>
             <h5 class="likes-comments">
