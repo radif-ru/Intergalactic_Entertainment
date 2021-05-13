@@ -2,6 +2,8 @@ import re
 from django import template
 from django.conf import settings
 
+from mainapp.models import UserRatings, ArticleRatings
+
 register = template.Library()
 
 
@@ -43,3 +45,13 @@ def tag_to_user(comment, to_comments):
         if comment.pk == to_comment.comment.pk:
             return to_comment.to_user
     return False
+
+
+@register.filter(name='average_author_rating')
+def average_author_rating(pk):
+    return UserRatings.average_author_rating(pk)
+
+
+@register.filter(name='average_pub_rating')
+def average_pub_rating(pk):
+    return ArticleRatings.average_pub_rating(pk)
