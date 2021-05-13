@@ -187,7 +187,12 @@ class Dislikes(models.Model):
                                        publication_id=publication)
         return dislike.change_status()
 
+# Таблица для подсчета количества просмотров статей
+class ViewCounter(models.Model):
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    count = models.PositiveIntegerField(default=0)
 
+    
 class ArticleRatings(models.Model):
     publication = models.ForeignKey(Publication, verbose_name='публикация',
                                     on_delete=models.CASCADE)
@@ -248,3 +253,4 @@ class UserRatings(models.Model):
     class Meta:
         verbose_name = 'рейтинг автора'
         verbose_name_plural = 'рейтинги авторов'
+        

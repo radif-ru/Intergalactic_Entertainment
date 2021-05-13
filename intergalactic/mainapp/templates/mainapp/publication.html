@@ -4,6 +4,7 @@
 {% load my_tags %}
 
 {% block main_content %}
+
   <div class="main-wrapper">
     <div class="main-wrapper-center">
       {% if not publication.is_active %}
@@ -79,6 +80,13 @@
               <th>Дата создания:</th>
               <td>{{ publication.created }}</td>
             </tr>
+            
+            {% if publication.is_active %}
+              <tr>
+                  <th>Просмотров:</th>
+                  <td>{{ count }}</td>
+              </tr>
+            {% endif %}
 
           </table>
 
