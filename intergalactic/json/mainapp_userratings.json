@@ -52,5 +52,32 @@
       "user": 2,
       "rating": 8
     }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 7,
+    "fields": {
+      "author": 1,
+      "user": 3,
+      "rating": 8
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 8,
+    "fields": {
+      "author": 2,
+      "user": 3,
+      "rating": 6
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 9,
+    "fields": {
+      "author": 3,
+      "user": 3,
+      "rating": 10
+    }
   }
 ]
