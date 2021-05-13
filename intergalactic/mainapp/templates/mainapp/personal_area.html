@@ -17,7 +17,7 @@
 
   <div class="my-3 p-3 bg-body rounded shadow-sm">
     <h6 class="border-bottom pb-2 mb-0">
-      Мой рейтинг: <span style="color: salmon; filter: saturate(300%);">
+      Мой рейтинг: <span class="rating">
       {{ request.user.pk|average_author_rating }}</span><br> Мои статьи:</h6>
     {% if publications_list %}
       <table id="datatable" class="table dt-responsive nowrap table-vertical"
@@ -52,7 +52,7 @@
             <td>{{ publication.get_is_active }}</td>
             <td><a href="{% url 'main:publication_page' pk=publication.id %}">Посмотреть</a>
             </td>
-            <td style="color: salmon; filter: saturate(300%);">{{ publication.pk|average_pub_rating }}</td>
+            <td class="rating">{{ publication.pk|average_pub_rating }}</td>
             {% if not publication.is_active and not publication.on_moderator_check %}
               <td><a
                   href="{% url 'main:edit_publication' pk=publication.id %}">Редактировать</a>
