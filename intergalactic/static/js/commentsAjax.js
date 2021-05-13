@@ -144,4 +144,31 @@ window.onload = () => {
     });
     event.preventDefault();
   });
+
+  $('#author_rating').on('click', 'i.icon-star', (event) => {
+    const author_id = event.target.parentElement.dataset.authorid
+    const user_author_rating = +event.target.dataset.rating
+    const wrapper = $('#author_rating')
+    const user_author_rating_el = $('#user_author_rating')
+    const average_author_rating_el = $('#average_author_rating')
+
+    $.post('/author_rating/', {
+      user_author_rating: user_author_rating,
+      author_id: author_id
+    }, function (data) {
+      if (data.form_is_valid && data.form_is_valid !== 'AnonymousUser') {
+        user_author_rating_el.text(data.user_author_rating);
+        average_author_rating_el.text(data.average_author_rating);
+      } else if (data.form_is_valid === 'AnonymousUser') {
+        if (!wrapper.parent().children('.AnonymousUserDis').length) {
+          wrapper.parent().append('<p class="AnonymousUserDis" style="margin-top:10px; color: red">Чтобы ставить рейтинг, Вы должны войти в аккаунт</p>')
+        }
+      } else {
+        if (!wrapper.parent().children('.AnonymousUserDis').length) {
+          wrapper.parent().append('<p class="AnonymousUserDis" style="margin-top:10px; color: red">Непредвиденная ошибка!</p>')
+        }
+      }
+    });
+    event.preventDefault();
+  });
 };

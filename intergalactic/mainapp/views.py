@@ -489,3 +489,38 @@ def user_pub_rating(request):
         return JsonResponse(data)
     else:
         return HttpResponse("Invalid request")
+
+
+@csrf_exempt
+def author_rating(request):
+    data = dict()
+    if request.method == 'POST':
+        user_author_rating = request.POST.get('user_author_rating')
+        author_id = request.POST.get('author_id')
+        if user_author_rating != '' and author_id != 0:
+            if request.user.is_authenticated:
+                user_ratings = UserRatings.objects.filter(author_id=author_id)
+
+                if not user_ratings.filter(user=request.user):
+                    user_ratings.create(
+                        author=IntergalacticUser.objects.get(pk=author_id),
+                        user=IntergalacticUser.objects.get(pk=request.user.pk),
+                        rating=user_author_rating
+                    )
+                else:
+                    user_ratings.filter(user=request.user).update(
+                        rating=user_author_rating)
+
+                average_author_rating = UserRatings.average_author_rating(
+                    pk=author_id)
+
+                data['form_is_valid'] = True
+                data['user_author_rating'] = user_author_rating
+                data['average_author_rating'] = average_author_rating
+            else:
+                data['form_is_valid'] = 'AnonymousUser'
+        else:
+            data['form_is_valid'] = False
+        return JsonResponse(data)
+    else:
+        return HttpResponse("Invalid request")

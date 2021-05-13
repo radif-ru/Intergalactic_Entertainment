@@ -232,7 +232,19 @@ class UserRatings(models.Model):
                 average_author_rating += author_rating.rating
             average_author_rating = int(
                 average_author_rating / aut_rat_quantity)
-        return average_author_rating
+
+        average_article_rating = 0
+        article_ratings = ArticleRatings.objects.filter(
+            publication__user_id=pk)
+        art_rat_quantity = len(article_ratings)
+        if art_rat_quantity:
+            for article_rating in article_ratings:
+                average_article_rating += article_rating.rating
+                print(average_article_rating)
+            average_article_rating = int(
+                average_article_rating / art_rat_quantity)
+
+        return int((average_author_rating + average_article_rating) / 2)
 
     class Meta:
         verbose_name = 'рейтинг автора'
