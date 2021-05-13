@@ -58,18 +58,20 @@
                   ==> Средний рейтинг:
                   <span class="rating"
                         id="average_author_rating">{{ average_author_rating }}</span>.
-                  Мой рейтинг автору:
-                  <span class="rating"
-                        id="user_author_rating">{{ user_author_rating }}</span>
-                  <a style="right: -150px; bottom: 0;"
-                      id="author_rating" class="stars" href="javascript://"
-                     data-authorid="{{ publication.user.pk }}">
-                    <i data-rating="2" class="icon-star"></i>
-                    <i data-rating="4" class="icon-star"></i>
-                    <i data-rating="6" class="icon-star"></i>
-                    <i data-rating="8" class="icon-star"></i>
-                    <i data-rating="10" class="icon-star"></i>
-                  </a>
+                  {% if not publication.user == request.user %}
+                      Мой рейтинг автору:
+                      <span class="rating"
+                            id="user_author_rating">{{ user_author_rating }}</span>
+                      <a style="right: -150px; bottom: 0;"
+                          id="author_rating" class="stars" href="javascript://"
+                         data-authorid="{{ publication.user.pk }}">
+                        <i data-rating="2" class="icon-star"></i>
+                        <i data-rating="4" class="icon-star"></i>
+                        <i data-rating="6" class="icon-star"></i>
+                        <i data-rating="8" class="icon-star"></i>
+                        <i data-rating="10" class="icon-star"></i>
+                      </a>
+                  {% endif %}
                 </span>
               </td>
             </tr>
@@ -99,17 +101,19 @@
               Средний рейтинг статьи:
               <span class="rating"
                     id="average_pub_rating">{{ average_pub_rating }}</span>.
-              Мой рейтинг статьи:
-              <span class="rating"
-                    id="user_pub_rating">{{ user_pub_rating }}</span>
-              <a id="pub_rating" class="stars" href="javascript://"
-                 data-pubid="{{ publication.pk }}">
-                <i data-rating="2" class="icon-star"></i>
-                <i data-rating="4" class="icon-star"></i>
-                <i data-rating="6" class="icon-star"></i>
-                <i data-rating="8" class="icon-star"></i>
-                <i data-rating="10" class="icon-star"></i>
-              </a>
+              {% if not publication.user == request.user %}
+                  Мой рейтинг статьи:
+                  <span class="rating"
+                        id="user_pub_rating">{{ user_pub_rating }}</span>
+                  <a id="pub_rating" class="stars" href="javascript://"
+                     data-pubid="{{ publication.pk }}">
+                    <i data-rating="2" class="icon-star"></i>
+                    <i data-rating="4" class="icon-star"></i>
+                    <i data-rating="6" class="icon-star"></i>
+                    <i data-rating="8" class="icon-star"></i>
+                    <i data-rating="10" class="icon-star"></i>
+                  </a>
+              {% endif %}
             </p>
             <h4>{{ publication.created }}</h4>
             <h5 class="likes-comments">
