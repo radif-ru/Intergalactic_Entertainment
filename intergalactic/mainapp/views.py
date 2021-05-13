@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 
 from mainapp.models import Publication, PublicationCategory, Likes, Dislikes, \
-    Comments, ToComments, ArticleRatings
+    Comments, ToComments, ArticleRatings, UserRatings
 from django.db.models import Count
 
 from authapp.models import IntergalacticUser
@@ -107,6 +107,7 @@ def main(request):
 
 
 def publication_page(request, pk):
+    publication = Publication.objects.get(pk=pk)
     categories = PublicationCategory.objects.filter(is_active=True)
     comments = get_comments(pk)
     likes = Likes.objects.all()
@@ -119,20 +120,27 @@ def publication_page(request, pk):
     to_comments = ToComments.objects.all()
 
     user_pub_rating = 0
-    average_pub_rating = 0
-    article_ratings = ArticleRatings.objects.filter(publication_id=pk)
-    for article_rating in article_ratings:
-        average_pub_rating += article_rating.rating
-    if len(article_ratings):
-        average_pub_rating = int(average_pub_rating / len(article_ratings))
+    average_pub_rating = ArticleRatings.average_pub_rating(pk)
+
+    user_author_rating = 0
+    average_author_rating = UserRatings.average_author_rating(
+        publication.user.pk)
 
     if request.user.is_authenticated:
         try:
-            user_article_rating = article_ratings.get(user=request.user)
-            user_pub_rating = user_article_rating.rating
+            user_pub_rating = ArticleRatings.article_ratings(pk).get(
+                user=request.user).rating
         except Exception as e:
             print(e)
             user_pub_rating = 0
+
+        try:
+            user_author_rating = UserRatings.objects.filter(
+                user=request.user).get(
+                author=publication.user).rating
+        except Exception as e:
+            print(e)
+            user_author_rating = 0
 
     context = {
         'page_title': 'Publication',
@@ -142,9 +150,13 @@ def publication_page(request, pk):
         'likes': likes,
         'now_read_publications': now_read_publications,
         'notifications': notifications,
+
         'to_comments': to_comments,
+
         'user_pub_rating': user_pub_rating,
-        'average_pub_rating': average_pub_rating
+        'average_pub_rating': average_pub_rating,
+        'user_author_rating': user_author_rating,
+        'average_author_rating': average_author_rating
 
     }
     return render(request, 'mainapp/publication.html', context)
@@ -450,12 +462,9 @@ def user_pub_rating(request):
     if request.method == 'POST':
         user_pub_rat = request.POST.get('user_pub_rating')
         pub_id = request.POST.get('pub_id')
-        print(request.user.is_authenticated)
         if user_pub_rat != '' and pub_id != 0:
             if request.user.is_authenticated:
-                average_pub_rating = 0
-                article_ratings = ArticleRatings.objects.filter(
-                    publication_id=pub_id)
+                article_ratings = ArticleRatings.article_ratings(pk=pub_id)
 
                 if not article_ratings.filter(user=request.user):
                     article_ratings.create(
@@ -467,10 +476,8 @@ def user_pub_rating(request):
                     article_ratings.filter(user=request.user).update(
                         rating=user_pub_rat)
 
-                for article_rating in article_ratings:
-                    average_pub_rating += article_rating.rating
-                average_pub_rating = int(
-                    average_pub_rating / len(article_ratings))
+                average_pub_rating = ArticleRatings.average_pub_rating(
+                    pk=pub_id)
 
                 data['form_is_valid'] = True
                 data['user_pub_rating'] = user_pub_rat

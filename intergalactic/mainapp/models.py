@@ -192,9 +192,48 @@ class ArticleRatings(models.Model):
     publication = models.ForeignKey(Publication, verbose_name='публикация',
                                     on_delete=models.CASCADE)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,
-                             verbose_name='автор рейтинга')
+                             verbose_name='голосующий пользователь')
     rating = models.IntegerField(default=0, blank=True, verbose_name='рейтинг')
+
+    @staticmethod
+    def article_ratings(pk):
+        return ArticleRatings.objects.filter(publication_id=pk)
+
+    @staticmethod
+    def average_pub_rating(pk):
+        average_pub_rating = 0
+        article_ratings = ArticleRatings.article_ratings(pk)
+        for article_rating in article_ratings:
+            average_pub_rating += article_rating.rating
+        if len(article_ratings):
+            average_pub_rating = int(average_pub_rating / len(article_ratings))
+        return average_pub_rating
 
     class Meta:
         verbose_name = 'рейтинг статьи'
         verbose_name_plural = 'рейтинги статей'
+
+
+class UserRatings(models.Model):
+    author = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
+                               verbose_name='автор')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,
+                             verbose_name='голосующий пользователь',
+                             related_name='voting_user', default=0)
+    rating = models.IntegerField(default=0, blank=True, verbose_name='рейтинг')
+
+    @staticmethod
+    def average_author_rating(pk):
+        average_author_rating = 0
+        author_ratings = UserRatings.objects.filter(author_id=pk)
+        aut_rat_quantity = len(author_ratings)
+        if aut_rat_quantity:
+            for author_rating in author_ratings:
+                average_author_rating += author_rating.rating
+            average_author_rating = int(
+                average_author_rating / aut_rat_quantity)
+        return average_author_rating
+
+    class Meta:
+        verbose_name = 'рейтинг автора'
+        verbose_name_plural = 'рейтинги авторов'

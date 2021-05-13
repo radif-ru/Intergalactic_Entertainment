@@ -5,7 +5,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 
 from mainapp.models import Publication, PublicationCategory, Likes, Comments, \
-    ToComments, ArticleRatings
+    ToComments, ArticleRatings, UserRatings
 from authapp.models import IntergalacticUser
 
 
@@ -164,3 +164,18 @@ class Command(BaseCommand):
             new_article_rating = ArticleRatings(**{'id': article_rating['pk']},
                                                 **article_rating['fields'])
             new_article_rating.save()
+
+        user_ratings = load_from_json('mainapp_userratings')
+        UserRatings.objects.all().delete()
+        for user_rating in user_ratings:
+            author = user_rating['fields']['author']
+            _author = IntergalacticUser.objects.get(id=author)
+            user_rating['fields']['author'] = _author
+
+            user = user_rating['fields']['user']
+            _user = IntergalacticUser.objects.get(id=user)
+            user_rating['fields']['user'] = _user
+
+            new_user_rating = UserRatings(**{'id': user_rating['pk']},
+                                          **user_rating['fields'])
+            new_user_rating.save()

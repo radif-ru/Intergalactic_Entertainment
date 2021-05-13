@@ -53,7 +53,25 @@
               </tr> {% endif %}
             <tr>
               <th>Автор:</th>
-              <td>{{ publication.user }}</td>
+              <td>{{ publication.user }}
+                <span style="position: relative;">
+                  ==> Средний рейтинг:
+                  <span style="color: salmon; filter: saturate(300%);"
+                        id="average_author_rating">{{ average_author_rating }}</span>.
+                  Мой рейтинг:
+                  <span style="color: salmon; filter: saturate(300%);"
+                        id="user_author_rating">{{ user_author_rating }}</span>
+                  <a style="right: -200px; bottom: 0;"
+                      id="author_rating" class="stars" href="javascript://"
+                     data-authorid="{{ publication.user.pk }}">
+                    <i data-rating="2" class="icon-star"></i>
+                    <i data-rating="4" class="icon-star"></i>
+                    <i data-rating="6" class="icon-star"></i>
+                    <i data-rating="8" class="icon-star"></i>
+                    <i data-rating="10" class="icon-star"></i>
+                  </a>
+                </span>
+              </td>
             </tr>
             <tr>
               <th>Дата создания:</th>
@@ -79,9 +97,11 @@
             <p>{{ publication.text|safe }}</p>
             <p style="position: relative;">
               Средний рейтинг статьи:
-              <span id="average_pub_rating">{{ average_pub_rating }}</span>.
+              <span style="color: salmon; filter: saturate(300%);"
+                    id="average_pub_rating">{{ average_pub_rating }}</span>.
               Мой рейтинг статьи:
-              <span id="user_pub_rating">{{ user_pub_rating }}</span>
+              <span style="color: salmon; filter: saturate(300%);"
+                    id="user_pub_rating">{{ user_pub_rating }}</span>
               <a id="pub_rating" class="stars" href="javascript://"
                  data-pubid="{{ publication.pk }}">
                 <i data-rating="2" class="icon-star"></i>
