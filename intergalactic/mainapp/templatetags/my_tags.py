@@ -2,6 +2,8 @@ import re
 from django import template
 from django.conf import settings
 
+from mainapp.models import UserRatings, ArticleRatings
+
 register = template.Library()
 
 
@@ -37,7 +39,19 @@ def media_folder_users(string):
 
 @register.filter(name='tag_to_user')
 def tag_to_user(comment, to_comments):
+    # print(comment.pk)
     for to_comment in to_comments:
-        if comment.pk == to_comment.comment.id:
+        # print(comment.pk, to_comment.for_comment.pk, to_comment.to_user)
+        if comment.pk == to_comment.comment.pk:
             return to_comment.to_user
     return False
+
+
+@register.filter(name='average_author_rating')
+def average_author_rating(pk):
+    return UserRatings.average_author_rating(pk)
+
+
+@register.filter(name='average_pub_rating')
+def average_pub_rating(pk):
+    return ArticleRatings.average_pub_rating(pk)

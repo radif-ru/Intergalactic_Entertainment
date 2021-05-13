@@ -37,7 +37,7 @@
                 {% for user in users_list %}
                     <tr>
                         <td>{{ user.id }}</td>
-                        <td><img alt="not" src="/media/{{ user.avatar }}" height="50px"></td>
+                        <td><img alt="not" src="{{ user.avatar|media_folder_users }}" height="50px"></td>
                         <td>{{ user.username }}</td>
                         <td>{{ user.first_name }}</td>
                         <td>{{ user.last_name }}</td>
