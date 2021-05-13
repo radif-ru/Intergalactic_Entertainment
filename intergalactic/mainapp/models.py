@@ -187,8 +187,70 @@ class Dislikes(models.Model):
                                        publication_id=publication)
         return dislike.change_status()
 
-
 # Таблица для подсчета количества просмотров статей
 class ViewCounter(models.Model):
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(default=0)
+
+    
+class ArticleRatings(models.Model):
+    publication = models.ForeignKey(Publication, verbose_name='публикация',
+                                    on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,
+                             verbose_name='голосующий пользователь')
+    rating = models.IntegerField(default=0, blank=True, verbose_name='рейтинг')
+
+    @staticmethod
+    def article_ratings(pk):
+        return ArticleRatings.objects.filter(publication_id=pk)
+
+    @staticmethod
+    def average_pub_rating(pk):
+        average_pub_rating = 0
+        article_ratings = ArticleRatings.article_ratings(pk)
+        for article_rating in article_ratings:
+            average_pub_rating += article_rating.rating
+        if len(article_ratings):
+            average_pub_rating = round(
+                (average_pub_rating / len(article_ratings)), 2)
+        return average_pub_rating
+
+    class Meta:
+        verbose_name = 'рейтинг статьи'
+        verbose_name_plural = 'рейтинги статей'
+
+
+class UserRatings(models.Model):
+    author = models.ForeignKey(IntergalacticUser, on_delete=models.CASCADE,
+                               verbose_name='автор')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE,
+                             verbose_name='голосующий пользователь',
+                             related_name='voting_user', default=0)
+    rating = models.IntegerField(default=0, blank=True, verbose_name='рейтинг')
+
+    @staticmethod
+    def average_author_rating(pk):
+        average_author_rating = 0
+        author_ratings = UserRatings.objects.filter(author_id=pk)
+        aut_rat_quantity = len(author_ratings)
+        if aut_rat_quantity:
+            for author_rating in author_ratings:
+                average_author_rating += author_rating.rating
+            average_author_rating = (average_author_rating / aut_rat_quantity)
+
+        average_article_rating = 0
+        article_ratings = ArticleRatings.objects.filter(
+            publication__user_id=pk)
+        art_rat_quantity = len(article_ratings)
+        if art_rat_quantity:
+            for article_rating in article_ratings:
+                average_article_rating += article_rating.rating
+            average_article_rating = (
+                    average_article_rating / art_rat_quantity)
+
+        return round(((average_author_rating + average_article_rating) / 2), 2)
+
+    class Meta:
+        verbose_name = 'рейтинг автора'
+        verbose_name_plural = 'рейтинги авторов'
+        

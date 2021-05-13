@@ -4,141 +4,188 @@
 {% load my_tags %}
 
 {% block main_content %}
-    <div class="main-wrapper">
-        <div class="main-wrapper-center">
-            {% if not publication.is_active %}
-                <div class="preliminarily">
-                    <h1>Страница предварительного просмотра публикации</h1>
-                    {% if publication.user == request.user %}
-                        <a href="{% url 'main:edit_publication' pk=publication.id %}"
-                           class="login">Редактировать</a>
-                    {% elif request.user.is_staff %}
-                        <a href="{% url 'main:moderator_room' %}"
-                           class="login">Вернуться</a>
-                    {% endif %}
-                    {% if request.user.is_staff %}
-                        <a href="{% url 'main:to_publish' pk=publication.id %}"
-                           class="login">Опубликовать</a>
-                    {% else %}
-                        <a href="{% url 'main:to_publish' pk=publication.id %}"
-                           class="login">Отправить на модерацию</a>
-                    {% endif %}
-                </div>
-            {% endif %}
-            <div class="main-container">
-                <!-- <div class="main-navigation">
-                      <ul>
-                         <li> <a href="#" class="active">Статьи</a> </li>
-                         <li><a href="#">Новости</a></li>
-                         <li><a href="#">Хабы</a></li>
-                         <li><a href="#">Авторы</a></li>
-                         <li><a href="#">Компании</a></li>
-                     </ul>
-                 </div> -->
-                <div class="info-publication-block">
-                    <h3>Информация</h3>
-                    <hr>
-                    <table>
-                        <tr>
-                            <th>Рубрика:</th>
-                            <td>
-                                <a href="{% url 'main:category'  publication.category.pk %}">
-                                    {{ publication.category }}
-                                </a></td>
-                        </tr>
-                        {% if publication.user.company %}
-                            <tr>
-                                <th>Компания:</th>
-                                <td>publication.user.company</td>
-                            </tr> {% endif %}
-                        <tr>
-                            <th>Автор:</th>
-                            <td>{{ publication.user }}</td>
-                        </tr>
-                        <tr>
-                            <th>Дата создания:</th>
-                            <td>{{ publication.created }}</td>
-                        </tr>
-                    {% if publication.is_active %}
-                        <tr>
-                            <th>Просмотров:</th>
-                            <td>{{ count }}</td>
-                        </tr>
-                    {% endif %}
-                    </table>
 
-                </div>
-                <div class="fast-blocks-container">
-                    <p>СЕЙЧАС ЧИТАЮТ</p>
-                    <div class="fast-blocks">
-                        {% for publication in now_read_publications %}
-                            {% include 'mainapp/includes/inc_now_read_blocks.html' %}
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="main-last-blocks-container">
-                    <div class="publication">
-                        <h2>{{ publication.name }}</h2>
-                        <img src="{{ publication.image|media_folder_publications }}"
-                             alt="">
-                        <p>{{ publication.text|safe }}</p>
-                        <h4>{{ publication.created }}</h4>
-                        <h5 class="likes-comments">
-
-                            <span class="like-wrapper"><i
-                                    class="like-button {% if publication|is_liked:user.id %} fas fa-heart {% else %} far fa-heart {% endif %}"
-                                    style="font-size:30px; cursor:pointer;"
-                                    data-publ="{{ publication.id }}"
-                                    data-user="{{ publication.user.id }}"></i></span>
-                            <span class="likes"
-                                  style="margin-right:15px; font-size:20px;">{{ publication.get_like_count }}</span>
-
-                            <span class="dislike-wrapper"><i
-                                    class="dislike-button {% if publication|is_liked:user.id %} fas fa-thumbs-down {% else %} far fa-thumbs-down {% endif %}"
-                                    style="font-size:30px; cursor:pointer;"
-                                    data-publ="{{ publication.id }}"
-                                    data-user="{{ publication.user.id }}"></i></span>
-                            <span class="dislikes"
-                                  style="margin-right:15px; font-size:20px;">{{ publication.get_dislike_count }}</span>
-
-                            <span class="comments"
-                                  onclick="toggle_comments(this)"
-                                  style="cursor: pointer;"><i
-                                    class="far fa-comment-alt"
-                                    style="font-size:30px;"></i> <span
-                                    class="comments-count"
-                                    style="font-size:20px;">{{ publication.get_comment_count }}</span></span>
-                            <form action="{% url 'main:comment' %}"
-                                  method="post" enctype="multipart/form-data"
-                                  class="comment-form hide">
-                                {% csrf_token %}
-                                <img src="{{ user.avatar|media_folder_users }}"
-                                     alt="" class="user-avatar-img">
-                                <input type="text" name="message"
-                                       class="comment-input">
-                                <input type="hidden" name='publication_id'
-                                       value='{{ publication.id }}'>
-                                <button type="submit" value="Submit"
-                                        class="btn btn-primary"><i
-                                        class="fas fa-paper-plane"
-                                        style="font-size:20px;"></i></button>
-                            </form>
-                            <div class="comments-wrapper">
-                                <div class="comments-div">
-                                    {% include 'mainapp/includes/inc_comments.html' %}
-                                </div>
-                            </div>
-                        </h5>
-                    </div>
-                    <!-- {% include 'mainapp/includes/inc_popular_blocks.html' %} -->
-                    <!-- <div class="delimiter">
-                        <div class="del"></div>
-                        <a href="#">Больше</a></div> -->
-                </div>
-            </div>
-            <div class="main-news">
-                <p></p>
-            </div>
+  <div class="main-wrapper">
+    <div class="main-wrapper-center">
+      {% if not publication.is_active %}
+        <div class="preliminarily">
+          <h1>Страница предварительного просмотра публикации</h1>
+          {% if publication.user == request.user %}
+            <a href="{% url 'main:edit_publication' pk=publication.id %}"
+               class="login">Редактировать</a>
+          {% elif request.user.is_staff %}
+            <a href="{% url 'main:moderator_room' %}"
+               class="login">Вернуться</a>
+          {% endif %}
+          {% if request.user.is_staff %}
+            <a href="{% url 'main:to_publish' pk=publication.id %}"
+               class="login">Опубликовать</a>
+          {% else %}
+            <a href="{% url 'main:to_publish' pk=publication.id %}"
+               class="login">Оправить на модерацию</a>
+          {% endif %}
         </div>
+      {% endif %}
+      <div class="main-container">
+        <!-- <div class="main-navigation">
+              <ul>
+                 <li> <a href="#" class="active">Статьи</a> </li>
+                 <li><a href="#">Новости</a></li>
+                 <li><a href="#">Хабы</a></li>
+                 <li><a href="#">Авторы</a></li>
+                 <li><a href="#">Компании</a></li>
+             </ul>
+         </div> -->
+        <div class="info-publication-block">
+          <h3>Информация</h3>
+          <hr>
+          <table>
+            <tr>
+              <th>Рубрика:</th>
+              <td>
+                <a href="{% url 'main:category'  publication.category.pk %}">
+                  {{ publication.category }}
+                </a></td>
+            </tr>
+            {% if publication.user.company %}
+              <tr>
+                <th>Компания:</th>
+                <td>publication.user.company</td>
+              </tr> {% endif %}
+            <tr>
+              <th>Автор:</th>
+              <td>{{ publication.user }}
+                <span style="position: relative;">
+                  ==> Средний рейтинг:
+                  <span class="rating"
+                        id="average_author_rating">{{ average_author_rating }}</span>.
+                  {#% if not publication.user == request.user %#}
+                      Мой рейтинг автору:
+                      <span class="rating"
+                            id="user_author_rating">{{ user_author_rating }}</span>
+                      <a style="right: -150px; bottom: 0;"
+                          id="author_rating" class="stars" href="javascript://"
+                         data-authorid="{{ publication.user.pk }}">
+                        <i data-rating="2" class="icon-star"></i>
+                        <i data-rating="4" class="icon-star"></i>
+                        <i data-rating="6" class="icon-star"></i>
+                        <i data-rating="8" class="icon-star"></i>
+                        <i data-rating="10" class="icon-star"></i>
+                      </a>
+                  {#% endif %#}
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>Дата создания:</th>
+              <td>{{ publication.created }}</td>
+            </tr>
+            
+            {% if publication.is_active %}
+              <tr>
+                  <th>Просмотров:</th>
+                  <td>{{ count }}</td>
+              </tr>
+            {% endif %}
+
+          </table>
+
+        </div>
+        <div class="fast-blocks-container">
+          <p>СЕЙЧАС ЧИТАЮТ</p>
+          <div class="fast-blocks">
+            {% for publication in now_read_publications %}
+              {% include 'mainapp/includes/inc_now_read_blocks.html' %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="main-last-blocks-container">
+          <div class="publication">
+            <h2>{{ publication.name }}</h2>
+            <img src="{{ publication.image|media_folder_publications }}"
+                 alt="">
+            <p>{{ publication.text|safe }}</p>
+            <p style="position: relative;">
+              Средний рейтинг статьи:
+              <span class="rating"
+                    id="average_pub_rating">{{ average_pub_rating }}</span>.
+              {#% if not publication.user == request.user %#}
+                  Мой рейтинг статьи:
+                  <span class="rating"
+                        id="user_pub_rating">{{ user_pub_rating }}</span>
+                  <a id="pub_rating" class="stars" href="javascript://"
+                     data-pubid="{{ publication.pk }}">
+                    <i data-rating="2" class="icon-star"></i>
+                    <i data-rating="4" class="icon-star"></i>
+                    <i data-rating="6" class="icon-star"></i>
+                    <i data-rating="8" class="icon-star"></i>
+                    <i data-rating="10" class="icon-star"></i>
+                  </a>
+              {#% endif %#}
+            </p>
+            <h4>{{ publication.created }}</h4>
+            <h5 class="likes-comments">
+
+              <div>
+                <span class="like-wrapper"><i
+                    class="like-button {% if publication|is_liked:user.id %} fas fa-heart {% else %} far fa-heart {% endif %}"
+                    style="font-size:30px; cursor:pointer;"
+                    data-publ="{{ publication.id }}"
+                    data-user="{{ publication.user.id }}"></i></span>
+                <span class="likes"
+                      style="margin-right:15px; font-size:20px;">{{ publication.get_like_count }}</span>
+
+                <span class="dislike-wrapper"><i
+                    class="dislike-button {% if publication|is_liked:user.id %} fas fa-thumbs-down {% else %} far fa-thumbs-down {% endif %}"
+                    style="font-size:30px; cursor:pointer;"
+                    data-publ="{{ publication.id }}"
+                    data-user="{{ publication.user.id }}"></i></span>
+                <span class="dislikes"
+                      style="margin-right:15px; font-size:20px;">{{ publication.get_dislike_count }}</span>
+
+                <span class="comments"
+                      onclick="toggle_comments(this)"
+                      style="cursor: pointer;"><i
+                    class="far fa-comment-alt"
+                    style="font-size:30px;"></i> <span
+                    class="comments-count"
+                    style="font-size:20px;">{{ publication.get_comment_count }}</span></span>
+                <form action="{% url 'main:comment' %}"
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="comment-form hide">
+                  {% csrf_token %}
+                  <img src="{{ user.avatar|media_folder_users }}"
+                       alt="" class="user-avatar-img">
+                  <input type="text" name="message"
+                         class="comment-input">
+                  <input type="hidden" name='publication_id'
+                         value='{{ publication.id }}'>
+                  <button type="submit" value="Submit"
+                          class="btn btn-primary"><i
+                      class="fas fa-paper-plane"
+                      style="font-size:20px;"></i>
+                  </button>
+                </form>
+              </div>
+
+
+              <div class="comments-wrapper">
+                <div class="comments-div">
+                  {% include 'mainapp/includes/inc_comments.html' %}
+                </div>
+              </div>
+            </h5>
+          </div>
+          <!-- {% include 'mainapp/includes/inc_popular_blocks.html' %} -->
+          <!-- <div class="delimiter">
+              <div class="del"></div>
+              <a href="#">Больше</a></div> -->
+        </div>
+      </div>
+      <div class="main-news">
+        <p></p>
+      </div>
     </div>
+  </div>
 {% endblock %}
