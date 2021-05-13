@@ -125,13 +125,20 @@ window.onload = () => {
     const user_pub_rating_el = $('#user_pub_rating')
     const average_pub_rating_el = $('#average_pub_rating')
 
+    const average_author_rating_el = $('#average_author_rating')
+    const author_id = document.getElementById('author_rating').dataset.authorid
+
     $.post('/user_pub_rating/', {
       user_pub_rating: user_pub_rating,
-      pub_id: pub_id
+      pub_id: pub_id,
+
+      author_id: author_id,
     }, function (data) {
       if (data.form_is_valid && data.form_is_valid !== 'AnonymousUser') {
         user_pub_rating_el.text(data.user_pub_rating);
         average_pub_rating_el.text(data.average_pub_rating);
+
+        average_author_rating_el.text(data.average_author_rating);
       } else if (data.form_is_valid === 'AnonymousUser') {
         if (!wrapper.parent().children('.AnonymousUserDis').length) {
           wrapper.parent().append('<p class="AnonymousUserDis" style="margin-top:10px; color: red">Чтобы ставить рейтинг, Вы должны войти в аккаунт</p>')
@@ -154,7 +161,7 @@ window.onload = () => {
 
     $.post('/author_rating/', {
       user_author_rating: user_author_rating,
-      author_id: author_id
+      author_id: author_id,
     }, function (data) {
       if (data.form_is_valid && data.form_is_valid !== 'AnonymousUser') {
         user_author_rating_el.text(data.user_author_rating);

@@ -115,11 +115,11 @@
             <h5 class="likes-comments">
 
               <div>
-                                <span class="like-wrapper"><i
-                                    class="like-button {% if publication|is_liked:user.id %} fas fa-heart {% else %} far fa-heart {% endif %}"
-                                    style="font-size:30px; cursor:pointer;"
-                                    data-publ="{{ publication.id }}"
-                                    data-user="{{ publication.user.id }}"></i></span>
+                <span class="like-wrapper"><i
+                    class="like-button {% if publication|is_liked:user.id %} fas fa-heart {% else %} far fa-heart {% endif %}"
+                    style="font-size:30px; cursor:pointer;"
+                    data-publ="{{ publication.id }}"
+                    data-user="{{ publication.user.id }}"></i></span>
                 <span class="likes"
                       style="margin-right:15px; font-size:20px;">{{ publication.get_like_count }}</span>
 

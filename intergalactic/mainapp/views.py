@@ -462,6 +462,8 @@ def user_pub_rating(request):
     if request.method == 'POST':
         user_pub_rat = request.POST.get('user_pub_rating')
         pub_id = request.POST.get('pub_id')
+
+        author_id = request.POST.get('author_id')
         if user_pub_rat != '' and pub_id != 0:
             if request.user.is_authenticated:
                 article_ratings = ArticleRatings.article_ratings(pk=pub_id)
@@ -479,9 +481,14 @@ def user_pub_rating(request):
                 average_pub_rating = ArticleRatings.average_pub_rating(
                     pk=pub_id)
 
+                average_author_rating = UserRatings.average_author_rating(
+                    pk=author_id)
+
                 data['form_is_valid'] = True
                 data['user_pub_rating'] = user_pub_rat
                 data['average_pub_rating'] = average_pub_rating
+
+                data['average_author_rating'] = average_author_rating
             else:
                 data['form_is_valid'] = 'AnonymousUser'
         else:
@@ -497,6 +504,7 @@ def author_rating(request):
     if request.method == 'POST':
         user_author_rating = request.POST.get('user_author_rating')
         author_id = request.POST.get('author_id')
+
         if user_author_rating != '' and author_id != 0:
             if request.user.is_authenticated:
                 user_ratings = UserRatings.objects.filter(author_id=author_id)
