@@ -121,13 +121,26 @@ window.onload = () => {
   $('#pub_rating').on('click', 'i.icon-star', (event) => {
     const pub_id = event.target.parentElement.dataset.pubid
     const user_pub_rating = +event.target.dataset.rating
+    const wrapper = $('#pub_rating')
+    const user_pub_rating_el = $('#user_pub_rating')
+    const average_pub_rating_el = $('#average_pub_rating')
 
     $.post('/user_pub_rating/', {
       user_pub_rating: user_pub_rating,
       pub_id: pub_id
     }, function (data) {
-      $('#user_pub_rating').text(data.user_pub_rating);
-      $('#average_pub_rating').text(data.average_pub_rating);
+      if (data.form_is_valid && data.form_is_valid !== 'AnonymousUser') {
+        user_pub_rating_el.text(data.user_pub_rating);
+        average_pub_rating_el.text(data.average_pub_rating);
+      } else if (data.form_is_valid === 'AnonymousUser') {
+        if (!wrapper.parent().children('.AnonymousUserDis').length) {
+          wrapper.parent().append('<p class="AnonymousUserDis" style="margin-top:10px; color: red">Чтобы ставить рейтинг, Вы должны войти в аккаунт</p>')
+        }
+      } else {
+        if (!wrapper.parent().children('.AnonymousUserDis').length) {
+          wrapper.parent().append('<p class="AnonymousUserDis" style="margin-top:10px; color: red">Непредвиденная ошибка!</p>')
+        }
+      }
     });
     event.preventDefault();
   });

@@ -123,11 +123,16 @@ def publication_page(request, pk):
     article_ratings = ArticleRatings.objects.filter(publication_id=pk)
     for article_rating in article_ratings:
         average_pub_rating += article_rating.rating
-    average_pub_rating = int(average_pub_rating / len(article_ratings))
+    if len(article_ratings):
+        average_pub_rating = int(average_pub_rating / len(article_ratings))
 
     if request.user.is_authenticated:
-        user_article_rating = article_ratings.get(user=request.user)
-        user_pub_rating = user_article_rating.rating
+        try:
+            user_article_rating = article_ratings.get(user=request.user)
+            user_pub_rating = user_article_rating.rating
+        except Exception as e:
+            print(e)
+            user_pub_rating = 0
 
     context = {
         'page_title': 'Publication',
@@ -445,14 +450,22 @@ def user_pub_rating(request):
     if request.method == 'POST':
         user_pub_rat = request.POST.get('user_pub_rating')
         pub_id = request.POST.get('pub_id')
+        print(request.user.is_authenticated)
         if user_pub_rat != '' and pub_id != 0:
             if request.user.is_authenticated:
                 average_pub_rating = 0
                 article_ratings = ArticleRatings.objects.filter(
                     publication_id=pub_id)
 
-                article_ratings.filter(user=request.user).update(
-                    rating=user_pub_rat)
+                if not article_ratings.filter(user=request.user):
+                    article_ratings.create(
+                        publication=Publication.objects.get(pk=pub_id),
+                        user=IntergalacticUser.objects.get(pk=request.user.pk),
+                        rating=user_pub_rat
+                    )
+                else:
+                    article_ratings.filter(user=request.user).update(
+                        rating=user_pub_rat)
 
                 for article_rating in article_ratings:
                     average_pub_rating += article_rating.rating

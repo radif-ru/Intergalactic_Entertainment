@@ -1016,6 +1016,9 @@ h4 {
   height: 30px;
 }
 .stars {
+  position: absolute;
+  right: 12px;
+  bottom: 24px;
   font-size: 15px;
   color: #e4af48;
 }
