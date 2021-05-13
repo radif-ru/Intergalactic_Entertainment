@@ -32,7 +32,7 @@
                      class="user-avatar-img">
                 <input type="text" name="message" class="comment-input">
                 <input type="hidden" name='publication_id'
-                       value='{{ publication.id }}'>
+                       value='{{ comment.publication.id }}'>
 
                 <input type="hidden" name='comment_id'
                        value='{{ comment.id }}'>
@@ -44,53 +44,61 @@
                 </button>
             </form>
             <br>
+
+
         </div>
 
     {% else %}
+{#        {% for to_comment in to_comments %}#}
+{#            {% for comment_for_comment in comments %}#}
+{#                {% if comment_for_comment.id == to_comment.for_comment.id %}#}
+                    <div style="margin-left: 5%">
+                        <div onclick="toggle_comments(this)" class="comments comment-grid">
+                            <div class="user-avatar">
+                                <a href="#">
+                                    <img src="{{ comment.user.avatar|media_folder_users }}"
+                                         alt=""
+                                         class="user-avatar-img">
+                                </a>
+                            </div>
+                            <div class="comment-username">
+                                <a href="#" style="color: #1d5e8c;"><p
+                                        style="display: inline;">{{ comment.user }}</p></a>
+                            </div>
+                            <p class="comment-text"><a
+                                    href="#">{{ comment|tag_to_user:to_comments }}</a>, {{ comment.description }}
+                            </p>
+                        </div>
 
-        <div style="margin-left: 5%">
-            <div onclick="toggle_comments(this)" class="comments comment-grid">
-                <div class="user-avatar">
-                    <a href="#">
-                        <img src="{{ comment.user.avatar|media_folder_users }}"
-                             alt=""
-                             class="user-avatar-img">
-                    </a>
-                </div>
-                <div class="comment-username">
-                    <a href="#" style="color: #1d5e8c;"><p
-                            style="display: inline;">{{ comment.user }}</p></a>
-                </div>
-                <p class="comment-text"><a
-                        href="#">{{ comment|tag_to_user:to_comments }}</a>, {{ comment.description }}
-                </p>
-            </div>
+                        <p class="comments"
+                           onclick="toggle_comments(this)"
+                           style="font-size: 10px; margin-left:15px; color:grey;">{{ comment.updated }}
+                            <i class="far fa-comment-alt" style="font-size:30px;"></i>
+                        </p>
 
-            <p class="comments"
-               onclick="toggle_comments(this)"
-               style="font-size: 10px; margin-left:15px; color:grey;">{{ comment.updated }}
-                <i class="far fa-comment-alt" style="font-size:30px;"></i>
-            </p>
+                        <form action="{% url 'main:comment' %}" method="post"
+                              enctype="multipart/form-data" class="comment-form hide">
+                            {% csrf_token %}
+                            <img src="{{ user.avatar|media_folder_users }}" alt=""
+                                 class="user-avatar-img">
+                            <input type="text" name="message" class="comment-input">
+                            <input type="hidden" name='publication_id'
+                                   value='{{ comment.publication.id }}'>
 
-            <form action="{% url 'main:comment' %}" method="post"
-                  enctype="multipart/form-data" class="comment-form hide">
-                {% csrf_token %}
-                <img src="{{ user.avatar|media_folder_users }}" alt=""
-                     class="user-avatar-img">
-                <input type="text" name="message" class="comment-input">
-                <input type="hidden" name='publication_id'
-                       value='{{ publication.id }}'>
-                <input type="hidden" name='comment_id'
-                       value='{{ comment.id }}'>
-                <input type="hidden" name='comment_user_id'
-                       value='{{ comment.user.id }}'>
-                <button type="submit" value="Submit" class="btn btn-primary"><i
-                        class="fas fa-paper-plane" style="font-size:20px;"></i>
-                </button>
-            </form>
+                            <input type="hidden" name='comment_id'
+                                   value='{{ comment.id }}'>
+                            <input type="hidden" name='comment_user_id'
+                                   value='{{ comment.user.id }}'>
 
-            <br>
-        </div>
+                            <button type="submit" value="Submit" class="btn btn-primary"><i
+                                    class="fas fa-paper-plane" style="font-size:20px;"></i>
+                            </button>
+                        </form>
 
+                        <br>
+                        </div>
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        {% endfor %}#}
     {% endif %}
 {% endfor %}

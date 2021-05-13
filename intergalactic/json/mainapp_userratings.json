@@ -1,0 +1,83 @@
+[
+  {
+    "model": "mainapp.userratings",
+    "pk": 1,
+    "fields": {
+      "author": 1,
+      "user": 1,
+      "rating": 8
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 2,
+    "fields": {
+      "author": 2,
+      "user": 1,
+      "rating": 6
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 3,
+    "fields": {
+      "author": 3,
+      "user": 1,
+      "rating": 2
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 4,
+    "fields": {
+      "author": 1,
+      "user": 2,
+      "rating": 2
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 5,
+    "fields": {
+      "author": 2,
+      "user": 2,
+      "rating": 4
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 6,
+    "fields": {
+      "author": 3,
+      "user": 2,
+      "rating": 8
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 7,
+    "fields": {
+      "author": 1,
+      "user": 3,
+      "rating": 8
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 8,
+    "fields": {
+      "author": 2,
+      "user": 3,
+      "rating": 6
+    }
+  },
+  {
+    "model": "mainapp.userratings",
+    "pk": 9,
+    "fields": {
+      "author": 3,
+      "user": 3,
+      "rating": 10
+    }
+  }
+]

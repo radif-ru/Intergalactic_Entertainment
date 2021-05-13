@@ -1,0 +1,110 @@
+[
+  {
+    "model": "mainapp.articleratings",
+    "pk": 1,
+    "fields": {
+      "publication": 1,
+      "user": 1,
+      "rating": 4
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 2,
+    "fields": {
+      "publication": 1,
+      "user": 2,
+      "rating": 2
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 3,
+    "fields": {
+      "publication": 1,
+      "user": 3,
+      "rating": 8
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 4,
+    "fields": {
+      "publication": 2,
+      "user": 1,
+      "rating": 10
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 5,
+    "fields": {
+      "publication": 2,
+      "user": 2,
+      "rating": 8
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 6,
+    "fields": {
+      "publication": 2,
+      "user": 3,
+      "rating": 2
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 7,
+    "fields": {
+      "publication": 3,
+      "user": 1,
+      "rating": 10
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 8,
+    "fields": {
+      "publication": 3,
+      "user": 2,
+      "rating": 6
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 9,
+    "fields": {
+      "publication": 3,
+      "user": 3,
+      "rating": 4
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 10,
+    "fields": {
+      "publication": 4,
+      "user": 1,
+      "rating": 2
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 11,
+    "fields": {
+      "publication": 4,
+      "user": 2,
+      "rating": 8
+    }
+  },
+  {
+    "model": "mainapp.articleratings",
+    "pk": 12,
+    "fields": {
+      "publication": 4,
+      "user": 3,
+      "rating": 10
+    }
+  }
+]
