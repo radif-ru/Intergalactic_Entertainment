@@ -4,91 +4,102 @@
 {% load my_tags %}
 
 {% block main_content %}
-    {% block css %}
-        <link rel="stylesheet" type="text/css" href="{% static 'style/bootstrap.css' %}">
-    {% endblock %}
+  {% block css %}
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'style/bootstrap.css' %}">
+  {% endblock %}
 
-    {% block js %}
-        <script src="{% static 'js/bootstrap.js' %}"></script>
-    {% endblock %}
+  {% block js %}
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+  {% endblock %}
 
-    {% include 'mainapp/includes/inc_personal_area_menu.html' %}
+  {% include 'mainapp/includes/inc_personal_area_menu.html' %}
 
-    <div class="my-3 p-3 bg-body rounded shadow-sm">
-        <h6 class="border-bottom pb-2 mb-0">Мои статьи</h6>
-        {% if publications_list %}
-            <table id="datatable" class="table dt-responsive nowrap table-vertical"
-                   width="100%" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Img</th>
-                    <th>Название</th>
-                    <th>Краткое описание</th>
-                    <th>Понравилось</th>
-                    <th>Комментарии</th>
-                    <th>Дата публикации</th>
-                    <th>Статус</th>
-                    <th>Просмотр</th>
-                    <th>Редактировать</th>
-                    <th>Уведомления!</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for publication in publications_list %}
-                    <tr>
-                        <td>{{ publication.id }}</td>
-                        <td><img alt="not" src="{{ publication.image|media_folder_publications }}" height="50px"></td>
-                        <td>{{ publication.name }}</td>
-                        <td>{{ publication.short_desc }}</td>
-                        <td>{{ publication.get_like_count }}</td>
-                        <td>{{ publication.get_comment_count }}</td>
-                        <td>{{ publication.created }}</td>
-                        <td>{{ publication.get_is_active }}</td>
-                        <td><a href="{% url 'main:publication_page' pk=publication.id  %}">Посмотреть</a></td>
-                        {% if not publication.is_active and not publication.on_moderator_check %}
-                        <td><a href="{% url 'main:edit_publication' pk=publication.id  %}">Редактировать</a>
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">
+      Мой рейтинг: <span class="rating">
+      {{ request.user.pk|average_author_rating }}</span><br> Мои статьи:</h6>
+    {% if publications_list %}
+      <table id="datatable" class="table dt-responsive nowrap table-vertical"
+             width="100%" cellspacing="0">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Img</th>
+          <th>Название</th>
+          <th>Краткое описание</th>
+          <th>Понравилось</th>
+          <th>Комментарии</th>
+          <th>Дата публикации</th>
+          <th>Статус</th>
+          <th>Просмотр</th>
+          <th>Рейтинг</th>
+          <th>Редактировать</th>
+          <th>Уведомления!</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for publication in publications_list %}
+          <tr>
+            <td>{{ publication.id }}</td>
+            <td><img alt="not" src="{{ publication.image|media_folder_publications }}" height="50px"></td>
+            <td>{{ publication.name }}</td>
+            <td>{{ publication.short_desc }}</td>
+            <td>{{ publication.get_like_count }}</td>
+            <td>{{ publication.get_comment_count }}</td>
+            <td>{{ publication.created }}</td>
+            <td>{{ publication.get_is_active }}</td>
+            <td><a href="{% url 'main:publication_page' pk=publication.id %}">Посмотреть</a>
+            </td>
+            <td class="rating">{{ publication.pk|average_pub_rating }}</td>
+            {% if not publication.is_active and not publication.on_moderator_check %}
+              <td><a
+                  href="{% url 'main:edit_publication' pk=publication.id %}">Редактировать</a>
 
-                        </td>
-                        <td>
-                        <dialog class="moderatorComment{{publication.id}}" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
-                                <h2>Коментарий Модератора</h2>
-                                <p>
-                                    {% if publication.moderator_refuse %}
-                                        {{publication.moderator_refuse|safe}}
-                                    {% else %}
-                                        Комментариев пока нет
-                                    {% endif %}
-                                </p>
-                                <button id="close{{publication.id}}">Закрыть</button>
-                            </dialog>
-                            <button style="border: none; background-color: white; color: green;" id="show{{publication.id}}">&#128386;</button>
-                        </td>
-                        {% endif %}
+              </td>
+              <td>
+                <dialog class="moderatorComment{{ publication.id }}"
+                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
+                  <h2>Коментарий Модератора</h2>
+                  <p>
+                    {% if publication.moderator_refuse %}
+                      {{ publication.moderator_refuse|safe }}
+                    {% else %}
+                      Комментариев пока нет
+                    {% endif %}
+                  </p>
+                  <button id="close{{ publication.id }}">Закрыть</button>
+                </dialog>
+                <button
+                    style="border: none; background-color: white; color: green;"
+                    id="show{{ publication.id }}">&#128386;
+                </button>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="lead">Пока ничего не опубликовано</p>
+    {% endif %}
 
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p class="lead">Пока ничего не опубликовано</p>
-        {% endif %}
+    <a class="btn btn-outline-secondary"
+       href="{% url 'main:create_publication' %}">Создать</a>
+  </div>
 
-        <a class="btn btn-outline-secondary" href="{% url 'main:create_publication' %}">Создать</a>
-    </div>
-
-<script type = text/javascript>
-{% for publication in publications_list %}
-    {% if not publication.is_active and not publication.on_moderator_check %}
+  <script type=text/javascript>
+    {% for publication in publications_list %}
+      {% if not publication.is_active and not publication.on_moderator_check %}
         var dialog{{publication.id}} = document.querySelector('.moderatorComment{{publication.id}}');
-        document.querySelector('#show{{publication.id}}').onclick = function() {
+        document.querySelector('#show{{publication.id}}').onclick = function () {
           dialog{{publication.id}}.show();
         };
-        document.querySelector('#close{{publication.id}}').onclick = function() {
+        document.querySelector('#close{{publication.id}}').onclick = function () {
           dialog{{publication.id}}.close();
         };
-    {% endif %}
-{% endfor %}
-</script>
+      {% endif %}
+    {% endfor %}
+  </script>
 
 {% endblock %}

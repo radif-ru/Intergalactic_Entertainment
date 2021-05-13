@@ -6,10 +6,11 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 
 from mainapp.models import Publication, PublicationCategory, Likes, Dislikes, \
-    Comments, ToComments
+    Comments, ToComments, ArticleRatings, UserRatings
 from django.db.models import Count
 
 from authapp.models import IntergalacticUser
@@ -106,6 +107,7 @@ def main(request):
 
 
 def publication_page(request, pk):
+    publication = Publication.objects.get(pk=pk)
     categories = PublicationCategory.objects.filter(is_active=True)
     comments = get_comments(pk)
     likes = Likes.objects.all()
@@ -117,6 +119,29 @@ def publication_page(request, pk):
 
     to_comments = ToComments.objects.all()
 
+    user_pub_rating = 0
+    average_pub_rating = ArticleRatings.average_pub_rating(pk)
+
+    user_author_rating = 0
+    average_author_rating = UserRatings.average_author_rating(
+        publication.user.pk)
+
+    if request.user.is_authenticated:
+        try:
+            user_pub_rating = ArticleRatings.article_ratings(pk).get(
+                user=request.user).rating
+        except Exception as e:
+            print(e)
+            user_pub_rating = 0
+
+        try:
+            user_author_rating = UserRatings.objects.filter(
+                user=request.user).get(
+                author=publication.user).rating
+        except Exception as e:
+            print(e)
+            user_author_rating = 0
+
     context = {
         'page_title': 'Publication',
         'categories': categories,
@@ -125,7 +150,13 @@ def publication_page(request, pk):
         'likes': likes,
         'now_read_publications': now_read_publications,
         'notifications': notifications,
-        'to_comments': to_comments
+
+        'to_comments': to_comments,
+
+        'user_pub_rating': user_pub_rating,
+        'average_pub_rating': average_pub_rating,
+        'user_author_rating': user_author_rating,
+        'average_author_rating': average_author_rating
 
     }
     return render(request, 'mainapp/publication.html', context)
@@ -205,6 +236,8 @@ def comment(request):
         message = request.POST.get('message')
         if message != '':
             if request.user.is_authenticated:
+                print('POST_DATA', request.POST,
+                      request.POST.get('publication_id'))
                 user = IntergalacticUser.objects.get(username=request.user)
                 publication = Publication.objects.get(
                     id=request.POST.get('publication_id'))
@@ -225,9 +258,10 @@ def comment(request):
                     comment_user_id_obj = IntergalacticUser.objects.get(
                         id=comment_user_id)
 
-                    ToComments.objects.create(comment=new_comments_obj,
-                                              to_user=comment_user_id_obj,
-                                              for_comment=comment_id_obj)
+                    new_to_comments_obj = ToComments.objects.create(
+                        comment=new_comments_obj,
+                        to_user=comment_user_id_obj,
+                        for_comment=comment_id_obj)
 
                 to_comments = ToComments.objects.all()
 
@@ -420,3 +454,81 @@ def moderator_room(request):
         "publications_list": publications_list
     }
     return render(request, 'mainapp/moderator_room.html', context)
+
+
+@csrf_exempt
+def user_pub_rating(request):
+    data = dict()
+    if request.method == 'POST':
+        user_pub_rat = request.POST.get('user_pub_rating')
+        pub_id = request.POST.get('pub_id')
+
+        author_id = request.POST.get('author_id')
+        if user_pub_rat != '' and pub_id != 0:
+            if request.user.is_authenticated:
+                article_ratings = ArticleRatings.article_ratings(pk=pub_id)
+
+                if not article_ratings.filter(user=request.user):
+                    article_ratings.create(
+                        publication=Publication.objects.get(pk=pub_id),
+                        user=IntergalacticUser.objects.get(pk=request.user.pk),
+                        rating=user_pub_rat
+                    )
+                else:
+                    article_ratings.filter(user=request.user).update(
+                        rating=user_pub_rat)
+
+                average_pub_rating = ArticleRatings.average_pub_rating(
+                    pk=pub_id)
+
+                average_author_rating = UserRatings.average_author_rating(
+                    pk=author_id)
+
+                data['form_is_valid'] = True
+                data['user_pub_rating'] = user_pub_rat
+                data['average_pub_rating'] = average_pub_rating
+
+                data['average_author_rating'] = average_author_rating
+            else:
+                data['form_is_valid'] = 'AnonymousUser'
+        else:
+            data['form_is_valid'] = False
+        return JsonResponse(data)
+    else:
+        return HttpResponse("Invalid request")
+
+
+@csrf_exempt
+def author_rating(request):
+    data = dict()
+    if request.method == 'POST':
+        user_author_rating = request.POST.get('user_author_rating')
+        author_id = request.POST.get('author_id')
+
+        if user_author_rating != '' and author_id != 0:
+            if request.user.is_authenticated:
+                user_ratings = UserRatings.objects.filter(author_id=author_id)
+
+                if not user_ratings.filter(user=request.user):
+                    user_ratings.create(
+                        author=IntergalacticUser.objects.get(pk=author_id),
+                        user=IntergalacticUser.objects.get(pk=request.user.pk),
+                        rating=user_author_rating
+                    )
+                else:
+                    user_ratings.filter(user=request.user).update(
+                        rating=user_author_rating)
+
+                average_author_rating = UserRatings.average_author_rating(
+                    pk=author_id)
+
+                data['form_is_valid'] = True
+                data['user_author_rating'] = user_author_rating
+                data['average_author_rating'] = average_author_rating
+            else:
+                data['form_is_valid'] = 'AnonymousUser'
+        else:
+            data['form_is_valid'] = False
+        return JsonResponse(data)
+    else:
+        return HttpResponse("Invalid request")
