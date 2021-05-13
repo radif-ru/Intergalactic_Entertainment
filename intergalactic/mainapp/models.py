@@ -240,7 +240,6 @@ class UserRatings(models.Model):
         if art_rat_quantity:
             for article_rating in article_ratings:
                 average_article_rating += article_rating.rating
-                print(average_article_rating)
             average_article_rating = int(
                 average_article_rating / art_rat_quantity)
 
