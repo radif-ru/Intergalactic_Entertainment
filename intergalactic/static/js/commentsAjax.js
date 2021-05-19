@@ -119,14 +119,16 @@ window.onload = () => {
   });
 
   $('#pub_rating').on('click', 'i.icon-star', (event) => {
-    const pub_id = event.target.parentElement.dataset.pubid
-    const user_pub_rating = +event.target.dataset.rating
-    const wrapper = $('#pub_rating')
-    const user_pub_rating_el = $('#user_pub_rating')
-    const average_pub_rating_el = $('#average_pub_rating')
+    const pub_id = event.target.parentElement.dataset.pubid;
+    const user_pub_rating = +event.target.dataset.rating;
+    const wrapper = $('#pub_rating');
+    // const user_pub_rating_el = $('#user_pub_rating');
+    const average_pub_rating_el = $('#average_pub_rating');
 
-    const average_author_rating_el = $('#average_author_rating')
-    const author_id = document.getElementById('author_rating').dataset.authorid
+    const average_author_rating_el = $('#average_author_rating');
+    const author_id = document.getElementById('author_rating').dataset.authorid;
+
+    const rating_star_els = wrapper.children()
 
     $.post('/user_pub_rating/', {
       user_pub_rating: user_pub_rating,
@@ -135,8 +137,16 @@ window.onload = () => {
       author_id: author_id,
     }, function (data) {
       if (data.form_is_valid && data.form_is_valid !== 'AnonymousUser') {
-        user_pub_rating_el.text(data.user_pub_rating);
+        // user_pub_rating_el.text(data.user_pub_rating);
         average_pub_rating_el.text(data.average_pub_rating);
+
+        for (let el of rating_star_els) {
+          if (+el.dataset.rating <= +data.user_pub_rating) {
+            el.classList.remove('rating-white');
+          } else {
+            el.classList.add('rating-white');
+          }
+        }
 
         average_author_rating_el.text(data.average_author_rating);
       } else if (data.form_is_valid === 'AnonymousUser') {
@@ -153,19 +163,30 @@ window.onload = () => {
   });
 
   $('#author_rating').on('click', 'i.icon-star', (event) => {
-    const author_id = event.target.parentElement.dataset.authorid
-    const user_author_rating = +event.target.dataset.rating
-    const wrapper = $('#author_rating')
-    const user_author_rating_el = $('#user_author_rating')
-    const average_author_rating_el = $('#average_author_rating')
+    const author_id = event.target.parentElement.dataset.authorid;
+    const user_author_rating = +event.target.dataset.rating;
+    const wrapper = $('#author_rating');
+    // const user_author_rating_el = $('#user_author_rating');
+    const average_author_rating_el = $('#average_author_rating');
+
+    const rating_star_els = wrapper.children()
 
     $.post('/author_rating/', {
       user_author_rating: user_author_rating,
       author_id: author_id,
     }, function (data) {
       if (data.form_is_valid && data.form_is_valid !== 'AnonymousUser') {
-        user_author_rating_el.text(data.user_author_rating);
+        // user_author_rating_el.text(data.user_author_rating);
         average_author_rating_el.text(data.average_author_rating);
+
+        for (let el of rating_star_els) {
+          if (+el.dataset.rating <= +data.user_author_rating) {
+            el.classList.remove('rating-white');
+          } else {
+            el.classList.add('rating-white');
+          }
+        }
+
       } else if (data.form_is_valid === 'AnonymousUser') {
         if (!wrapper.parent().children('.AnonymousUserDis').length) {
           wrapper.parent().append('<p class="AnonymousUserDis" style="margin-top:10px; color: red">Чтобы ставить рейтинг, Вы должны войти в аккаунт</p>')
