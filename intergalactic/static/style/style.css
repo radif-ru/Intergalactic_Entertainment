@@ -1031,6 +1031,9 @@ h4 {
   color: salmon;
   filter: saturate(300%);
 }
+.rating-white {
+  color: white;
+}
 * {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
