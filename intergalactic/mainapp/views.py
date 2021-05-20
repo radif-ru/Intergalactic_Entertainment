@@ -33,6 +33,10 @@ def get_comments(pk):
     return Comments.objects.filter(publication=pk)
 
 
+def get_ratings():
+    return [2, 4, 6, 8, 10]
+
+
 def take_trendy_publication_id_list(category_pk):
     if category_pk == 0:
         trendy_publication_id_counts = Likes.objects.filter(status=1).values(
@@ -158,13 +162,14 @@ def publication_page(request, pk):
         'notifications': notifications,
 
         'count': count.count,
-      
+
         'to_comments': to_comments,
-      
+
         'user_pub_rating': user_pub_rating,
         'average_pub_rating': average_pub_rating,
         'user_author_rating': user_author_rating,
-        'average_author_rating': average_author_rating
+        'average_author_rating': average_author_rating,
+        'ratings': get_ratings()
 
     }
     return render(request, 'mainapp/publication.html', context)
@@ -480,7 +485,18 @@ def user_pub_rating(request):
         author_id = request.POST.get('author_id')
         if user_pub_rat != '' and pub_id != 0:
             if request.user.is_authenticated:
+
                 article_ratings = ArticleRatings.article_ratings(pk=pub_id)
+
+                user_pub_rating = 0
+                try:
+                    user_pub_rating = article_ratings.get(
+                        user=request.user).rating
+                except Exception as e:
+                    print(e)
+                    user_pub_rating = 0
+                if int(user_pub_rat) == int(user_pub_rating):
+                    user_pub_rat = 0
 
                 if not article_ratings.filter(user=request.user):
                     article_ratings.create(
@@ -522,6 +538,19 @@ def author_rating(request):
         if user_author_rating != '' and author_id != 0:
             if request.user.is_authenticated:
                 user_ratings = UserRatings.objects.filter(author_id=author_id)
+
+                user_author_rating_old = 0
+                try:
+                    user_author_rating_old = UserRatings.objects.filter(
+                        user=request.user).get(
+                        author=IntergalacticUser.objects.get(
+                            pk=author_id)).rating
+                except Exception as e:
+                    print(e)
+                    user_author_rating_old = 0
+
+                if int(user_author_rating) == int(user_author_rating_old):
+                    user_author_rating = 0
 
                 if not user_ratings.filter(user=request.user):
                     user_ratings.create(
