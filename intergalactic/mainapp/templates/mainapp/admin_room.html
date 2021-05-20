@@ -22,15 +22,15 @@
                 <thead>
                 <tr>
                     <th>id</th>
-                    <th>avatar</th>
-                    <th>username</th>
-                    <th>first_name</th>
-                    <th>last_name</th>
-                    <th>age</th>
+                    <th>аватар</th>
+                    <th>никнейм</th>
+                    <th>имя</th>
+                    <th>фамилия</th>
+                    <th>возраст</th>
                     <th>email</th>
-                    <th>company</th>
-                    <th>is_active</th>
-                    <th>is_staff</th>
+                    <th>компания</th>
+                    <th>статус</th>
+                    <th>роль</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,12 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.company }}</td>
                         <td>
-                            {{ user.is_active }}
+                            {% if user.is_active %}
+                                active
+                            {% else %}
+                                banned
+                            {% endif %}
+
                             <dialog class="is_active{{user.id}}" style="position: absolute; left: 50%; top: 50%;
                             transform: translate(-50%,-50%); padding: 20px;">
                                 {% if user.is_active %}
@@ -65,10 +70,21 @@
                                 </form>
                                 <button id="is_active_close{{user.id}}">Закрыть</button>
                             </dialog>
-                            <button id="is_active_show{{user.id}}">&#9998;</button>
+                            {% if user.is_superuser %}
+                                <button hidden id="is_active_show{{user.id}}">&#9998;</button>
+                            {% else %}
+                                <button id="is_active_show{{user.id}}">&#9998;</button>
+                            {% endif %}
+
                         </td>
                         <td>
-                            {{ user.is_staff }}
+                            {% if user.is_superuser %}
+                                admin
+                            {% elif user.is_staff %}
+                                moderator
+                            {% else %}
+                                user
+                            {% endif %}
                             <dialog class="is_staff{{user.id}}" style="position: absolute; left: 50%; top: 50%;
                             transform: translate(-50%,-50%); padding: 20px;">
                                 {% if user.is_staff %}
@@ -88,7 +104,12 @@
                                 </form>
                                 <button id="is_staff_close{{user.id}}">Закрыть</button>
                             </dialog>
-                            <button id="is_staff_show{{user.id}}">&#9998;</button>
+                            {% if user.is_superuser %}
+                                <button hidden id="is_staff_show{{user.id}}">&#9998;</button>
+                            {% else %}
+                                <button id="is_staff_show{{user.id}}">&#9998;</button>
+                            {% endif %}
+
                         </td>
                     </tr>
                 {% endfor %}

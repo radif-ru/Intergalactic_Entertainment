@@ -457,7 +457,7 @@ def moderator_room(request):
                 instance = to_publish_form.save(commit=False)
                 instance.is_active = False
                 instance.on_moderator_check = False
-                instance.moderator_refuse = '<p>Отказ в публикации.</p> ' \
+                instance.moderator_refuse = instance.moderator_refuse + '<h5>Отказ в публикации.</h5> ' \
                                             '<p>Нарушены правила №: '
 
                 for i in range(5):
@@ -465,7 +465,7 @@ def moderator_room(request):
                     if rule in request.POST.keys():
                         if request.POST[rule] == 'selected':
                             instance.moderator_refuse = instance.moderator_refuse + f'{i + 1}; '
-                instance.moderator_refuse = instance.moderator_refuse + f'</p> <p>Дополнительный комментарий: {request.POST["reason"]}</p>'
+                instance.moderator_refuse = instance.moderator_refuse + f'</p> <p>Дополнительный комментарий: {request.POST["reason"]}</p><hr>'
                 instance.save()
                 return HttpResponseRedirect(reverse('main:moderator_room'))
 
