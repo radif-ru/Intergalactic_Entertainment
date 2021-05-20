@@ -187,12 +187,13 @@ class Dislikes(models.Model):
                                        publication_id=publication)
         return dislike.change_status()
 
+
 # Таблица для подсчета количества просмотров статей
 class ViewCounter(models.Model):
     publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
     count = models.PositiveIntegerField(default=0)
 
-    
+
 class ArticleRatings(models.Model):
     publication = models.ForeignKey(Publication, verbose_name='публикация',
                                     on_delete=models.CASCADE)
@@ -211,9 +212,8 @@ class ArticleRatings(models.Model):
         for article_rating in article_ratings:
             average_pub_rating += article_rating.rating
         if len(article_ratings):
-            average_pub_rating = round(
-                (average_pub_rating / len(article_ratings)), 2)
-        return average_pub_rating
+            average_pub_rating = (average_pub_rating / len(article_ratings))
+        return round(average_pub_rating, 2)
 
     class Meta:
         verbose_name = 'рейтинг статьи'
@@ -253,4 +253,3 @@ class UserRatings(models.Model):
     class Meta:
         verbose_name = 'рейтинг автора'
         verbose_name_plural = 'рейтинги авторов'
-        
