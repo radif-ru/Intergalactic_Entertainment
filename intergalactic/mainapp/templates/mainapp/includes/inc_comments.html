@@ -26,23 +26,23 @@
             </p>
 
             <form action="{% url 'main:comment' %}" method="post"
-                  enctype="multipart/form-data" class="comment-form hide">
-                {% csrf_token %}
-                <img src="{{ user.avatar|media_folder_users }}" alt=""
-                     class="user-avatar-img">
-                <input type="text" name="message" class="comment-input">
-                <input type="hidden" name='publication_id'
-                       value='{{ comment.publication.id }}'>
+                              enctype="multipart/form-data" class="comment-form hide">
+                            {% csrf_token %}
+                            <img src="{{ user.avatar|media_folder_users }}" alt=""
+                                 class="user-avatar-img">
+                            <input type="text" name="message" class="comment-input">
+                            <input type="hidden" name='publication_id'
+                                   value='{{ comment.publication.id }}'>
 
-                <input type="hidden" name='comment_id'
-                       value='{{ comment.id }}'>
-                <input type="hidden" name='to_user_id'
-                       value='{{ comment.user.id }}'>
+                            <input type="hidden" name='comment_id'
+                                   value='{{ comment.id }}'>
+                            <input type="hidden" name='comment_user_id'
+                                   value='{{ comment.user.id }}'>
 
-                <button type="submit" value="Submit" class="btn btn-primary"><i
-                        class="fas fa-paper-plane" style="font-size:20px;"></i>
-                </button>
-            </form>
+                            <button type="submit" value="Submit" class="btn btn-primary"><i
+                                    class="fas fa-paper-plane" style="font-size:20px;"></i>
+                            </button>
+                        </form>
             <br>
 
 

@@ -59,8 +59,8 @@
               </td>
               <td>
                 <dialog class="moderatorComment{{ publication.id }}"
-                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px;">
-                  <h2>Коментарий Модератора</h2>
+                        style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); padding: 20px; overflow: auto; height: 300px;">
+                  <h4>Коментарии Модератора</h4><hr>
                   <p>
                     {% if publication.moderator_refuse %}
                       {{ publication.moderator_refuse|safe }}
