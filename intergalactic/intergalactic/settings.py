@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '-ks5c@rh#g+gj0-tt*h#%w739^w=rz(hg+#8tkpe8!9v=#6fg8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['intergalactic.radif.ru']
 
 # Application definition
 
