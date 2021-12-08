@@ -1,4 +1,9 @@
 # https://intergalactic.radif.ru/
+В этом проекте, кроме меня, участвовали рандомные участники. Целью проекта была отработка командного взаимодействия по методологии `Agile`, `SCRUM`. Посмотреть в `Trello` - https://trello.com/b/hzmUNlWf/itergalacticintertainment-копия-без-активности-и-участников 
+
+Залогиниться от суперпользователя: login: intergalactic / password: intergalactic
+
+
 Перед использованием проекта выполнить обновление пакетов из requirements.txt
 
 #Консольные команды:
